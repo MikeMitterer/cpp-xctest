@@ -17,6 +17,8 @@ project(HelloQT)
 # Output bin, c++11 usw
 include(Config)
 
+include(configGTest)
+
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Qt (e.g. /usr/local/QT5.3/5.3/clang_64                             │
 # │      Weitere Infos: http://doc.qt.io/qt-5/cmake-manual.html      │
@@ -54,6 +56,12 @@ find_package(Qt5Core REQUIRED)
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Tests                                                           │
 # │     Sample: add_subdirectory (tests)                             │
+# └──────────────────────────────────────────────────────────────────┘
+
+add_subdirectory (tests)
+
+# ┌──────────────────────────────────────────────────────────────────┐
+# │  Source file                                                     │
 # └──────────────────────────────────────────────────────────────────┘
 
 include_directories(include)
