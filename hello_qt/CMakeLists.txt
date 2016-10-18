@@ -1,0 +1,70 @@
+# ┌──────────────────────────────────────────────────────────────────┐
+# │  Basis für CMAKE                                                 │
+# └──────────────────────────────────────────────────────────────────┘
+
+cmake_minimum_required(VERSION 3.6)
+
+# ENV ist im .bashrc definiert
+#   (Am Mac auf /Volumes/Daten/DevLocal/DevCPP/cmake )
+set(CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH} ${CMAKE_MODULE_PATH})
+
+# ┌──────────────────────────────────────────────────────────────────┐
+# │  Projects Settings                                               │
+# └──────────────────────────────────────────────────────────────────┘
+
+project(HelloQT)
+
+# Output bin, c++11 usw
+include(Config)
+
+# ┌──────────────────────────────────────────────────────────────────┐
+# │  Qt (e.g. /usr/local/QT5.3/5.3/clang_64                             │
+# │      Weitere Infos: http://doc.qt.io/qt-5/cmake-manual.html      │
+# └──────────────────────────────────────────────────────────────────┘
+
+if(XCTARGET STREQUAL "rpi1")
+    set(CMAKE_PREFIX_PATH "${PIROOT}/usr/lib/arm-linux-gnueabihf/cmake" ${CMAKE_PREFIX_PATH})
+
+    # Wichtig - sonst funktioniert's auf dem Raspi nicht
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+
+else()
+
+    # Ist in der .bashrc definiert
+    set(CMAKE_PREFIX_PATH $ENV{QT53DIR} ${CMAKE_PREFIX_PATH})
+
+endif()
+
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+# Instruct CMake to run moc automatically when needed.
+set(CMAKE_AUTOMOC ON)
+
+find_package(Qt5Core REQUIRED)
+#find_package(Qt5Widgets REQUIRED)
+
+
+# ┌──────────────────────────────────────────────────────────────────┐
+# │  Libs                                                            │
+# └──────────────────────────────────────────────────────────────────┘
+
+
+
+# ┌──────────────────────────────────────────────────────────────────┐
+# │  Tests                                                           │
+# │     Sample: add_subdirectory (tests)                             │
+# └──────────────────────────────────────────────────────────────────┘
+
+include_directories(include)
+include_directories(src)
+
+set(SOURCE_FILES
+        src/hello_qt.cpp
+        )
+
+add_executable(${PROJECT_NAME}
+        ${SOURCE_FILES}
+        )
+
+qt5_use_modules(${PROJECT_NAME} Widgets)
