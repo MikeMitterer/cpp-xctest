@@ -24,7 +24,9 @@ include(configGTest)
 # │      Weitere Infos: http://doc.qt.io/qt-5/cmake-manual.html      │
 # └──────────────────────────────────────────────────────────────────┘
 
-if(XCTARGET STREQUAL "rpi1")
+#if(XCTARGET STREQUAL "rpi1")
+#if(XCTARGET MATCHES "^rpi.*")
+if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm")
     set(CMAKE_PREFIX_PATH "${PIROOT}/usr/lib/arm-linux-gnueabihf/cmake" ${CMAKE_PREFIX_PATH})
 
     # Wichtig - sonst funktioniert's auf dem Raspi nicht
