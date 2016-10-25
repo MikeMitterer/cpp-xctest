@@ -36,6 +36,8 @@ endif()
 
 include_directories(${gpio_SOURCE_DIR}/include )
 
+find_package(Curses REQUIRED)
+
 # RealLife
 if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm")
 
@@ -63,4 +65,8 @@ set(SOURCE_FILES ${SOURCE_FILES}
         )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} gpio)
+
+target_link_libraries(${PROJECT_NAME}
+        gpio
+        ${CURSES_LIBRARIES}
+        )
