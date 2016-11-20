@@ -26,6 +26,7 @@ void draw(char dc) {
 
 // http://heather.cs.ucdavis.edu/~matloff/UnixAndC/CLanguage/Curses.pdf
 // CPP-Version: https://github.com/Praetonus/Ncursescpp
+// https://sourceforge.net/projects/ansigl/
 void waitForKB(std::function<void (int ch)> onKeyPressed) {
     /*WINDOW* wnd = */initscr();
     cbreak();
