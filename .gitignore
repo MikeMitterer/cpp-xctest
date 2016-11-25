@@ -34,3 +34,4 @@
 # BIN-Dirs
 bin
 lib
+cmake-build-debug/
