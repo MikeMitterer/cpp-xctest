@@ -32,6 +32,8 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setApplicationName("helloQT");
     QCoreApplication::setApplicationVersion("1.0");
 
+    qDebug() << "Hallo Mike";
+
     QCommandLineParser parser;
     parser.setApplicationDescription(
             QCoreApplication::translate("main", "Disassembler for the Intel 8080 microprocessor."));

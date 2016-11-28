@@ -29,3 +29,6 @@ Lib bei ldconfig bekannt machen
 
     ldconfig -p | grep -i libmylib
         libmyLib.so (libc6,hard-float) => /usr/lib/libmyLib.so
+
+C++ - Samples
+        http://www.cppsamples.com/

@@ -36,7 +36,7 @@ endif()
 
 include_directories(${gpio_SOURCE_DIR}/include )
 
-find_package(Curses REQUIRED)
+#find_package(Curses REQUIRED)
 
 # RealLife
 if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm")

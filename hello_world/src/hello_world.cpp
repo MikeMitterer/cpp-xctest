@@ -1,8 +1,13 @@
 #include "spdlog/spdlog.h"
-
 #include <iostream>
 #include <args.hxx>
 
+/**
+ * Sample verwendet folgendes Libs:
+ *      Formatter:  https://github.com/fmtlib/fmt
+ *      Logger: https://github.com/gabime/spdlog
+ *      ArgParser: https://github.com/Taywee/args
+ */
 namespace spd = spdlog;
 int main(int argc,const char *argv[]) {
     auto logger = spd::stdout_color_mt("console");
@@ -15,7 +20,8 @@ int main(int argc,const char *argv[]) {
     args::Positional<std::string> foo(parser, "foo", "The foo position");
     args::PositionalList<double> numbers(parser, "numbers", "The numbers position list");
 
-    logger->warn("Hallo ein Test");
+
+    logger->info(fmt::format("Hello, {}!", "world"));
 
     try {
         parser.ParseCLI(argc, argv);
@@ -38,10 +44,10 @@ int main(int argc,const char *argv[]) {
         return 1;
     }
 
-    if (integer) { std::cout << "i: " << args::get(integer) << std::endl; }
-    if (characters) { for (const auto ch: args::get(characters)) { std::cout << "c: " << ch << std::endl; }}
-    if (foo) { std::cout << "f: " << args::get(foo) << std::endl; }
-    if (numbers) { for (const auto nm: args::get(numbers)) { std::cout << "n: " << nm << std::endl; }}
+    if (integer) { std::cout << "Param i (integer): " << args::get(integer) << std::endl; }
+    if (characters) { for (const auto ch: args::get(characters)) { std::cout << "Param c (characters): " << ch << std::endl; }}
+    if (foo) { std::cout << "Param f (foo (positional)): " << args::get(foo) << std::endl; }
+    if (numbers) { for (const auto nm: args::get(numbers)) { std::cout << "Param n (number): " << nm << std::endl; }}
 
     return 0;
 }

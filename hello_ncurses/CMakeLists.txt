@@ -12,7 +12,7 @@ set(CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH} ${CMAKE_MODULE_PATH})
 # │  Projects Settings                                               │
 # └──────────────────────────────────────────────────────────────────┘
 
-project(HelloWorld)
+project(HelloNCurses)
 
 # Output bin, c++11 usw
 include(Config)
@@ -23,7 +23,9 @@ include(Config)
 
 find_package(args)
 find_package(spdlog)
-find_package(fmt)
+
+set(ADDITIONAL_LIBRARIES menu)
+find_package(curses REQUIRED)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Tests                                                           │
@@ -34,7 +36,8 @@ include_directories(include)
 include_directories(src)
 
 set(SOURCE_FILES
-        src/hello_world.cpp
+        src/hello_ncurses.cpp
         )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} ${CURSES_LIBRARIES} menu )

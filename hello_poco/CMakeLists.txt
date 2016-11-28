@@ -12,7 +12,7 @@ set(CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH} ${CMAKE_MODULE_PATH})
 # │  Projects Settings                                               │
 # └──────────────────────────────────────────────────────────────────┘
 
-project(HelloWorld)
+project(HelloPoco)
 
 # Output bin, c++11 usw
 include(Config)
@@ -21,9 +21,10 @@ include(Config)
 # │  Libs                                                            │
 # └──────────────────────────────────────────────────────────────────┘
 
-find_package(args)
-find_package(spdlog)
-find_package(fmt)
+find_package(Poco REQUIRED Foundation Util Net )
+
+message( WARNING "Poco_LIBRARIES:     " ${Poco_LIBRARIES} )
+message( WARNING "Poco_INCLUDE_DIRS:     " ${Poco_INCLUDE_DIRS} )
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Tests                                                           │
@@ -34,7 +35,15 @@ include_directories(include)
 include_directories(src)
 
 set(SOURCE_FILES
-        src/hello_world.cpp
+        src/hello_poco.cpp
         )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+
+target_link_libraries(
+        ${PROJECT_NAME}
+        ${Poco_LIBRARIES}
+        ${Poco_Foundation_LIBRARY}
+        ${Poco_Net_LIBRARY}
+        ${Poco_Util_LIBRARY}
+        )
