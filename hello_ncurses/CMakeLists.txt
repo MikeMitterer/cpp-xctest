@@ -37,7 +37,12 @@ find_package(curses REQUIRED)
 include_directories(include)
 include_directories(src)
 
-file(GLOB_RECURSE HEADER_SOURCES src/*.h)
+#file(GLOB_RECURSE HEADER_SOURCES src/*.h)
+set(HEADER_SOURCES
+        src/main/data_types.h
+        src/main/Screen.h
+)
+
 include_directories(src/main)
 
 set(SOURCE_FILES

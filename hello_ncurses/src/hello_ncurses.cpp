@@ -3,6 +3,7 @@
 #include <fmt/format.h>
 #include <iostream>
 #include <queue>
+#include <main/Screen.h>
 
 #include "main/data_types.h"
 
@@ -75,20 +76,12 @@ int main(int argc, char *argv[]) {
     int size_x, size_y;
     int score_size = 3;
 
-    initscr();
+    Screen screen;
+    screen.init();
 
-    // To use these routines start_color must be called, usually right after initscr
-    // More: https://linux.die.net/man/3/init_color
-    start_color();
-    init_pair(1, COLOR_WHITE, COLOR_BLUE);
-    init_pair(2, COLOR_GREEN, COLOR_BLACK);
-
-    clear();
-    noecho();
-    curs_set(FALSE);
-
-    // set up initial windows
-    getmaxyx(stdscr, size_y, size_x);
+    Size size = screen.getSize();
+    size_x = size.x();
+    size_y = size.y();
 
     auto header = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
     auto field = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
@@ -133,8 +126,7 @@ int main(int argc, char *argv[]) {
 
     } while((key = getch()) != KEY_X);
 
-    wclear(stdscr);
-    endwin();
+
 
     return 0;
 }
