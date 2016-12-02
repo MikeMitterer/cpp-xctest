@@ -1,143 +1,140 @@
-#include <iostream>
-#include <stdlib.h>
-#include <spdlog/spdlog.h>
-#include <args.hxx>
 #include <ncurses.h>
-#include <menu.h>
-#include <list>
+#include <unistd.h>
+#include <fmt/format.h>
+#include <iostream>
+#include <queue>
 
-namespace spd = spdlog;
+#include "main/data_types.h"
 
-//ITEM **it;
-MENU *me;
-//WINDOW *win;
+/**
+ * Sample verwendet folgendes Libs:
+ *      Formatter:  https://github.com/fmtlib/fmt
+ *      Logger: https://github.com/gabime/spdlog
+ *      ArgParser: https://github.com/Taywee/args
+ *
+ * More infos:
+ *      https://de.wikibooks.org/wiki/Ncurses:_Inhaltsverzeichnis
+ *      http://tldp.org/HOWTO/NCURSES-Programming-HOWTO/index.html
+ *      http://tldp.org/HOWTO/NCURSES-Programming-HOWTO/tools.html
+ *      http://frank.harvard.edu/~coldwell/ncurses/ncurses-intro.html
+ *      https://www.gnu.org/software/guile-ncurses/manual/guile-ncurses.html
+ *      https://www.viget.com/articles/c-games-in-ncurses-using-multiple-windows
+ *      http://hughm.cs.ukzn.ac.za/~murrellh/os/notes/ncurses.html
+ *      http://www.linuxfocus.org/Deutsch/March2002/article233.shtml
+ *
+ * GH-Samples:
+ *      Collection:     https://github.com/tony/NCURSES-Programming-HOWTO-examples
+ *      Menu:           https://goo.gl/DTIQSK
+ *                      http://techlister.com/linux/creating-menu-with-ncurses-in-c/1293/
+ *      ToDo:           https://github.com/phillip-h/todo
+ *
+ *  Gist:
+ *      https://gist.github.com/reagent/9819045
+ *
+ *  C++ Libs:
+ *      Curses++:   https://sourceforge.net/projects/cursesplusplus/
+ *      libcwpp:    https://github.com/giszo/libcwpp
+ *      unicurses:  https://github.com/Chiel92/unicurses
+ *
+ *  Valgrind (CheckMemo / Avoid MemLeaks)
+ *      http://valgrind.org/docs/manual/quick-start.html#quick-start.intro
+ */
 
-//void quit(void) {
-//    auto logger = spd::stdout_color_mt("quit");
-//    //int i;
-//
-//    logger->info("Closing window...");
-//    std::cout << "Closing window..." << std::endl;
-//
-//    unpost_menu(me);
-//    free_menu(me);
-//
-////    for (i = 0; i <= 4; i++) {
-////        free_item(it[i]);
-////    }
-//
-//    //free(it);
-//    delwin(win);
-//    endwin();
-//
-//    logger->info("Done!");
-//}
+const int8_t KEY_X = 120;
+const int8_t BORDER_WIDTH = 1;
 
-int main(void) {
-    auto logger = spd::stdout_color_mt("main");
+using namespace mm::curses;
 
-    int ch;
+/// Initializes des given Window and returns the Main-Window size
+std::tuple<int, int> init_screen(NCWindow field,NCWindow score,int score_size) {
+    int size_x, size_y;
+    getmaxyx(stdscr, size_y, size_x);
+
+    wresize(field.get(), size_y - score_size, size_x);
+
+    wresize(score.get(), score_size, size_x);
+    mvwin(score.get(), size_y - score_size, 0);
+
+    wclear(stdscr);
+    wclear(field.get());
+    wclear(score.get());
+
+    refresh(); // refresh() is equivalent to wrefresh(stdscr).
+
+    box(field.get(), 0, 0);
+    box(score.get(), 0, 0);
+
+    // refresh each window
+    wrefresh(field.get());
+    wrefresh(score.get());
+
+    return std::make_tuple(size_x, size_y);
+}
+
+int main(int argc, char *argv[]) {
+    int size_x, size_y;
+    int score_size = 3;
 
     initscr();
-    atexit([] () {
-        auto logger = spd::stdout_color_mt("quit");
-        //int i;
 
-        logger->info("Closing window...");
-        std::cout << "Closing window..." << std::endl;
-
-        unpost_menu(me);
-        //free_menu(me);
-
-//    for (i = 0; i <= 4; i++) {
-//        free_item(it[i]);
-//    }
-
-        //free(it);
-        //delwin(win);
-        endwin();
-        std::cout << "Done" << std::endl;
-
-        logger->info("Done!");
-    });
+    // To use these routines start_color must be called, usually right after initscr
+    // More: https://linux.die.net/man/3/init_color
+    start_color();
+    init_pair(1, COLOR_WHITE, COLOR_BLUE);
+    init_pair(2, COLOR_GREEN, COLOR_BLACK);
 
     clear();
     noecho();
-    curs_set(0);
-    cbreak();
-    nl();
-    keypad(stdscr, TRUE);
+    curs_set(FALSE);
 
-//    std::vector<std::shared_ptr<ITEM>> itemsX = {
-//            std::shared_ptr<ITEM>(new_item("M1", "Menue-Eintrag 1"),free_item),
-//            std::shared_ptr<ITEM>(new_item("M2", "Menue-Eintrag 2"),free_item),
-//            std::shared_ptr<ITEM>(new_item("M3", "Menue-Eintrag 3"),free_item),
-//            std::shared_ptr<ITEM>(new_item("Exit", "Exit"),free_item),
-//            std::shared_ptr<ITEM>(NULL)
-//
-//    };
-//
-//    std::vector<std::unique_ptr<ITEM>> itemsY;
-//    itemsY.push_back(std::unique_ptr<ITEM>(new_item("M1", "Menue-Eintrag 1")));
-//    itemsY.push_back(std::unique_ptr<ITEM>(new_item("M2", "Menue-Eintrag 2")));
-//    itemsY.push_back(std::unique_ptr<ITEM>(new_item("M3", "Menue-Eintrag 3")));
-//    itemsY.push_back(std::unique_ptr<ITEM>(new_item("Exit", "Exit")));
-//    itemsY.push_back(NULL);
+    // set up initial windows
+    getmaxyx(stdscr, size_y, size_x);
 
-    using MenuItem = std::unique_ptr<ITEM>; // ,decltype(&free_item)
+    auto header = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
+    auto field = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
+    auto score = NCWindow(newwin(score_size, size_x, size_y - score_size, 0),&delwin);
 
-    new_item("M4", "Menue-Eintrag 34");
+    wbkgd(field.get(), COLOR_PAIR(2));
 
-    std::vector<MenuItem> items;
-    items.push_back(MenuItem(new_item("M1", "Menue-Eintrag 1")));
-    items.push_back(MenuItem(new_item("M2", "Menue-Eintrag 2")));
-    items.push_back(MenuItem(new_item("M3", "Menue-Eintrag 3")));
-    items.push_back(MenuItem(new_item("Exit", "Exit")));
-    items.push_back(NULL);
+    int key = -1;
+    std::deque<int> logs;
 
-//    it = (ITEM **) calloc(5, sizeof(ITEM *));
-//    it[0] = new_item("M1", "Menueeintrag 1");
-//    it[1] = new_item("M2", "Menueeintrag 2");
-//    it[2] = new_item("M3", "Menueeintrag 3");
-//    it[3] = new_item("Ende", "Programm beenden");
-//    it[4] = 0;
-    me = new_menu((ITEM **) &items[0]);
-
-    //items.begin()
-    auto win = std::unique_ptr<WINDOW,decltype(&delwin)>(newwin(8, 30, 5, 5),&delwin);
-    set_menu_win(me, win.get());
-    set_menu_sub(me, derwin(win.get(), 4, 28, 3, 2));
-    box(win.get(), 0, 0);
-    mvwaddstr(win.get(), 1, 2, "***** Testmenü *****");
-    post_menu(me);
-
-    mvaddstr(14, 3, "Programm mittels Menü oder F1-Funktionstaste beenden");
-
-    refresh();
-    wrefresh(win.get());
-
-    while ((ch = getch()) != KEY_F(1)) {
-        switch (ch) {
-            case KEY_DOWN:
-                menu_driver(me, REQ_DOWN_ITEM);
-                break;
-            case KEY_UP:
-                menu_driver(me, REQ_UP_ITEM);
-                break;
-            case 0xA: /* Return- bzw. Enter-Taste -> ASCII-Code */
-
-                //logger->info("Current Item: {}", item_name(current_item(me)));
-                mvaddstr(15, 3, (std::string("Current Item: ") + item_name(current_item(me))).c_str());
-                if (item_index(current_item(me)) == 3) {
-                    exit(0);
-                }
-
-            default:
-                mvaddstr(16, 3, (std::string("KeyCode: ") + std::to_string(ch)).c_str());
+    std::tie(size_x, size_y) = init_screen(field, score, score_size);
+    do {
+        if(key == KEY_RESIZE) {
+            std::tie(size_x, size_y) = init_screen(field, score, score_size);
+            logs.clear();
+        } else {
+            logs.push_back(key);
+            if(logs.size() >= size_y - score_size - (BORDER_WIDTH * 2)) {
+                logs.pop_front();
+            }
         }
 
-        wrefresh(win.get());
-    }
+        mvwprintw(field.get(), 1, 1, "Log");
+        int line = 0;
+        std::for_each(logs.begin(),logs.end(), [&](int value) {
+            mvwprintw(field.get(), line + 2, 1, fmt::format("KeyCode: {:3}",value).c_str());
+            line++;
+        });
 
-    return (0);
+
+        mvwprintw(score.get(), 1, 1, fmt::format("Screen: X:{}, Y:{}, KeyCode: {:10}",
+                                                 size_x,size_y,
+                                                 key != -1 ? std::to_string(key) : "<not set>").c_str() );
+
+
+        std::string info = "'x' to Exit";
+        mvwprintw(score.get(), 1, static_cast<int>(size_x - BORDER_WIDTH - info.length()), info.c_str() );
+
+        // refresh each window
+        wrefresh(field.get());
+        wrefresh(score.get());
+
+    } while((key = getch()) != KEY_X);
+
+    wclear(stdscr);
+    endwin();
+
+    return 0;
 }

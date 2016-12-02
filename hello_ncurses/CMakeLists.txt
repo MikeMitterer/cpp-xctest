@@ -24,6 +24,8 @@ include(Config)
 find_package(args)
 find_package(spdlog)
 
+find_package(fmt)
+
 set(ADDITIONAL_LIBRARIES menu)
 find_package(curses REQUIRED)
 
@@ -35,9 +37,15 @@ find_package(curses REQUIRED)
 include_directories(include)
 include_directories(src)
 
+file(GLOB_RECURSE HEADER_SOURCES src/*.h)
+include_directories(src/main)
+
 set(SOURCE_FILES
+        ${HEADER_SOURCES}
         src/hello_ncurses.cpp
-        )
+
+        src/main/Window.cpp
+        src/main/Screen.h)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} ${CURSES_LIBRARIES} menu )
