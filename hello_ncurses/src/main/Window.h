@@ -12,9 +12,24 @@ namespace mm {
 
         class Window {
         private:
-            Size size;
+            Position position_;
+            Size size_;
+
+            NCWindow ncWindow;
 
         public:
+            Window(const Position& position, const Size& size);
+
+            WINDOW* get() const;
+
+            const NCWindow& getNCWidow() const;
+
+            void clear() const {
+                wclear(ncWindow.get());
+            }
+
+            void draw() const ;
+
             const Size& getSize() const;
 
             void setSize(const Size& size);

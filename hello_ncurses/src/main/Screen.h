@@ -18,7 +18,7 @@ namespace mm {
             Size size{0, 0};
 
         public:
-            void init() {
+            const Size& init() {
                 initscr();
 
                 // To use these routines start_color must be called, usually right after initscr
@@ -31,19 +31,47 @@ namespace mm {
                 noecho();
                 curs_set(FALSE);
 
-                // set up initial windows
-                size.x(static_cast<uint8_t>(getmaxx(stdscr)));
-                size.y(static_cast<uint8_t>(getmaxy(stdscr)));
+                updateSize();
+
+                return size;
             }
 
-
+            /// Add a new Window to the Main-Screen
             void add(const Window& window) {
                 windows.push_back(window);
             }
 
             const Size& getSize() const;
 
+            void onResize() {
+                updateSize();
+                draw();
+            }
+
+            void draw() {
+                wclear(stdscr);
+
+                std::for_each(windows.begin(),windows.end(),[&] (Window& window) {
+                    //window.setSize(size);
+                    window.clear();
+                });
+
+                refresh();
+
+                std::for_each(windows.begin(),windows.end(),[&] (Window& window) {
+                    window.draw();
+                });
+
+            }
+
             virtual ~Screen();
+
+        private:
+            void updateSize() {
+                // set up initial windows
+                size.width(static_cast<coord_t>(getmaxx(stdscr)));
+                size.height(static_cast<coord_t>(getmaxy(stdscr)));
+            }
         };
 
         Screen::~Screen() {
@@ -54,6 +82,7 @@ namespace mm {
         const Size& Screen::getSize() const {
             return size;
         }
+
     }
 }
 

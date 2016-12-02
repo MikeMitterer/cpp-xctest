@@ -13,31 +13,60 @@ namespace mm {
     namespace curses {
 
         using NCWindow = std::shared_ptr<WINDOW>;
+        using coord_t = uint16_t;
 
-        class Size {
+        class Position {
         private:
-            uint8_t x_;
-            uint8_t y_;
+            coord_t x_;
+            coord_t y_;
 
         public:
-            Size(uint8_t x, uint8_t y) : x_{x}, y_{y} {
+            Position(coord_t x, coord_t y) : x_{x}, y_{y} {
 
             }
 
-            uint8_t x() const {
+            coord_t x() const {
                 return x_;
             }
 
-            void x(uint8_t x_) {
-                Size::x_ = x_;
+            void x(coord_t x) {
+                x_ = x;
             }
 
-            uint8_t y() const {
+            coord_t y() const {
                 return y_;
             }
 
-            void y(uint8_t y_) {
-                Size::y_ = y_;
+            void y(coord_t y) {
+                y_ = y;
+            }
+
+        };
+
+        class Size {
+        private:
+            coord_t width_;
+            coord_t height_;
+
+        public:
+            Size(coord_t width, coord_t height) : width_{width}, height_{height} {
+
+            }
+
+            coord_t width() const {
+                return width_;
+            }
+
+            void width(coord_t x) {
+                width_ = x;
+            }
+
+            coord_t height() const {
+                return height_;
+            }
+
+            void height(coord_t y) {
+                height_ = y;
             }
 
         };

@@ -47,14 +47,15 @@ const int8_t BORDER_WIDTH = 1;
 using namespace mm::curses;
 
 /// Initializes des given Window and returns the Main-Window size
-std::tuple<int, int> init_screen(NCWindow field,NCWindow score,int score_size) {
-    int size_x, size_y;
+std::tuple<coord_t, coord_t> init_screen(NCWindow field,NCWindow score,int score_size) {
+    coord_t size_x, size_y;
     getmaxyx(stdscr, size_y, size_x);
 
     wresize(field.get(), size_y - score_size, size_x);
 
     wresize(score.get(), score_size, size_x);
     mvwin(score.get(), size_y - score_size, 0);
+
 
     wclear(stdscr);
     wclear(field.get());
@@ -73,29 +74,36 @@ std::tuple<int, int> init_screen(NCWindow field,NCWindow score,int score_size) {
 }
 
 int main(int argc, char *argv[]) {
-    int size_x, size_y;
-    int score_size = 3;
+    coord_t size_x, size_y;
+    uint8_t score_size = 3;
 
     Screen screen;
-    screen.init();
+    Size size = screen.init();
 
-    Size size = screen.getSize();
-    size_x = size.x();
-    size_y = size.y();
+    size_x = size.width();
+    size_y = size.height();
 
-    auto header = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
-    auto field = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
-    auto score = NCWindow(newwin(score_size, size_x, size_y - score_size, 0),&delwin);
+    //auto header = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
+    //auto field = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
+    //auto score = NCWindow(newwin(score_size, size_x, size_y - score_size, 0),&delwin);
+
+    Window field(Position(0,0),Size(size_x,size_y - score_size));
+    Window score(Position(0,size_y - score_size),Size(size_x,score_size));
+
+    screen.add(field);
+    screen.add(score);
 
     wbkgd(field.get(), COLOR_PAIR(2));
 
     int key = -1;
     std::deque<int> logs;
 
-    std::tie(size_x, size_y) = init_screen(field, score, score_size);
+    //std::tie(size_x, size_y) = init_screen(field.getNCWidow(), score, score_size);
+    screen.draw();
     do {
         if(key == KEY_RESIZE) {
-            std::tie(size_x, size_y) = init_screen(field, score, score_size);
+            screen.onResize();
+            //std::tie(size_x, size_y) = init_screen(field.getNCWidow(), score, score_size);
             logs.clear();
         } else {
             logs.push_back(key);
@@ -103,26 +111,26 @@ int main(int argc, char *argv[]) {
                 logs.pop_front();
             }
         }
-
-        mvwprintw(field.get(), 1, 1, "Log");
-        int line = 0;
-        std::for_each(logs.begin(),logs.end(), [&](int value) {
-            mvwprintw(field.get(), line + 2, 1, fmt::format("KeyCode: {:3}",value).c_str());
-            line++;
-        });
-
-
-        mvwprintw(score.get(), 1, 1, fmt::format("Screen: X:{}, Y:{}, KeyCode: {:10}",
-                                                 size_x,size_y,
-                                                 key != -1 ? std::to_string(key) : "<not set>").c_str() );
-
-
-        std::string info = "'x' to Exit";
-        mvwprintw(score.get(), 1, static_cast<int>(size_x - BORDER_WIDTH - info.length()), info.c_str() );
-
-        // refresh each window
-        wrefresh(field.get());
-        wrefresh(score.get());
+        screen.draw();
+//        mvwprintw(field.get(), 1, 1, "Log");
+//        int line = 0;
+//        std::for_each(logs.begin(),logs.end(), [&](int value) {
+//            mvwprintw(field.get(), line + 2, 1, fmt::format("KeyCode: {:3}",value).c_str());
+//            line++;
+//        });
+//
+//
+//        mvwprintw(score.get(), 1, 1, fmt::format("Screen: X:{}, Y:{}, KeyCode: {:10}",
+//                                                 size_x,size_y,
+//                                                 key != -1 ? std::to_string(key) : "<not set>").c_str() );
+//
+//
+//        std::string info = "'x' to Exit";
+//        mvwprintw(score.get(), 1, static_cast<int>(size_x - BORDER_WIDTH - info.length()), info.c_str() );
+//
+//        // refresh each window
+//        wrefresh(field.get());
+//        wrefresh(score.get());
 
     } while((key = getch()) != KEY_X);
 
