@@ -41,14 +41,19 @@ namespace mm {
                 windows.push_back(window);
             }
 
-            const Size& getSize() const;
+            static const Size getSize() {
+                return Size{
+                        static_cast<coord_t>(getmaxx(stdscr)),
+                        static_cast<coord_t>(getmaxy(stdscr))
+                    };
+            }
 
             void onResize() {
                 updateSize();
-                draw();
+                update();
             }
 
-            void draw() {
+            void update() {
                 wclear(stdscr);
 
                 std::for_each(windows.begin(),windows.end(),[&] (Window& window) {
@@ -59,7 +64,7 @@ namespace mm {
                 refresh();
 
                 std::for_each(windows.begin(),windows.end(),[&] (Window& window) {
-                    window.draw();
+                    window.update();
                 });
 
             }
@@ -77,10 +82,6 @@ namespace mm {
         Screen::~Screen() {
             wclear(stdscr);
             endwin();
-        }
-
-        const Size& Screen::getSize() const {
-            return size;
         }
 
     }

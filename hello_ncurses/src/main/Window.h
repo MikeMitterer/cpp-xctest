@@ -5,6 +5,7 @@
 #ifndef XCTEST_WINDOW_H
 #define XCTEST_WINDOW_H
 
+#include <string>
 #include "data_types.h"
 
 namespace mm {
@@ -14,6 +15,8 @@ namespace mm {
         private:
             Position position_;
             Size size_;
+            Size minSize_;
+            Size maxSize_;
 
             NCWindow ncWindow;
 
@@ -28,11 +31,24 @@ namespace mm {
                 wclear(ncWindow.get());
             }
 
-            void draw() const ;
+            void print(const Position& position, const std::string text);
+
+            void print(coord_t x, coord_t y, const std::string text);
+
+            void update() const ;
 
             const Size& getSize() const;
 
             void setSize(const Size& size);
+
+            const Size& getMinSize() const;
+
+            const Window& setMinSize(const Size& size);
+
+            const Size& getMaxSize() const;
+
+            const Window& setMaxSize(const Size& size);
+
         };
     }
 }

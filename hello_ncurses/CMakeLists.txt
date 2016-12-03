@@ -41,6 +41,7 @@ include_directories(src)
 set(HEADER_SOURCES
         src/main/data_types.h
         src/main/Screen.h
+        src/main/LayoutManager.h
 )
 
 include_directories(src/main)

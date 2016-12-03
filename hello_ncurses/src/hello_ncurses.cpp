@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
     std::deque<int> logs;
 
     //std::tie(size_x, size_y) = init_screen(field.getNCWidow(), score, score_size);
-    screen.draw();
+    screen.update();
     do {
         if(key == KEY_RESIZE) {
             screen.onResize();
@@ -111,7 +111,27 @@ int main(int argc, char *argv[]) {
                 logs.pop_front();
             }
         }
-        screen.draw();
+        field.print(1, 1, "Log");
+
+        coord_t line = 0;
+        std::for_each(logs.begin(),logs.end(), [&](int value) {
+            field.print(1, static_cast<coord_t>(line + 2), fmt::format("KeyCode: {:3}",value));
+            line++;
+        });
+
+        score.print( 1, 1, fmt::format("Screen: X: {}, Y: {}, KeyCode: {:10}",
+                                                 size_x,size_y,
+                                                 key != -1 ? std::to_string(key) : "<not set>"));
+
+
+        std::string info = "'x' to Exit";
+        score.print(static_cast<coord_t>(size_x - BORDER_WIDTH - info.length()),1, info);
+
+        field.update();
+        score.update();
+
+        //screen.update();
+
 //        mvwprintw(field.get(), 1, 1, "Log");
 //        int line = 0;
 //        std::for_each(logs.begin(),logs.end(), [&](int value) {
@@ -134,7 +154,8 @@ int main(int argc, char *argv[]) {
 
     } while((key = getch()) != KEY_X);
 
-
+    wclear(stdscr);
+    endwin();
 
     return 0;
 }
