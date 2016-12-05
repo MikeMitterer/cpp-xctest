@@ -40,18 +40,20 @@ include_directories(src)
 #file(GLOB_RECURSE HEADER_SOURCES src/*.h)
 set(HEADER_SOURCES
         src/main/data_types.h
-        src/main/Screen.h
         src/main/LayoutManager.h
+        src/main/Screen.h
+        src/main/Window.h
 )
 
 include_directories(src/main)
 
 set(SOURCE_FILES
-        ${HEADER_SOURCES}
         src/hello_ncurses.cpp
 
+        src/main/LayoutManager.cpp
+        src/main/Screen.cpp
         src/main/Window.cpp
-        src/main/Screen.h)
+        )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} ${CURSES_LIBRARIES} menu )

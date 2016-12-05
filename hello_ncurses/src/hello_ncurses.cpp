@@ -87,11 +87,14 @@ int main(int argc, char *argv[]) {
     //auto field = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
     //auto score = NCWindow(newwin(score_size, size_x, size_y - score_size, 0),&delwin);
 
-    Window field(Position(0,0),Size(size_x,size_y - score_size));
-    Window score(Position(0,size_y - score_size),Size(size_x,score_size));
+    Window field;
+    Window score;
+
+    score.setMinHeight(3);
 
     screen.add(field);
     screen.add(score);
+
 
     wbkgd(field.get(), COLOR_PAIR(2));
 

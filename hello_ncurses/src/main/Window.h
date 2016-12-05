@@ -13,15 +13,18 @@ namespace mm {
 
         class Window {
         private:
-            Position position_;
-            Size size_;
-            Size minSize_;
-            Size maxSize_;
+            Position position_{0, 0};
+            Size size_{1, 1};
+            Size minSize_{1, 1};
+            Size maxSize_{MAX_SCREEN_WITH, MAX_SCREEN_HEIGHT};
 
             NCWindow ncWindow;
 
         public:
-            Window(const Position& position, const Size& size);
+            Window();
+
+//            /// move constructor
+//            Window(Window&& other);
 
             WINDOW* get() const;
 
@@ -35,15 +38,21 @@ namespace mm {
 
             void print(coord_t x, coord_t y, const std::string text);
 
-            void update() const ;
+            void update() const;
 
             const Size& getSize() const;
 
             void setSize(const Size& size);
 
+            const Window& setPosition(const Position& position);
+
+            const Position& getPosition();
+
             const Size& getMinSize() const;
 
             const Window& setMinSize(const Size& size);
+
+            const Window& setMinHeight(const coord_t height);
 
             const Size& getMaxSize() const;
 

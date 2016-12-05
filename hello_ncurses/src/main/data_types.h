@@ -12,6 +12,7 @@
 namespace mm {
     namespace curses {
 
+
         using NCWindow = std::shared_ptr<WINDOW>;
         using coord_t = uint16_t;
 

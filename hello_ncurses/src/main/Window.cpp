@@ -7,10 +7,16 @@
 namespace mm {
     namespace curses {
 
-        Window::Window(const mm::curses::Position& position, const mm::curses::Size& size)
-                : position_{position}, size_{size}, minSize_{1, 1}, maxSize_{MAX_SCREEN_WITH, MAX_SCREEN_HEIGHT},
-                  ncWindow{newwin(size.height(), size.width(), position.y(), position.x()), &delwin} {
+        Window::Window()
+                : ncWindow{newwin(size_.height(), size_.width(), position_.y(), position_.x()), &delwin} {
+
         }
+
+//        Window::Window(Window&& other) : position_{other.position_},
+//                                         size_{other.size_},minSize_{other.minSize_},maxSize_{other.maxSize_} {
+//            ncWindow = other.ncWindow;
+//            other.ncWindow = nullptr;
+//        }
 
 
         const Size& Window::getSize() const {
@@ -19,7 +25,7 @@ namespace mm {
 
         void Window::setSize(const mm::curses::Size& size) {
             size_ = size;
-            wresize(ncWindow.get(), size_.height() - 5, size_.width());
+            wresize(ncWindow.get(), size_.height(), size_.width());
         }
 
         WINDOW* Window::get() const {
@@ -52,6 +58,11 @@ namespace mm {
             return *this;
         }
 
+        const Window& Window::setMinHeight(const coord_t height) {
+            minSize_.height(height);
+            return *this;
+        }
+
         const Size& Window::getMaxSize() const {
             return maxSize_;
         }
@@ -60,5 +71,15 @@ namespace mm {
             maxSize_ = size;
             return *this;
         }
+
+        const Window& Window::setPosition(const Position& position) {
+            position_ = position;
+            return  *this;
+        }
+
+        const Position& Window::getPosition() {
+            return position_;
+        }
+
     }
 }

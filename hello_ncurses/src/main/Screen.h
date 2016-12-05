@@ -8,6 +8,7 @@
 #include <ncurses.h>
 #include "data_types.h"
 #include "Window.h"
+#include "LayoutManager.h"
 
 namespace mm {
     namespace curses {
@@ -16,36 +17,22 @@ namespace mm {
         private:
             std::vector<Window> windows;
             Size size{0, 0};
+            std::unique_ptr<LayoutManager> layoutManager =
+                    std::unique_ptr<LayoutManager>(new FlowLayoutManager());
 
         public:
-            const Size& init() {
-                initscr();
-
-                // To use these routines start_color must be called, usually right after initscr
-                // More: https://linux.die.net/man/3/init_color
-                start_color();
-                init_pair(1, COLOR_WHITE, COLOR_BLUE);
-                init_pair(2, COLOR_GREEN, COLOR_BLACK);
-
-                clear();
-                noecho();
-                curs_set(FALSE);
-
-                updateSize();
-
-                return size;
-            }
+            const Size& init();
 
             /// Add a new Window to the Main-Screen
             void add(const Window& window) {
                 windows.push_back(window);
             }
 
-            static const Size getSize() {
+             static Size getSize() {
                 return Size{
                         static_cast<coord_t>(getmaxx(stdscr)),
                         static_cast<coord_t>(getmaxy(stdscr))
-                    };
+                };
             }
 
             void onResize() {
@@ -55,6 +42,8 @@ namespace mm {
 
             void update() {
                 wclear(stdscr);
+
+                layoutManager.get()->layout(windows);
 
                 std::for_each(windows.begin(),windows.end(),[&] (Window& window) {
                     //window.setSize(size);
@@ -79,10 +68,9 @@ namespace mm {
             }
         };
 
-        Screen::~Screen() {
-            wclear(stdscr);
-            endwin();
-        }
+
+
+
 
     }
 }
