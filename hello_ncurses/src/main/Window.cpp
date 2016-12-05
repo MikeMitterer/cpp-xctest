@@ -41,6 +41,11 @@ namespace mm {
             wrefresh(ncWindow.get());
         }
 
+        void Window::updatePosition() const {
+            mvwin(ncWindow.get(), position_.y(),position_.x());
+        }
+
+
         void Window::print(const Position& position, const std::string text) {
             print(position.x(), position.y(), text);
         }
@@ -80,6 +85,7 @@ namespace mm {
         const Position& Window::getPosition() {
             return position_;
         }
+
 
     }
 }

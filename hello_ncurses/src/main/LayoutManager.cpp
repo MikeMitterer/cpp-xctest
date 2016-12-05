@@ -9,14 +9,16 @@
 namespace mm {
     namespace curses {
 
-        void mm::curses::FlowLayoutManager::layout(std::vector<Window>& windows) {
+        void mm::curses::FlowLayoutManager::layout(
+                const std::vector<std::shared_ptr<Window>>& windows) {
+
             const Size screenSize = Screen::getSize();
 
             coord_t defHeight = 0;
             uint8_t winWithoutSize = 0;
-            std::for_each(windows.begin(), windows.end(), [&](const Window& window) {
-                if (window.getMinSize().height() > 1) {
-                    defHeight += window.getMinSize().height();
+            std::for_each(windows.begin(), windows.end(), [&](const std::shared_ptr<Window>& window) {
+                if (window->getMinSize().height() > 1) {
+                    defHeight += window->getMinSize().height();
                 } else {
                     winWithoutSize++;
                 }
@@ -28,14 +30,14 @@ namespace mm {
             }
 
             coord_t newYPos = 0;
-            std::for_each(windows.begin(), windows.end(), [&](Window& window) {
-                window.setPosition(Position(window.getPosition().x(), newYPos));
-                if (window.getMinSize().height() > 1) {
-                    window.setSize(Size(screenSize.width(), window.getMinSize().height()));
-                    newYPos += window.getMinSize().height();
+            std::for_each(windows.begin(), windows.end(), [&](const std::shared_ptr<Window>& window) {
+                window->setPosition(Position(window->getPosition().x(), newYPos));
+                if (window->getMinSize().height() > 1) {
+                    window->setSize(Size(screenSize.width(), window->getMinSize().height()));
+                    newYPos += window->getMinSize().height();
 
                 } else {
-                    window.setSize(Size(screenSize.width(), averageHeight));
+                    window->setSize(Size(screenSize.width(), averageHeight));
                     newYPos += averageHeight;
                 }
             });

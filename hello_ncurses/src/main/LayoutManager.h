@@ -14,7 +14,7 @@ namespace mm {
 
         class LayoutManager {
         public:
-            virtual void layout(std::vector<Window>& windows)= 0;
+            virtual void layout(const std::vector<std::shared_ptr<Window>>& windows)= 0;
         };
 
 
@@ -22,7 +22,7 @@ namespace mm {
 
         public:
 
-            virtual void layout(std::vector<Window>& windows) override;
+            virtual void layout(const std::vector<std::shared_ptr<Window>>& windows) override;
         };
 
     }

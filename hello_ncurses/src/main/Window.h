@@ -40,6 +40,8 @@ namespace mm {
 
             void update() const;
 
+            void updatePosition() const;
+
             const Size& getSize() const;
 
             void setSize(const Size& size);

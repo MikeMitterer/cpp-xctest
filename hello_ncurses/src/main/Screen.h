@@ -15,8 +15,8 @@ namespace mm {
 
         class Screen {
         private:
-            std::vector<Window> windows;
             Size size{0, 0};
+            std::vector<std::shared_ptr<Window>> windows;
             std::unique_ptr<LayoutManager> layoutManager =
                     std::unique_ptr<LayoutManager>(new FlowLayoutManager());
 
@@ -24,7 +24,7 @@ namespace mm {
             const Size& init();
 
             /// Add a new Window to the Main-Screen
-            void add(const Window& window) {
+            void add(std::shared_ptr<Window> window) {
                 windows.push_back(window);
             }
 
@@ -45,15 +45,16 @@ namespace mm {
 
                 layoutManager.get()->layout(windows);
 
-                std::for_each(windows.begin(),windows.end(),[&] (Window& window) {
+                std::for_each(windows.begin(),windows.end(),[&] (const std::shared_ptr<Window>& window) {
                     //window.setSize(size);
-                    window.clear();
+                    window->updatePosition();
+                    window->clear();
                 });
 
                 refresh();
 
-                std::for_each(windows.begin(),windows.end(),[&] (Window& window) {
-                    window.update();
+                std::for_each(windows.begin(),windows.end(),[&] (const std::shared_ptr<Window>& window) {
+                    window->update();
                 });
 
             }

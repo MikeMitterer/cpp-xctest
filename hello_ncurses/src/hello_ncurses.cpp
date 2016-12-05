@@ -74,29 +74,24 @@ std::tuple<coord_t, coord_t> init_screen(NCWindow field,NCWindow score,int score
 }
 
 int main(int argc, char *argv[]) {
-    coord_t size_x, size_y;
-    uint8_t score_size = 3;
 
     Screen screen;
     Size size = screen.init();
-
-    size_x = size.width();
-    size_y = size.height();
 
     //auto header = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
     //auto field = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
     //auto score = NCWindow(newwin(score_size, size_x, size_y - score_size, 0),&delwin);
 
-    Window field;
-    Window score;
-
-    score.setMinHeight(3);
+    auto field = std::shared_ptr<Window>(new Window()) ;
+    auto score = std::shared_ptr<Window>(new Window()) ;
 
     screen.add(field);
     screen.add(score);
 
+    score->setMinHeight(3);
 
-    wbkgd(field.get(), COLOR_PAIR(2));
+
+    wbkgd(field.get()->getNCWidow().get(), COLOR_PAIR(2));
 
     int key = -1;
     std::deque<int> logs;
@@ -110,28 +105,28 @@ int main(int argc, char *argv[]) {
             logs.clear();
         } else {
             logs.push_back(key);
-            if(logs.size() >= size_y - score_size - (BORDER_WIDTH * 2)) {
+            if(logs.size() >= field->getSize().height() - (BORDER_WIDTH * 2)) {
                 logs.pop_front();
             }
         }
-        field.print(1, 1, "Log");
+        field->print(1, 1, "Log");
 
         coord_t line = 0;
         std::for_each(logs.begin(),logs.end(), [&](int value) {
-            field.print(1, static_cast<coord_t>(line + 2), fmt::format("KeyCode: {:3}",value));
+            field->print(1, static_cast<coord_t>(line + 2), fmt::format("KeyCode: {:3}",value));
             line++;
         });
 
-        score.print( 1, 1, fmt::format("Screen: X: {}, Y: {}, KeyCode: {:10}",
-                                                 size_x,size_y,
+        score->print( 1, 1, fmt::format("Screen: X: {}, Y: {}, KeyCode: {:10}",
+                                                 screen.getSize().width(),screen.getSize().height(),
                                                  key != -1 ? std::to_string(key) : "<not set>"));
 
 
         std::string info = "'x' to Exit";
-        score.print(static_cast<coord_t>(size_x - BORDER_WIDTH - info.length()),1, info);
+        score->print(static_cast<coord_t>(score->getSize().width() - BORDER_WIDTH - info.length()),1, info);
 
-        field.update();
-        score.update();
+        field->update();
+        score->update();
 
         //screen.update();
 
