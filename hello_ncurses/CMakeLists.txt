@@ -17,6 +17,9 @@ project(HelloNCurses)
 # Output bin, c++11 usw
 include(Config)
 
+# Wichtig - sonst funktioniert's auf dem Raspi nicht
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Libs                                                            │
 # └──────────────────────────────────────────────────────────────────┘

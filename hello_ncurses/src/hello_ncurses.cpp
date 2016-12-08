@@ -3,7 +3,12 @@
 #include <fmt/format.h>
 #include <iostream>
 #include <queue>
+#include <atomic>
+#include <thread>
+#include <chrono>
 #include <main/Screen.h>
+#include <iomanip>
+#include <sstream>
 
 #include "main/data_types.h"
 
@@ -47,7 +52,7 @@ const int8_t BORDER_WIDTH = 1;
 using namespace mm::curses;
 
 /// Initializes des given Window and returns the Main-Window size
-std::tuple<coord_t, coord_t> init_screen(NCWindow field,NCWindow score,int score_size) {
+std::tuple<coord_t, coord_t> init_screen(NCWindow field, NCWindow score, int score_size) {
     coord_t size_x, size_y;
     getmaxyx(stdscr, size_y, size_x);
 
@@ -73,7 +78,32 @@ std::tuple<coord_t, coord_t> init_screen(NCWindow field,NCWindow score,int score
     return std::make_tuple(size_x, size_y);
 }
 
-int main(int argc, char *argv[]) {
+void update(std::atomic<bool>& program_is_running, std::shared_ptr<Window> window) {
+    const unsigned int update_interval = 250 ; // update after every 50 milliseconds
+    const auto wait_duration = std::chrono::milliseconds(update_interval);
+
+    while (program_is_running) {
+        auto now = std::chrono::system_clock::now();
+        auto in_time_t = std::chrono::system_clock::to_time_t(now);
+
+        auto t = std::time(nullptr);
+        auto tm = std::localtime(&t);
+
+        std::ostringstream oss;
+        oss << std::put_time(tm, "%d-%m-%Y %H:%M:%S");
+        //oss << asctime(tm);
+
+        //std::cout << oss.str() << std::endl;
+
+        std::string info = oss.str();
+        window->print(static_cast<coord_t>(window->getSize().width() - BORDER_WIDTH - info.length()), 1, info);
+        window->update();
+
+        std::this_thread::sleep_for(wait_duration);
+    }
+}
+
+int main(int argc, char* argv[]) {
 
     Screen screen;
     Size size = screen.init();
@@ -82,12 +112,15 @@ int main(int argc, char *argv[]) {
     //auto field = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
     //auto score = NCWindow(newwin(score_size, size_x, size_y - score_size, 0),&delwin);
 
-    auto field = std::shared_ptr<Window>(new Window()) ;
-    auto score = std::shared_ptr<Window>(new Window()) ;
+    auto header = std::shared_ptr<Window>(new Window());
+    auto field = std::shared_ptr<Window>(new Window());
+    auto score = std::shared_ptr<Window>(new Window());
 
+    screen.add(header);
     screen.add(field);
     screen.add(score);
 
+    header->setMinHeight(3);
     score->setMinHeight(3);
 
 
@@ -96,35 +129,41 @@ int main(int argc, char *argv[]) {
     int key = -1;
     std::deque<int> logs;
 
+    std::atomic<bool> running { true } ;
+
+    std::thread update_thread( update, std::ref(running), header ) ;
+
+
     //std::tie(size_x, size_y) = init_screen(field.getNCWidow(), score, score_size);
     screen.update();
     do {
-        if(key == KEY_RESIZE) {
+        if (key == KEY_RESIZE) {
             screen.onResize();
             //std::tie(size_x, size_y) = init_screen(field.getNCWidow(), score, score_size);
             logs.clear();
         } else {
             logs.push_back(key);
-            if(logs.size() >= field->getSize().height() - (BORDER_WIDTH * 2)) {
+            if (logs.size() >= field->getSize().height() - BORDER_WIDTH) {
                 logs.pop_front();
             }
         }
-        field->print(1, 1, "Log");
+        header->print(1, 1, "Log");
 
         coord_t line = 0;
-        std::for_each(logs.begin(),logs.end(), [&](int value) {
-            field->print(1, static_cast<coord_t>(line + 2), fmt::format("KeyCode: {:3}",value));
+        std::for_each(logs.begin(), logs.end(), [&](int value) {
+            field->print(1, static_cast<coord_t>(line + 1), fmt::format("KeyCode: {:3}", value));
             line++;
         });
 
-        score->print( 1, 1, fmt::format("Screen: X: {}, Y: {}, KeyCode: {:10}",
-                                                 screen.getSize().width(),screen.getSize().height(),
-                                                 key != -1 ? std::to_string(key) : "<not set>"));
+        score->print(1, 1, fmt::format("Screen: X: {}, Y: {}, KeyCode: {:10}",
+                                       screen.getSize().width(), screen.getSize().height(),
+                                       key != -1 ? std::to_string(key) : "<not set>"));
 
 
         std::string info = "'x' to Exit";
-        score->print(static_cast<coord_t>(score->getSize().width() - BORDER_WIDTH - info.length()),1, info);
+        score->print(static_cast<coord_t>(score->getSize().width() - BORDER_WIDTH - info.length()), 1, info);
 
+        header->update();
         field->update();
         score->update();
 
@@ -150,10 +189,15 @@ int main(int argc, char *argv[]) {
 //        wrefresh(field.get());
 //        wrefresh(score.get());
 
-    } while((key = getch()) != KEY_X);
+    } while ((key = getch()) != KEY_X);
+
+    // exit gracefully
+    running = false ;
+    update_thread.join() ;
 
     wclear(stdscr);
     endwin();
+
 
     return 0;
 }
