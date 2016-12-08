@@ -23,9 +23,10 @@ namespace mm {
             return size_;
         }
 
-        void Window::setSize(const mm::curses::Size& size) {
-            size_ = size;
-            wresize(ncWindow.get(), size_.height(), size_.width());
+        void Window::setSize(Size size) {
+            size_.width(size.width());
+            size_.height(size.height());
+            ::wresize(ncWindow.get(), size.height(), size.width());
         }
 
         WINDOW* Window::get() const {
@@ -37,22 +38,33 @@ namespace mm {
         }
 
         void Window::update() const {
-            box(ncWindow.get(), 0, 0);
-            wrefresh(ncWindow.get());
+            ::wrefresh(ncWindow.get());
         }
 
         void Window::updatePosition() const {
             mvwin(ncWindow.get(), position_.y(),position_.x());
         }
 
+        const Window& Window::clear() const {
+            wclear(ncWindow.get());
+            return *this;
+        }
 
-        void Window::print(const Position& position, const std::string text) {
+        const Window& Window::print(const Position& position, const std::string text) const {
             print(position.x(), position.y(), text);
+            return *this;
         }
 
-        void Window::print(coord_t x, coord_t y, const std::string text) {
+        const Window& Window::print(coord_t x, coord_t y, const std::string text) const {
             mvwprintw(ncWindow.get(), y, x, text.c_str());
+            return *this;
         }
+
+        const Window& Window::box() const {
+            ::box(ncWindow.get(), 0, 0);
+            return *this;
+        }
+
 
         const Size& Window::getMinSize() const {
             return minSize_;
@@ -85,6 +97,7 @@ namespace mm {
         const Position& Window::getPosition() {
             return position_;
         }
+
 
 
     }

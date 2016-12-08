@@ -56,7 +56,8 @@ set(SOURCE_FILES
         src/main/LayoutManager.cpp
         src/main/Screen.cpp
         src/main/Window.cpp
-        )
+        src/main/XCurses.cpp
+)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} ${CURSES_LIBRARIES} menu )

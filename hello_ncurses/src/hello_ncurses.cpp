@@ -10,7 +10,7 @@
 #include <iomanip>
 #include <sstream>
 
-#include "main/data_types.h"
+#include "XCurses.h"
 
 /**
  * Sample verwendet folgendes Libs:
@@ -79,7 +79,7 @@ std::tuple<coord_t, coord_t> init_screen(NCWindow field, NCWindow score, int sco
 }
 
 void update(std::atomic<bool>& program_is_running, std::shared_ptr<Window> window) {
-    const unsigned int update_interval = 250 ; // update after every 50 milliseconds
+    const unsigned int update_interval = 250; // update after every 50 milliseconds
     const auto wait_duration = std::chrono::milliseconds(update_interval);
 
     while (program_is_running) {
@@ -104,6 +104,50 @@ void update(std::atomic<bool>& program_is_running, std::shared_ptr<Window> windo
 }
 
 int main(int argc, char* argv[]) {
+    Curses curses;
+
+    curses.initColor().echo(Echo::OFF).cursor(Cursor::OFF).update();
+
+    //curses.clear();
+    curses.update();
+
+    Window window1;
+
+    Size screenSize = curses.screenSize();
+    window1.setSize(Size{screenSize.width(), static_cast<coord_t>(screenSize.height() / 2)});
+
+    window1.clear().box().print(1, 1, "Hallo").update();
+
+    int key = -1;
+    do {
+        if (key == KEY_RESIZE) {
+            screenSize = curses.screenSize();
+            curses.clear();
+            curses.update();
+
+            window1.setSize(Size(screenSize.width(),static_cast<coord_t>(screenSize.height() / 2)));
+            window1.updatePosition();
+
+            window1.clear();
+        }
+
+        window1.box().print(1, 1, "Hallo");
+        window1.print(1, static_cast<coord_t>(window1.getSize().height() - 2),
+                      fmt::format("Screen: X: {}, Y: {}, KeyCode: {:10}",
+                                  screenSize.width(), screenSize.height(),
+                                  key != -1 ? std::to_string(key) : "<not set>"));
+
+
+        std::string info = "'x' to Exit";
+        window1.print(static_cast<coord_t>(window1.getSize().width() - BORDER_WIDTH - info.length()), 1, info);
+
+        window1.update();
+
+    } while ((key = curses.getch()) != KEY_X);
+
+}
+
+int main_old(int argc, char* argv[]) {
 
     Screen screen;
     Size size = screen.init();
@@ -129,9 +173,9 @@ int main(int argc, char* argv[]) {
     int key = -1;
     std::deque<int> logs;
 
-    std::atomic<bool> running { true } ;
+    std::atomic<bool> running{true};
 
-    std::thread update_thread( update, std::ref(running), header ) ;
+    std::thread update_thread(update, std::ref(running), header);
 
 
     //std::tie(size_x, size_y) = init_screen(field.getNCWidow(), score, score_size);
@@ -192,8 +236,8 @@ int main(int argc, char* argv[]) {
     } while ((key = getch()) != KEY_X);
 
     // exit gracefully
-    running = false ;
-    update_thread.join() ;
+    running = false;
+    update_thread.join();
 
     wclear(stdscr);
     endwin();

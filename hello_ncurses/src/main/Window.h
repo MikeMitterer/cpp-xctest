@@ -30,13 +30,14 @@ namespace mm {
 
             const NCWindow& getNCWidow() const;
 
-            void clear() const {
-                wclear(ncWindow.get());
-            }
+            const Window& clear() const;
 
-            void print(const Position& position, const std::string text);
+            const Window& print(const Position& position, const std::string text) const;
 
-            void print(coord_t x, coord_t y, const std::string text);
+            const Window& print(coord_t x, coord_t y, const std::string text) const;
+
+            const Window& box() const;
+
 
             void update() const;
 
@@ -44,11 +45,13 @@ namespace mm {
 
             const Size& getSize() const;
 
-            void setSize(const Size& size);
+            void setSize(Size size);
 
             const Window& setPosition(const Position& position);
 
             const Position& getPosition();
+
+            // - für den Layout-Manager --------------------------------------------------------------------------------
 
             const Size& getMinSize() const;
 

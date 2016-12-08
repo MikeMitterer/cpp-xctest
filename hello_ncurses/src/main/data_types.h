@@ -6,12 +6,11 @@
 #define XCTEST_DATA_TYPES_H
 
 #include <cstdint>
-#include <ncurses.h>
 #include <memory>
+#include <ncurses.h>
 
 namespace mm {
     namespace curses {
-
 
         using NCWindow = std::shared_ptr<WINDOW>;
         using coord_t = uint16_t;
@@ -72,7 +71,8 @@ namespace mm {
             /// move assignment
             Size& operator=(const Size&& other) {
                 if(this != &other) {
-
+                    width_ = other.width_;
+                    height_ = other.height_;
                 }
                 return *this;
             }
