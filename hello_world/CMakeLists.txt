@@ -21,9 +21,9 @@ include(Config)
 # │  Libs                                                            │
 # └──────────────────────────────────────────────────────────────────┘
 
-find_package(args)
-find_package(spdlog)
-find_package(fmt)
+find_package(Args)
+find_package(Spdlog)
+find_package(Fmt)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Tests                                                           │
