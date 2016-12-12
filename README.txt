@@ -1,6 +1,8 @@
 Welche GLIBC ist verfügbar
     strings /usr/lib/arm-linux-gnueabihf/libstdc++.so.6 | grep -i glibc
 
+Aktuell!
+
 Anzeige Libray-Typ
     readelf -A libmyLib.so
 
