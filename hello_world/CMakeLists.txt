@@ -37,4 +37,4 @@ set(SOURCE_FILES
         src/hello_world.cpp
         )
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${CONAN_LIBS})
