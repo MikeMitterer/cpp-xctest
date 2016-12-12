@@ -10,7 +10,7 @@
  */
 namespace spd = spdlog;
 int main(int argc,const char *argv[]) {
-    auto logger = spd::stdout_logger_mt("console");
+    auto logger = spd::stdout_color_mt("console");
 
     args::ArgumentParser parser("This is a test program.", "This goes after the options.");
     args::HelpFlag help(parser, "help", "Display this help menu", {'h', "help"});
