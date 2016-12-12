@@ -39,6 +39,7 @@ find_package(curses REQUIRED)
 
 include_directories(include)
 include_directories(src)
+#include_directories(${CURSES_INCLUDE_DIRS})
 
 #file(GLOB_RECURSE HEADER_SOURCES src/*.h)
 set(HEADER_SOURCES
@@ -60,4 +61,4 @@ set(SOURCE_FILES
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} ${CURSES_LIBRARIES} menu )
+target_link_libraries(${PROJECT_NAME} ${curses_LIBRARIES} menu )

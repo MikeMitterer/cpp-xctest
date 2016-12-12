@@ -46,6 +46,9 @@ namespace mm {
 
         };
 
+        /// Achtung!!!! Big-Five richtig implementieren:
+        ///
+        /// Sample: http://stackoverflow.com/questions/37915088/a-better-way-to-implement-copy-and-swap-idiom-in-c11
         class Size {
         private:
             coord_t width_;
@@ -55,24 +58,24 @@ namespace mm {
             Size(coord_t width, coord_t height) : width_{width}, height_{height} { }
 
             /// Size size(Size(10,11)) - ruft den CopyConstructor auf
-            Size(const Size& other) : width_{other.width()},height_{other.height()} { }
+            Size(const Size& rhs) : width_{rhs.width()},height_{rhs.height()} { }
 
             /// move constructor
-            Size(Size&& other) : width_{other.width()},height_{other.height()} {
+            Size(Size&& rhs) : width_{rhs.width()},height_{rhs.height()} {
             }
 
             /// copy assignment
-            Size& operator=(const Size& other) {
-                width_ = other.width_;
-                height_ = other.height_;
+            Size& operator=(const Size& rhs) {
+                width_ = rhs.width_;
+                height_ = rhs.height_;
                 return *this;
             }
 
             /// move assignment
-            Size& operator=(const Size&& other) {
-                if(this != &other) {
-                    width_ = other.width_;
-                    height_ = other.height_;
+            Size& operator=(const Size&& rhs) {
+                if(this != &rhs) {
+                    width_ = rhs.width_;
+                    height_ = rhs.height_;
                 }
                 return *this;
             }

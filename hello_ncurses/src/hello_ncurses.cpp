@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <algorithm>
 #include <unistd.h>
 #include <fmt/format.h>
 #include <iostream>
@@ -116,7 +117,7 @@ int main(int argc, char* argv[]) {
     Size screenSize = curses.screenSize();
     window1.setSize(Size{screenSize.width(), static_cast<coord_t>(screenSize.height() / 2)});
 
-    window1.clear().box().print(1, 1, "Hallo").update();
+    window1.clear().box().print(1, 1, "Hallo3").update();
 
     int key = -1;
     do {

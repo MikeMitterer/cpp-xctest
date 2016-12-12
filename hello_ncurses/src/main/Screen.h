@@ -6,6 +6,7 @@
 #define XCTEST_SCREEN_H
 
 #include <ncurses.h>
+#include <algorithm>
 #include "data_types.h"
 #include "Window.h"
 #include "LayoutManager.h"
