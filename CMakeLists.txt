@@ -22,10 +22,13 @@ include(Config)
 # └──────────────────────────────────────────────────────────────────┘
 
 add_subdirectory(hello_world)
-#add_subdirectory(hello_lib)
-#add_subdirectory(hello_thread)
-#add_subdirectory(hello_poco)
-#add_subdirectory(hello_qt)
-#add_subdirectory(hello_led)
-#add_subdirectory(hello_ncurses)
-#add_subdirectory(hello_dart)
+add_subdirectory(hello_lib)
+add_subdirectory(hello_thread)
+
+# Scheint nur mit clang zu funktionieren - nicht mit gcc-5
+add_subdirectory(hello_poco)
+
+add_subdirectory(hello_qt)
+add_subdirectory(hello_led)
+add_subdirectory(hello_ncurses)
+add_subdirectory(hello_dart)
