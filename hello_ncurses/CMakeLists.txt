@@ -17,19 +17,16 @@ project(HelloNCurses)
 # Output bin, c++11 usw
 include(Config)
 
-# Wichtig - sonst funktioniert's auf dem Raspi nicht
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Libs                                                            │
 # └──────────────────────────────────────────────────────────────────┘
 
-find_package(args)
-find_package(spdlog)
-find_package(fmt)
+find_package(Args)
+find_package(Spdlog)
+find_package(Fmt)
 
 set(ADDITIONAL_LIBRARIES menu)
-find_package(curses REQUIRED)
+find_package(Curses REQUIRED)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Tests                                                           │
