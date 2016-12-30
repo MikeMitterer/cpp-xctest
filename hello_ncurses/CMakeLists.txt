@@ -26,7 +26,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 find_package(args)
 find_package(spdlog)
-
 find_package(fmt)
 
 set(ADDITIONAL_LIBRARIES menu)
