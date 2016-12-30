@@ -7,3 +7,6 @@
 [submodule ".dependencies/args"]
 	path = .dependencies/args
 	url = https://github.com/Taywee/args
+[submodule ".dependencies/googletest"]
+	path = .dependencies/googletest
+	url = https://github.com/google/googletest

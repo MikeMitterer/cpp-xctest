@@ -34,3 +34,7 @@ Lib bei ldconfig bekannt machen
 
 C++ - Samples
         http://www.cppsamples.com/
+
+Dependencies für dieses Projekt:
+        Google Test
+            git submodule add https://github.com/google/googletest .dependencies/googletest

@@ -34,6 +34,9 @@
 # BIN-Dirs
 bin
 lib
-cmake-build-debug/
 .idea
 .directory
+
+# CLion generated files/folders
+cmake-build-*
+
