@@ -36,5 +36,15 @@ C++ - Samples
         http://www.cppsamples.com/
 
 Dependencies für dieses Projekt:
-        Google Test
-            git submodule add https://github.com/google/googletest .dependencies/googletest
+    git submodule update --init -- .dependencies/args
+    git submodule update --init -- .dependencies/fmt
+    git submodule update --init -- .dependencies/googletest/
+    git submodule update --init -- .dependencies/spdlog
+
+    Google Test
+        git submodule add https://github.com/google/googletest .dependencies/googletest
+
+
+ACHTUNG:
+    clang auf Raspi needs crtbegin.o - wird nicht automatisch installiert
+        apt-get install --reinstall libgcc-4.9-dev
