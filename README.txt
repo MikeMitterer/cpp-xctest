@@ -1,6 +1,8 @@
 Welche GLIBC ist verfügbar
     strings /usr/lib/arm-linux-gnueabihf/libstdc++.so.6 | grep -i glibc
 
+Aktuell!
+
 Anzeige Libray-Typ
     readelf -A libmyLib.so
 
@@ -32,3 +34,7 @@ Lib bei ldconfig bekannt machen
 
 C++ - Samples
         http://www.cppsamples.com/
+
+Dependencies für dieses Projekt:
+        Google Test
+            git submodule add https://github.com/google/googletest .dependencies/googletest

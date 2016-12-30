@@ -17,10 +17,11 @@ project(HelloQT)
 # Output bin, c++11 usw
 include(Config)
 
-include(configGTest)
+#include(configGTest)
+#add_subdirectory(../.dependencies/googletest test_HelloQT)
 
 # ┌──────────────────────────────────────────────────────────────────┐
-# │  Qt (e.g. /usr/local/QT5.3/5.3/clang_64                             │
+# │  Qt (e.g. /usr/local/QT5.3/5.3/clang_64                          │
 # │      Weitere Infos: http://doc.qt.io/qt-5/cmake-manual.html      │
 # └──────────────────────────────────────────────────────────────────┘
 

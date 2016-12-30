@@ -1,143 +1,248 @@
-#include <iostream>
-#include <stdlib.h>
-#include <spdlog/spdlog.h>
-#include <args.hxx>
 #include <ncurses.h>
-#include <menu.h>
-#include <list>
+#include <algorithm>
+#include <unistd.h>
+#include <fmt/format.h>
+#include <iostream>
+#include <queue>
+#include <atomic>
+#include <thread>
+#include <chrono>
+#include <main/Screen.h>
+#include <iomanip>
+#include <sstream>
 
-namespace spd = spdlog;
+#include "XCurses.h"
 
-//ITEM **it;
-MENU *me;
-//WINDOW *win;
+/**
+ * Sample verwendet folgendes Libs:
+ *      Formatter:  https://github.com/fmtlib/fmt
+ *      Logger: https://github.com/gabime/spdlog
+ *      ArgParser: https://github.com/Taywee/args
+ *
+ * More infos:
+ *      https://de.wikibooks.org/wiki/Ncurses:_Inhaltsverzeichnis
+ *      http://tldp.org/HOWTO/NCURSES-Programming-HOWTO/index.html
+ *      http://tldp.org/HOWTO/NCURSES-Programming-HOWTO/tools.html
+ *      http://frank.harvard.edu/~coldwell/ncurses/ncurses-intro.html
+ *      https://www.gnu.org/software/guile-ncurses/manual/guile-ncurses.html
+ *      https://www.viget.com/articles/c-games-in-ncurses-using-multiple-windows
+ *      http://hughm.cs.ukzn.ac.za/~murrellh/os/notes/ncurses.html
+ *      http://www.linuxfocus.org/Deutsch/March2002/article233.shtml
+ *
+ * GH-Samples:
+ *      Collection:     https://github.com/tony/NCURSES-Programming-HOWTO-examples
+ *      Menu:           https://goo.gl/DTIQSK
+ *                      http://techlister.com/linux/creating-menu-with-ncurses-in-c/1293/
+ *      ToDo:           https://github.com/phillip-h/todo
+ *
+ *  Gist:
+ *      https://gist.github.com/reagent/9819045
+ *
+ *  C++ Libs:
+ *      Curses++:   https://sourceforge.net/projects/cursesplusplus/
+ *      libcwpp:    https://github.com/giszo/libcwpp
+ *      unicurses:  https://github.com/Chiel92/unicurses
+ *
+ *  Valgrind (CheckMemo / Avoid MemLeaks)
+ *      http://valgrind.org/docs/manual/quick-start.html#quick-start.intro
+ */
 
-//void quit(void) {
-//    auto logger = spd::stdout_color_mt("quit");
-//    //int i;
-//
-//    logger->info("Closing window...");
-//    std::cout << "Closing window..." << std::endl;
-//
-//    unpost_menu(me);
-//    free_menu(me);
-//
-////    for (i = 0; i <= 4; i++) {
-////        free_item(it[i]);
-////    }
-//
-//    //free(it);
-//    delwin(win);
-//    endwin();
-//
-//    logger->info("Done!");
-//}
+const int8_t KEY_X = 120;
+const int8_t BORDER_WIDTH = 1;
 
-int main(void) {
-    auto logger = spd::stdout_color_mt("main");
+using namespace mm::curses;
 
-    int ch;
+/// Initializes des given Window and returns the Main-Window size
+std::tuple<coord_t, coord_t> init_screen(NCWindow field, NCWindow score, int score_size) {
+    coord_t size_x, size_y;
+    getmaxyx(stdscr, size_y, size_x);
 
-    initscr();
-    atexit([] () {
-        auto logger = spd::stdout_color_mt("quit");
-        //int i;
+    wresize(field.get(), size_y - score_size, size_x);
 
-        logger->info("Closing window...");
-        std::cout << "Closing window..." << std::endl;
+    wresize(score.get(), score_size, size_x);
+    mvwin(score.get(), size_y - score_size, 0);
 
-        unpost_menu(me);
-        //free_menu(me);
 
-//    for (i = 0; i <= 4; i++) {
-//        free_item(it[i]);
-//    }
+    wclear(stdscr);
+    wclear(field.get());
+    wclear(score.get());
 
-        //free(it);
-        //delwin(win);
-        endwin();
-        std::cout << "Done" << std::endl;
+    refresh(); // refresh() is equivalent to wrefresh(stdscr).
 
-        logger->info("Done!");
-    });
+    box(field.get(), 0, 0);
+    box(score.get(), 0, 0);
 
-    clear();
-    noecho();
-    curs_set(0);
-    cbreak();
-    nl();
-    keypad(stdscr, TRUE);
+    // refresh each window
+    wrefresh(field.get());
+    wrefresh(score.get());
 
-//    std::vector<std::shared_ptr<ITEM>> itemsX = {
-//            std::shared_ptr<ITEM>(new_item("M1", "Menue-Eintrag 1"),free_item),
-//            std::shared_ptr<ITEM>(new_item("M2", "Menue-Eintrag 2"),free_item),
-//            std::shared_ptr<ITEM>(new_item("M3", "Menue-Eintrag 3"),free_item),
-//            std::shared_ptr<ITEM>(new_item("Exit", "Exit"),free_item),
-//            std::shared_ptr<ITEM>(NULL)
-//
-//    };
-//
-//    std::vector<std::unique_ptr<ITEM>> itemsY;
-//    itemsY.push_back(std::unique_ptr<ITEM>(new_item("M1", "Menue-Eintrag 1")));
-//    itemsY.push_back(std::unique_ptr<ITEM>(new_item("M2", "Menue-Eintrag 2")));
-//    itemsY.push_back(std::unique_ptr<ITEM>(new_item("M3", "Menue-Eintrag 3")));
-//    itemsY.push_back(std::unique_ptr<ITEM>(new_item("Exit", "Exit")));
-//    itemsY.push_back(NULL);
+    return std::make_tuple(size_x, size_y);
+}
 
-    using MenuItem = std::unique_ptr<ITEM>; // ,decltype(&free_item)
+void update(std::atomic<bool>& program_is_running, std::shared_ptr<Window> window) {
+    const unsigned int update_interval = 250; // update after every 50 milliseconds
+    const auto wait_duration = std::chrono::milliseconds(update_interval);
 
-    new_item("M4", "Menue-Eintrag 34");
+    while (program_is_running) {
+        auto now = std::chrono::system_clock::now();
+        auto in_time_t = std::chrono::system_clock::to_time_t(now);
 
-    std::vector<MenuItem> items;
-    items.push_back(MenuItem(new_item("M1", "Menue-Eintrag 1")));
-    items.push_back(MenuItem(new_item("M2", "Menue-Eintrag 2")));
-    items.push_back(MenuItem(new_item("M3", "Menue-Eintrag 3")));
-    items.push_back(MenuItem(new_item("Exit", "Exit")));
-    items.push_back(NULL);
+        auto t = std::time(nullptr);
+        auto tm = std::localtime(&t);
 
-//    it = (ITEM **) calloc(5, sizeof(ITEM *));
-//    it[0] = new_item("M1", "Menueeintrag 1");
-//    it[1] = new_item("M2", "Menueeintrag 2");
-//    it[2] = new_item("M3", "Menueeintrag 3");
-//    it[3] = new_item("Ende", "Programm beenden");
-//    it[4] = 0;
-    me = new_menu((ITEM **) &items[0]);
+        std::ostringstream oss;
+        oss << std::put_time(tm, "%d-%m-%Y %H:%M:%S");
+        //oss << asctime(tm);
 
-    //items.begin()
-    auto win = std::unique_ptr<WINDOW,decltype(&delwin)>(newwin(8, 30, 5, 5),&delwin);
-    set_menu_win(me, win.get());
-    set_menu_sub(me, derwin(win.get(), 4, 28, 3, 2));
-    box(win.get(), 0, 0);
-    mvwaddstr(win.get(), 1, 2, "***** Testmenü *****");
-    post_menu(me);
+        //std::cout << oss.str() << std::endl;
 
-    mvaddstr(14, 3, "Programm mittels Menü oder F1-Funktionstaste beenden");
+        std::string info = oss.str();
+        window->print(static_cast<coord_t>(window->getSize().width() - BORDER_WIDTH - info.length()), 1, info);
+        window->update();
 
-    refresh();
-    wrefresh(win.get());
+        std::this_thread::sleep_for(wait_duration);
+    }
+}
 
-    while ((ch = getch()) != KEY_F(1)) {
-        switch (ch) {
-            case KEY_DOWN:
-                menu_driver(me, REQ_DOWN_ITEM);
-                break;
-            case KEY_UP:
-                menu_driver(me, REQ_UP_ITEM);
-                break;
-            case 0xA: /* Return- bzw. Enter-Taste -> ASCII-Code */
+int main(int argc, char* argv[]) {
+    Curses curses;
 
-                //logger->info("Current Item: {}", item_name(current_item(me)));
-                mvaddstr(15, 3, (std::string("Current Item: ") + item_name(current_item(me))).c_str());
-                if (item_index(current_item(me)) == 3) {
-                    exit(0);
-                }
+    curses.initColor().echo(Echo::OFF).cursor(Cursor::OFF).update();
 
-            default:
-                mvaddstr(16, 3, (std::string("KeyCode: ") + std::to_string(ch)).c_str());
+    //curses.clear();
+    curses.update();
+
+    Window window1;
+
+    Size screenSize = curses.screenSize();
+    window1.setSize(Size{screenSize.width(), static_cast<coord_t>(screenSize.height() / 2)});
+
+    window1.clear().box().print(1, 1, "Hallo3").update();
+
+    int key = -1;
+    do {
+        if (key == KEY_RESIZE) {
+            screenSize = curses.screenSize();
+            curses.clear();
+            curses.update();
+
+            window1.setSize(Size(screenSize.width(),static_cast<coord_t>(screenSize.height() / 2)));
+            window1.updatePosition();
+
+            window1.clear();
         }
 
-        wrefresh(win.get());
-    }
+        window1.box().print(1, 1, "Hallo");
+        window1.print(1, static_cast<coord_t>(window1.getSize().height() - 2),
+                      fmt::format("Screen: X: {}, Y: {}, KeyCode: {:10}",
+                                  screenSize.width(), screenSize.height(),
+                                  key != -1 ? std::to_string(key) : "<not set>"));
 
-    return (0);
+
+        std::string info = "'x' to Exit";
+        window1.print(static_cast<coord_t>(window1.getSize().width() - BORDER_WIDTH - info.length()), 1, info);
+
+        window1.update();
+
+    } while ((key = curses.getch()) != KEY_X);
+
+}
+
+int main_old(int argc, char* argv[]) {
+
+    Screen screen;
+    Size size = screen.init();
+
+    //auto header = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
+    //auto field = NCWindow(newwin(size_y - score_size, size_x, 0, 0),&delwin);
+    //auto score = NCWindow(newwin(score_size, size_x, size_y - score_size, 0),&delwin);
+
+    auto header = std::shared_ptr<Window>(new Window());
+    auto field = std::shared_ptr<Window>(new Window());
+    auto score = std::shared_ptr<Window>(new Window());
+
+    screen.add(header);
+    screen.add(field);
+    screen.add(score);
+
+    header->setMinHeight(3);
+    score->setMinHeight(3);
+
+
+    wbkgd(field.get()->getNCWidow().get(), COLOR_PAIR(2));
+
+    int key = -1;
+    std::deque<int> logs;
+
+    std::atomic<bool> running{true};
+
+    std::thread update_thread(update, std::ref(running), header);
+
+
+    //std::tie(size_x, size_y) = init_screen(field.getNCWidow(), score, score_size);
+    screen.update();
+    do {
+        if (key == KEY_RESIZE) {
+            screen.onResize();
+            //std::tie(size_x, size_y) = init_screen(field.getNCWidow(), score, score_size);
+            logs.clear();
+        } else {
+            logs.push_back(key);
+            if (logs.size() >= field->getSize().height() - BORDER_WIDTH) {
+                logs.pop_front();
+            }
+        }
+        header->print(1, 1, "Log");
+
+        coord_t line = 0;
+        std::for_each(logs.begin(), logs.end(), [&](int value) {
+            field->print(1, static_cast<coord_t>(line + 1), fmt::format("KeyCode: {:3}", value));
+            line++;
+        });
+
+        score->print(1, 1, fmt::format("Screen: X: {}, Y: {}, KeyCode: {:10}",
+                                       screen.getSize().width(), screen.getSize().height(),
+                                       key != -1 ? std::to_string(key) : "<not set>"));
+
+
+        std::string info = "'x' to Exit";
+        score->print(static_cast<coord_t>(score->getSize().width() - BORDER_WIDTH - info.length()), 1, info);
+
+        header->update();
+        field->update();
+        score->update();
+
+        //screen.update();
+
+//        mvwprintw(field.get(), 1, 1, "Log");
+//        int line = 0;
+//        std::for_each(logs.begin(),logs.end(), [&](int value) {
+//            mvwprintw(field.get(), line + 2, 1, fmt::format("KeyCode: {:3}",value).c_str());
+//            line++;
+//        });
+//
+//
+//        mvwprintw(score.get(), 1, 1, fmt::format("Screen: X:{}, Y:{}, KeyCode: {:10}",
+//                                                 size_x,size_y,
+//                                                 key != -1 ? std::to_string(key) : "<not set>").c_str() );
+//
+//
+//        std::string info = "'x' to Exit";
+//        mvwprintw(score.get(), 1, static_cast<int>(size_x - BORDER_WIDTH - info.length()), info.c_str() );
+//
+//        // refresh each window
+//        wrefresh(field.get());
+//        wrefresh(score.get());
+
+    } while ((key = getch()) != KEY_X);
+
+    // exit gracefully
+    running = false;
+    update_thread.join();
+
+    wclear(stdscr);
+    endwin();
+
+
+    return 0;
 }

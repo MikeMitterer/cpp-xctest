@@ -16,7 +16,7 @@ project(HelloLed)
 
 # Output bin, c++11 usw
 include(Config)
-include(configGPIO)
+#include(configGPIO)
 
 # RealLife
 if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm")
@@ -30,11 +30,13 @@ else()
 
 endif()
 
+find_package(GPIO)
+
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Libs                                                            │
 # └──────────────────────────────────────────────────────────────────┘
 
-include_directories(${gpio_SOURCE_DIR}/include )
+#include_directories(${gpio_SOURCE_DIR}/include )
 
 #find_package(Curses REQUIRED)
 
@@ -46,11 +48,6 @@ else()
 
 
 endif()
-
-# ┌──────────────────────────────────────────────────────────────────┐
-# │  Tests                                                           │
-# │     Sample: add_subdirectory (tests)                             │
-# └──────────────────────────────────────────────────────────────────┘
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Source                                                          │

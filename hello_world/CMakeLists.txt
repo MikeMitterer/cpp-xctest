@@ -18,12 +18,18 @@ project(HelloWorld)
 include(Config)
 
 # ┌──────────────────────────────────────────────────────────────────┐
+# │  Google-Test (BasisProjekt: find_package(GTest)                  │
+# └──────────────────────────────────────────────────────────────────┘
+
+add_subdirectory(tests)
+
+# ┌──────────────────────────────────────────────────────────────────┐
 # │  Libs                                                            │
 # └──────────────────────────────────────────────────────────────────┘
 
-find_package(args)
-find_package(spdlog)
-find_package(fmt)
+find_package(Args)
+find_package(Spdlog)
+find_package(Fmt)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Tests                                                           │
@@ -37,4 +43,4 @@ set(SOURCE_FILES
         src/hello_world.cpp
         )
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${CONAN_LIBS})
