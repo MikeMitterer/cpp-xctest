@@ -42,7 +42,6 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 target_link_libraries(
         ${PROJECT_NAME}
-        ${Poco_LIBRARIES}
         ${Poco_Foundation_LIBRARY}
         ${Poco_Net_LIBRARY}
         ${Poco_Util_LIBRARY}
