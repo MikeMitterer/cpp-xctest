@@ -24,7 +24,7 @@ include(Config)
 find_package(Poco REQUIRED Foundation Util Net )
 
 # message( WARNING "Poco_LIBRARIES:     " ${Poco_LIBRARIES} )
-# message( WARNING "Poco_INCLUDE_DIRS:     " ${Poco_INCLUDE_DIRS} )
+# message( WARNING "Poco_INCLUDE_DIRS:  " ${Poco_INCLUDE_DIRS} )
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Tests                                                           │

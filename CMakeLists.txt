@@ -35,6 +35,6 @@ add_subdirectory(hello_thread)
 add_subdirectory(hello_poco)
 
 add_subdirectory(hello_qt)
-#add_subdirectory(hello_led)
+add_subdirectory(hello_led)
 add_subdirectory(hello_ncurses)
 add_subdirectory(hello_dart)

@@ -91,8 +91,8 @@ void update(std::atomic<bool>& program_is_running, std::shared_ptr<Window> windo
         auto tm = std::localtime(&t);
 
         std::ostringstream oss;
-        oss << std::put_time(tm, "%d-%m-%Y %H:%M:%S");
-        //oss << asctime(tm);
+        //oss << std::put_time(tm, "%d-%m-%Y %H:%M:%S");
+        oss << asctime(tm);
 
         //std::cout << oss.str() << std::endl;
 

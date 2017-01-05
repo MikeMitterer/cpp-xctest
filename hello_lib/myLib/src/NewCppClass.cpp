@@ -8,5 +8,5 @@
 using namespace std;
 
 void NewCppClass::showName() {
-    cout << "Name? " << name << endl;
+    cout << "Name: " << name << "\n";
 }

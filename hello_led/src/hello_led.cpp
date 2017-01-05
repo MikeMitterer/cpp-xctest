@@ -1,6 +1,5 @@
 #include <iostream>
 #include <thread>
-#include <curses.h>
 #include "GPIO.h"
 
 using namespace mm;

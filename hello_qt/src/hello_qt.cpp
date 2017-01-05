@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setApplicationName("helloQT");
     QCoreApplication::setApplicationVersion("1.0");
 
-    qDebug() << "Hallo Mike";
+    qDebug() << "Hallo Mike1";
 
     QCommandLineParser parser;
     parser.setApplicationDescription(

@@ -16,6 +16,10 @@ project(HelloNCurses)
 
 # Output bin, c++11 usw
 include(Config)
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
+# Wichtig - sonst funktioniert's auf dem Raspi nicht
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Libs                                                            │
@@ -57,4 +61,13 @@ set(SOURCE_FILES
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} ${curses_LIBRARIES} menu )
+
+target_link_libraries(
+        ${PROJECT_NAME}
+        menu
+        ${curses_LIBRARY}
+
+        # Solves: undefined reference to symbol 'curs_set'
+        # More: https://goo.gl/9dtJsO
+        tinfo
+)
