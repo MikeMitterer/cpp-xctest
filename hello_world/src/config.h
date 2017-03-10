@@ -15,6 +15,6 @@ const std::string HelloWorld_VERSION_MINOR = "4";
 
 // Password compiled into source
 // Set in .config/passwords.cmake (or via ENV-VAR)
-const std::string HelloWorld_PASSWORD = "<not set2>";
+const std::string HelloWorld_PASSWORD = "<not set>";
 
 #endif //XCTEST_CONFIG_H_IN_H
