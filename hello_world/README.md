@@ -21,9 +21,9 @@ verwendet:
     .config/passwords.cmake
     src/config.h
    
-### Aktivieren + DeAktivieren von getrackten Files    
+### Aktivieren + De-Aktivieren von getrackten Files    
 
-    # DeAktivieren
+    # De-Aktivieren
     git update-index --assume-unchanged .config/passwords.cmake
     git update-index --assume-unchanged src/config.h
 
