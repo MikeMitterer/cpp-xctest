@@ -17,11 +17,27 @@ project(HelloWorld)
 # Output bin, c++11 usw
 include(Config)
 
+# Password for this project
+include(.config/passwords.cmake)
+
+# The version number.
+set (${PROJECT_NAME}_VERSION_MAJOR 1)
+set (${PROJECT_NAME}_VERSION_MINOR 4)
+
+# configure a header file to pass some of the CMake settings
+# to the source code
+configure_file (
+        "${PROJECT_SOURCE_DIR}/.config/config.h.in"
+        "${PROJECT_SOURCE_DIR}/src/config.h"
+        @ONLY
+)
+
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Google-Test (BasisProjekt: find_package(GTest)                  │
 # └──────────────────────────────────────────────────────────────────┘
 
-add_subdirectory(tests)
+#find_package(GTest)
+#add_subdirectory(tests)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Libs                                                            │
@@ -30,6 +46,8 @@ add_subdirectory(tests)
 find_package(Args)
 find_package(Spdlog)
 find_package(Fmt)
+
+
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Tests                                                           │

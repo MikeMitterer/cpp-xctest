@@ -1,6 +1,7 @@
 #include "spdlog/spdlog.h"
 #include <iostream>
 #include <args.hxx>
+#include "config.h"
 
 /**
  * Sample verwendet folgendes Libs:
