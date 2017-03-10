@@ -33,3 +33,9 @@ verwendet:
     # Aktivieren von src/config.h - Fraglich ob das überhaupt irgendwann notwendig ist!
     git update-index --no-assume-unchanged src/config.h
 
+#### Betreffende files online:
+
+   - [passwords.cmake](https://github.com/MikeMitterer/cpp-xctest/blob/master/hello_world/.config/passwords.cmake)
+   - [config.h](https://github.com/MikeMitterer/cpp-xctest/blob/master/hello_world/src/config.h)
+   
+   
