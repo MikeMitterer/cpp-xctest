@@ -10,3 +10,9 @@
 [submodule ".dependencies/googletest"]
 	path = .dependencies/googletest
 	url = https://github.com/google/googletest
+[submodule ".dependencies/uws"]
+	path = .dependencies/uws
+	url = https://github.com/uWebSockets/uWebSockets
+[submodule ".dependencies/json"]
+	path = .dependencies/json
+	url = https://github.com/nlohmann/json

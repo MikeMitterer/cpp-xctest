@@ -40,10 +40,12 @@ Dependencies für dieses Projekt:
     git submodule update --init -- .dependencies/fmt
     git submodule update --init -- .dependencies/googletest/
     git submodule update --init -- .dependencies/spdlog
+    git submodule update --init -- .dependencies/uws
 
     Google Test
         git submodule add https://github.com/google/googletest .dependencies/googletest
-
+        git submodule add https://github.com/uWebSockets/uWebSockets .dependencies/uws
+        git submodule add https://github.com/nlohmann/json .dependencies/json
 
 ACHTUNG:
     clang auf Raspi needs crtbegin.o - wird nicht automatisch installiert

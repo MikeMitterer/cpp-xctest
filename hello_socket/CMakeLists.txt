@@ -12,52 +12,28 @@ set(CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH} ${CMAKE_MODULE_PATH})
 # │  Projects Settings                                               │
 # └──────────────────────────────────────────────────────────────────┘
 
-project(HelloWorld)
+project(HelloSocket)
 
 # Output bin, c++11 usw
 include(Config)
-
-# Password for this project
-include(.config/passwords.cmake)
-
-# The version number.
-set (${PROJECT_NAME}_VERSION_MAJOR 1)
-set (${PROJECT_NAME}_VERSION_MINOR 4)
-
-# configure a header file to pass some of the CMake settings
-# to the source code
-configure_file (
-        "${PROJECT_SOURCE_DIR}/.config/config.h.in"
-        "${PROJECT_SOURCE_DIR}/src/config.h"
-        @ONLY
-)
-
-# ┌──────────────────────────────────────────────────────────────────┐
-# │  Precompiled headers                                             │
-# └──────────────────────────────────────────────────────────────────┘
-
-add_library(${PROJECT_NAME}_pch
-        ${PROJECT_SOURCE_DIR}/src/stdafx.cpp ${PROJECT_SOURCE_DIR}/src/stdafx.h)
-
-set_source_files_properties(${PROJECT_SOURCE_DIR}/src/stdafx.cpp
-        PROPERTIES
-        COMPILE_FLAGS "-include ${PROJECT_SOURCE_DIR}/src/stdafx.h")
-
-# ┌──────────────────────────────────────────────────────────────────┐
-# │  Google-Test (BasisProjekt: find_package(GTest)                  │
-# └──────────────────────────────────────────────────────────────────┘
-
-find_package(GTest)
-add_subdirectory(tests)
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "${CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS} -undefined dynamic_lookup")
+endif()
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Libs                                                            │
 # └──────────────────────────────────────────────────────────────────┘
 
-find_package(Args)
-find_package(Spdlog)
-find_package(Fmt)
+add_subdirectory (myLib)
+include_directories(myLib/include)
 
+set(OPENSSL_ROOT_DIR "/usr/local/opt/openssl" )
+find_package(OpenSSL REQUIRED)
+
+find_package(LibUV REQUIRED)
+find_package(ZLIB REQUIRED)
+find_package(UWS REQUIRED)
+find_package(JSON REQUIRED)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Tests                                                           │
@@ -66,9 +42,20 @@ find_package(Fmt)
 
 include_directories(include)
 include_directories(src)
+include_directories(${OPENSSL_INCLUDE_DIR} )
 
 set(SOURCE_FILES
-        src/hello_world.cpp
+        src/hello_socket.cpp
         )
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${CONAN_LIBS})
+add_executable(${PROJECT_NAME}
+        ${SOURCE_FILES}
+        ${uws_SRCFILES}
+        )
+
+target_link_libraries(${PROJECT_NAME} myLib
+        ${OPENSSL_LIBRARIES}
+        ${crypto_LIB}
+        ${LIBUV_LIBRARIES}
+        ${ZLIB_LIBRARIES}
+        )

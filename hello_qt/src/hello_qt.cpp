@@ -29,10 +29,10 @@ Arguments:
 
 int main(int argc, char *argv[]) {
     QCoreApplication app(argc, argv);
-    QCoreApplication::setApplicationName("helloQT");
+    QCoreApplication::setApplicationName("helloQT1");
     QCoreApplication::setApplicationVersion("1.0");
 
-    qDebug() << "Hallo Mike1";
+    qDebug() << "Hallo Mike";
 
     QCommandLineParser parser;
     parser.setApplicationDescription(

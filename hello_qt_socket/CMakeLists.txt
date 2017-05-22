@@ -12,51 +12,55 @@ set(CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH} ${CMAKE_MODULE_PATH})
 # │  Projects Settings                                               │
 # └──────────────────────────────────────────────────────────────────┘
 
-project(HelloWorld)
+project(HelloQTSocket)
 
 # Output bin, c++11 usw
 include(Config)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
-# Password for this project
-include(.config/passwords.cmake)
-
-# The version number.
-set (${PROJECT_NAME}_VERSION_MAJOR 1)
-set (${PROJECT_NAME}_VERSION_MINOR 4)
-
-# configure a header file to pass some of the CMake settings
-# to the source code
-configure_file (
-        "${PROJECT_SOURCE_DIR}/.config/config.h.in"
-        "${PROJECT_SOURCE_DIR}/src/config.h"
-        @ONLY
-)
+#include(configGTest)
+#add_subdirectory(../.dependencies/googletest test_HelloQT)
 
 # ┌──────────────────────────────────────────────────────────────────┐
-# │  Precompiled headers                                             │
+# │  Qt (e.g. /usr/local/QT5.3/5.3/clang_64                          │
+# │      Weitere Infos: http://doc.qt.io/qt-5/cmake-manual.html      │
 # └──────────────────────────────────────────────────────────────────┘
 
-add_library(${PROJECT_NAME}_pch
-        ${PROJECT_SOURCE_DIR}/src/stdafx.cpp ${PROJECT_SOURCE_DIR}/src/stdafx.h)
+# Instruct CMake to run moc automatically when needed.
+set(CMAKE_AUTOMOC ON) # moc
+set(CMAKE_AUTORCC ON) # rcc
 
-set_source_files_properties(${PROJECT_SOURCE_DIR}/src/stdafx.cpp
-        PROPERTIES
-        COMPILE_FLAGS "-include ${PROJECT_SOURCE_DIR}/src/stdafx.h")
+set(CMAKE_COLOR_MAKEFILE ON)
+set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE)
 
-# ┌──────────────────────────────────────────────────────────────────┐
-# │  Google-Test (BasisProjekt: find_package(GTest)                  │
-# └──────────────────────────────────────────────────────────────────┘
+#if(XCTARGET STREQUAL "rpi1")
+#if(XCTARGET MATCHES "^rpi.*")
+if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm")
+    set(CMAKE_PREFIX_PATH "${PIROOT}/usr/lib/arm-linux-gnueabihf/cmake" ${CMAKE_PREFIX_PATH})
 
-find_package(GTest)
-add_subdirectory(tests)
+    # Wichtig - sonst funktioniert's auf dem Raspi nicht
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+
+else()
+
+    # Ist in der .bashrc definiert
+    set(CMAKE_PREFIX_PATH $ENV{QT58DIR} ${CMAKE_PREFIX_PATH})
+
+    set(CMAKE_MODULE_PATH $ENV{QT58DIR}/lib/cmake/Qt5 ${CMAKE_MODULE_PATH})
+
+endif()
+
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5WebSockets REQUIRED)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Libs                                                            │
 # └──────────────────────────────────────────────────────────────────┘
 
-find_package(Args)
-find_package(Spdlog)
-find_package(Fmt)
 
 
 # ┌──────────────────────────────────────────────────────────────────┐
@@ -64,11 +68,23 @@ find_package(Fmt)
 # │     Sample: add_subdirectory (tests)                             │
 # └──────────────────────────────────────────────────────────────────┘
 
+add_subdirectory (tests)
+
+# ┌──────────────────────────────────────────────────────────────────┐
+# │  Source file                                                     │
+# └──────────────────────────────────────────────────────────────────┘
+
 include_directories(include)
 include_directories(src)
 
 set(SOURCE_FILES
-        src/hello_world.cpp
+        src/hello_qt_socket.cpp
+        src/echoserver.cpp
         )
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${CONAN_LIBS})
+add_executable(${PROJECT_NAME}
+        ${SOURCE_FILES}
+        )
+
+#target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::WebSockets)
+qt5_use_modules(${PROJECT_NAME} Core WebSockets)

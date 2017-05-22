@@ -69,5 +69,5 @@ target_link_libraries(
 
         # Solves: undefined reference to symbol 'curs_set'
         # More: https://goo.gl/9dtJsO
-        tinfo
+        # tinfo
 )

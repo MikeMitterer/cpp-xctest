@@ -1,7 +1,4 @@
-#include "spdlog/spdlog.h"
-#include <iostream>
-#include <args.hxx>
-#include "config.h"
+#include <stdafx.h>
 
 /**
  * Sample verwendet folgendes Libs:
@@ -30,16 +27,16 @@ int main(int argc,const char *argv[]) {
             throw args::Help("");
         }
     }
-    catch (args::Help e) {
+    catch (const args::Help& e) {
         std::cout << parser;
         return 0;
     }
-    catch (args::ParseError e) {
+    catch (const args::ParseError& e) {
         std::cerr << e.what() << std::endl;
         std::cerr << parser;
         return 1;
     }
-    catch (args::ValidationError e) {
+    catch (const args::ValidationError& e) {
         std::cerr << e.what() << std::endl;
         std::cerr << parser;
         return 1;

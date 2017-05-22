@@ -16,6 +16,7 @@ project(HelloQT)
 
 # Output bin, c++11 usw
 include(Config)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 #include(configGTest)
 #add_subdirectory(../.dependencies/googletest test_HelloQT)
@@ -24,6 +25,13 @@ include(Config)
 # │  Qt (e.g. /usr/local/QT5.3/5.3/clang_64                          │
 # │      Weitere Infos: http://doc.qt.io/qt-5/cmake-manual.html      │
 # └──────────────────────────────────────────────────────────────────┘
+
+# Instruct CMake to run moc automatically when needed.
+set(CMAKE_AUTOMOC ON) # moc
+set(CMAKE_AUTORCC ON) # rcc
+
+set(CMAKE_COLOR_MAKEFILE ON)
+set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE)
 
 #if(XCTARGET STREQUAL "rpi1")
 #if(XCTARGET MATCHES "^rpi.*")
@@ -36,18 +44,17 @@ if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm")
 else()
 
     # Ist in der .bashrc definiert
-    set(CMAKE_PREFIX_PATH $ENV{QT53DIR} ${CMAKE_PREFIX_PATH})
+    set(CMAKE_PREFIX_PATH $ENV{QT58DIR} ${CMAKE_PREFIX_PATH})
+
+    set(CMAKE_MODULE_PATH $ENV{QT58DIR}/lib/cmake/Qt5 ${CMAKE_MODULE_PATH})
 
 endif()
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-# Instruct CMake to run moc automatically when needed.
-set(CMAKE_AUTOMOC ON)
-
 find_package(Qt5Core REQUIRED)
-#find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Widgets REQUIRED)
 
 
 # ┌──────────────────────────────────────────────────────────────────┐
