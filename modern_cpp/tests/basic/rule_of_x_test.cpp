@@ -5,7 +5,10 @@
 #include "gtest/gtest.h"
 #include "rule_of_x.h"
 
+
 TEST(basic_check_ma, test_instance_counter) {
+    auto logger = spdlog::stdout_color_mt(mm::APP_LOGGER);
+    logger->set_level(mm::DEFAULT_LOG_LEVEL);
 
     // Führt zu einer Fehlermeldung da dieser Konstruktor gelöscht wurde
     // const auto r1 = Resource{};

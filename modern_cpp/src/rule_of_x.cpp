@@ -11,11 +11,11 @@ Resource::Resource(const std::string& _value)
         : value{_value} {
     
     instanceCounter++;
-    logger->debug("")
+    logger->debug("[{}] Resource - Konstruktor",__FILENAME__);
 }
 
 Resource::~Resource() {
-
+    logger->debug("[{}] Resource - Destruktor",__FILENAME__);
 }
 
 

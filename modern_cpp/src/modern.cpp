@@ -7,9 +7,8 @@
  *      Logger: https://github.com/gabime/spdlog
  *      ArgParser: https://github.com/Taywee/args
  */
-namespace spd = spdlog;
 int main(int argc,const char *argv[]) {
-    auto logger = spd::stdout_color_mt(APP_LOGGER);
+    auto logger = spdlog::stdout_color_mt(mm::APP_LOGGER);
 
     args::ArgumentParser parser("This is a test program.", "This goes after the options.");
     args::HelpFlag help(parser, "help", "Display this help menu", {'h', "help"});
@@ -19,8 +18,6 @@ int main(int argc,const char *argv[]) {
     args::Positional<std::string> foo(parser, "foo", "The foo position");
     args::PositionalList<double> numbers(parser, "numbers", "The numbers position list");
 
-
-    logger->info(fmt::format("Hello, {}!", "world"));
 
     try {
         parser.ParseCLI(argc, argv);

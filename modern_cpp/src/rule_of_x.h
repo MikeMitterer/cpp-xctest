@@ -13,7 +13,7 @@ private:
     const std::string value { "<undefined>" };
 
     // Default-Init ist zu bevorzugen
-    const std::shared_ptr<spdlog::logger> logger { spdlog::get(APP_LOGGER) };
+    const std::shared_ptr<spdlog::logger> logger { spdlog::get(mm::APP_LOGGER) };
 
 public:
     static uint8_t instanceCounter;
