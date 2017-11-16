@@ -1,0 +1,20 @@
+//
+// Created by Mike Mitterer on 10.03.17.
+//
+// cmake-Template für config.h
+//
+
+#ifndef XCTEST_CONFIG_H_IN_H
+#define XCTEST_CONFIG_H_IN_H
+
+#include <string>
+
+// the configured options and settings for ModernCPP
+const std::string ModernCPP_VERSION_MAJOR = "@ModernCPP_VERSION_MAJOR@";
+const std::string ModernCPP_VERSION_MINOR = "@ModernCPP_VERSION_MINOR@";
+
+// Password compiled into source
+// Set in .config/passwords.cmake (or via ENV-VAR)
+const std::string ModernCPP_PASSWORD = "@ModernCPP_PASSWORD@";
+
+#endif //XCTEST_CONFIG_H_IN_H

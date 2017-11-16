@@ -11,6 +11,7 @@ Resource::Resource(const std::string& _value)
         : value{_value} {
     
     instanceCounter++;
+    logger->debug("")
 }
 
 Resource::~Resource() {
