@@ -53,6 +53,9 @@ endif()
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+set(OPENSSL_ROOT_DIR "/usr/local/opt/openssl" )
+find_package(OpenSSL REQUIRED)
+
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5WebSockets REQUIRED)
@@ -79,6 +82,7 @@ include_directories(src)
 
 set(SOURCE_FILES
         src/hello_qt_socket.cpp
+        src/echoserver.h
         src/echoserver.cpp
         )
 

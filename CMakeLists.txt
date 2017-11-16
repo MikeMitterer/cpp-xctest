@@ -41,3 +41,6 @@ add_subdirectory(hello_qt_socket)
 add_subdirectory(hello_led)
 add_subdirectory(hello_ncurses)
 add_subdirectory(hello_dart)
+
+add_subdirectory(modern_cpp)
+

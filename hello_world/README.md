@@ -16,7 +16,7 @@ verwendet:
    - Check in der beiden Files (`passwords.cmake + config.h`)
 
    - Hinzufügen der Files zu `.gitignore`:  
-   (Nicht sicher ob das wirklich notwendig ist!)
+   (Eigentlich nicht notwendig!)
    
     .config/passwords.cmake
     src/config.h
