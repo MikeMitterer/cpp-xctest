@@ -17,7 +17,10 @@
 
 namespace mm {
     const std::string APP_LOGGER = "moderncpp";
-    const spdlog::level::level_enum DEFAULT_LOG_LEVEL = spdlog::level::info;
+    const std::string TEST_LOGGER = "test_moderncpp";
+
+    //const spdlog::level::level_enum DEFAULT_LOG_LEVEL = spdlog::level::info;
+    const spdlog::level::level_enum DEFAULT_LOG_LEVEL = spdlog::level::debug;
 }
 
 #endif //XCTEST_STDAFX_H
