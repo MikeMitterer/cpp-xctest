@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/NewCppClass.h
+iosfwd
+-
+string
+-
+
+/Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/src/NewCppClass.cpp
+iostream
+-
+NewCppClass.h
+/Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/src/NewCppClass.h
+

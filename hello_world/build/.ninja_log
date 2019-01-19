@@ -1,0 +1,9 @@
+# ninja log v5
+1	1740	0	CMakeFiles/HelloWorld_pch.dir/src/stdafx.cpp.o	8bbfdf8093032305
+1740	1763	0	../lib/mac/libHelloWorld_pch.a	6a88bd0950f2d6f5
+0	2226	0	CMakeFiles/HelloWorld.dir/src/hello_world.cpp.o	e22c91e66bf32db8
+2227	2266	0	../bin/mac/HelloWorld	861f87cebf2bde08
+1	2248	0	CMakeFiles/HelloWorld.dir/src/hello_world.cpp.o	e22c91e66bf32db8
+2248	2301	0	../bin/mac/HelloWorld	861f87cebf2bde08
+1	2222	0	CMakeFiles/HelloWorld.dir/src/hello_world.cpp.o	e22c91e66bf32db8
+2222	2267	0	../bin/mac/HelloWorld	861f87cebf2bde08

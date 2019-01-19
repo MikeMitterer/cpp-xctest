@@ -5,8 +5,12 @@
 cmake_minimum_required(VERSION 3.6)
 
 # ENV ist im .bashrc definiert
-#   (Am Mac auf /Volumes/Daten/DevLocal/DevCPP/cmake )
-set(CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH} ${CMAKE_MODULE_PATH})
+#   (Am Mac auf /Volumes/DevLocal/DevCPP/cmake )
+#set(CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH} ${CMAKE_MODULE_PATH})
+list(APPEND CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH})
+
+#list(APPEND CMAKE_MODULE_PATH "$ENV{QT5DIR}/lib/cmake")
+#message(WARNING "MP ${CMAKE_MODULE_PATH}")
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Projects Settings                                               │

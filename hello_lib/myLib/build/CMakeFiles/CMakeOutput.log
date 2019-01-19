@@ -1,0 +1,539 @@
+The target system is: Linux - 1 - arm
+The host system is: Darwin - 15.6.0 - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc 
+Build flags: ;-Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi;-Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi;-Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib;-Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi;-Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi;-Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/3.6.2/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++ 
+Build flags: ;-Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi;-Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi;-Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib;-Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi;-Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi;-Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/3.6.2/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_078cd/fast"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_078cd.dir/build.make CMakeFiles/cmTC_078cd.dir/build
+Building C object CMakeFiles/cmTC_078cd.dir/testCCompiler.c.o
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot   -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -o CMakeFiles/cmTC_078cd.dir/testCCompiler.c.o   -c /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_078cd
+/usr/local/Cellar/cmake/3.6.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_078cd.dir/link.txt --verbose=1
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot  -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib     CMakeFiles/cmTC_078cd.dir/testCCompiler.c.o  -o cmTC_078cd -rdynamic 
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_3bf47/fast"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_3bf47.dir/build.make CMakeFiles/cmTC_3bf47.dir/build
+Building C object CMakeFiles/cmTC_3bf47.dir/CMakeCCompilerABI.c.o
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot   -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -o CMakeFiles/cmTC_3bf47.dir/CMakeCCompilerABI.c.o   -c /usr/local/Cellar/cmake/3.6.2/share/cmake/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_3bf47
+/usr/local/Cellar/cmake/3.6.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3bf47.dir/link.txt --verbose=1
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot  -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -v CMakeFiles/cmTC_3bf47.dir/CMakeCCompilerABI.c.o  -o cmTC_3bf47 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc
+COLLECT_LTO_WRAPPER=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/lto-wrapper
+Target: armv6-rpi-linux-gnueabi
+Configured with: /Volumes/RPi-EABI/.build/src/gcc-5.2.0/configure --build=x86_64-build_apple-darwin15.6.0 --host=x86_64-build_apple-darwin15.6.0 --target=armv6-rpi-linux-gnueabi --prefix=/Volumes/RPi-EABI-small/armv6-rpi-linux-gnueabi --with-sysroot=/Volumes/RPi-EABI-small/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot --enable-languages=c,c++ --with-cpu=arm1176jzf-s --with-fpu=vfp --with-pkgversion='crosstool-NG crosstool-ng-1.22.0' --enable-__cxa_atexit --disable-libmudflap --disable-libgomp --disable-libssp --disable-libquadmath --disable-libquadmath-support --disable-libsanitizer --with-gmp=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-mpfr=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-mpc=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-isl=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-cloog=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-libelf=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --enable-lto --enable-threads=posix --enable-target-optspace --enable-plugin --enable-gold --disable-nls --disable-multilib --with-local-prefix=/Volumes/RPi-EABI-small/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot --enable-long-long
+Thread model: posix
+gcc version 5.2.0 (crosstool-NG crosstool-ng-1.22.0) 
+COMPILER_PATH=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/bin/
+LIBRARY_PATH=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib/:/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib/:/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3bf47' '-rdynamic' '-mcpu=arm1176jzf-s' '-mfpu=vfp' '-mtls-dialect=gnu'
+ /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/collect2 -plugin /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/liblto_plugin.so -plugin-opt=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/lto-wrapper -plugin-opt=-fresolution=/var/folders/m4/9rg16xhd2rlbln753n9zk1540000gn/T//cc67uCPC.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux.so.3 -X -m armelf_linux_eabi -o cmTC_3bf47 /usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crt1.o /usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crti.o /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/crtbegin.o -L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0 -L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc -L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib -L/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib -L/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib CMakeFiles/cmTC_3bf47.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/crtend.o /usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crtn.o
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(armv6-rpi-linux-gnueabi-ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_3bf47/fast"]
+  ignore line: [/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_3bf47.dir/build.make CMakeFiles/cmTC_3bf47.dir/build]
+  ignore line: [Building C object CMakeFiles/cmTC_3bf47.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot   -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -o CMakeFiles/cmTC_3bf47.dir/CMakeCCompilerABI.c.o   -c /usr/local/Cellar/cmake/3.6.2/share/cmake/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_3bf47]
+  ignore line: [/usr/local/Cellar/cmake/3.6.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3bf47.dir/link.txt --verbose=1]
+  ignore line: [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot  -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -v CMakeFiles/cmTC_3bf47.dir/CMakeCCompilerABI.c.o  -o cmTC_3bf47 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/lto-wrapper]
+  ignore line: [Target: armv6-rpi-linux-gnueabi]
+  ignore line: [Configured with: /Volumes/RPi-EABI/.build/src/gcc-5.2.0/configure --build=x86_64-build_apple-darwin15.6.0 --host=x86_64-build_apple-darwin15.6.0 --target=armv6-rpi-linux-gnueabi --prefix=/Volumes/RPi-EABI-small/armv6-rpi-linux-gnueabi --with-sysroot=/Volumes/RPi-EABI-small/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot --enable-languages=c,c++ --with-cpu=arm1176jzf-s --with-fpu=vfp --with-pkgversion='crosstool-NG crosstool-ng-1.22.0' --enable-__cxa_atexit --disable-libmudflap --disable-libgomp --disable-libssp --disable-libquadmath --disable-libquadmath-support --disable-libsanitizer --with-gmp=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-mpfr=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-mpc=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-isl=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-cloog=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-libelf=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --enable-lto --enable-threads=posix --enable-target-optspace --enable-plugin --enable-gold --disable-nls --disable-multilib --with-local-prefix=/Volumes/RPi-EABI-small/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot --enable-long-long]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 5.2.0 (crosstool-NG crosstool-ng-1.22.0) ]
+  ignore line: [COMPILER_PATH=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/bin/]
+  ignore line: [LIBRARY_PATH=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib/:/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib/:/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3bf47' '-rdynamic' '-mcpu=arm1176jzf-s' '-mfpu=vfp' '-mtls-dialect=gnu']
+  link line: [ /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/collect2 -plugin /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/liblto_plugin.so -plugin-opt=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/lto-wrapper -plugin-opt=-fresolution=/var/folders/m4/9rg16xhd2rlbln753n9zk1540000gn/T//cc67uCPC.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux.so.3 -X -m armelf_linux_eabi -o cmTC_3bf47 /usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crt1.o /usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crti.o /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/crtbegin.o -L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0 -L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc -L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib -L/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib -L/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib CMakeFiles/cmTC_3bf47.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/crtend.o /usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crtn.o]
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/var/folders/m4/9rg16xhd2rlbln753n9zk1540000gn/T//cc67uCPC.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [--sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux.so.3] ==> ignore
+    arg [-X] ==> ignore
+    arg [-m] ==> ignore
+    arg [armelf_linux_eabi] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_3bf47] ==> ignore
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crt1.o] ==> ignore
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crti.o] ==> ignore
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/crtbegin.o] ==> ignore
+    arg [-L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0] ==> dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0]
+    arg [-L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc] ==> dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc]
+    arg [-L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib] ==> dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib]
+    arg [-L/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib] ==> dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib]
+    arg [-L/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib] ==> dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib]
+    arg [-rpath-link] ==> ignore
+    arg [/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi] ==> ignore
+    arg [-rpath-link] ==> ignore
+    arg [/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi] ==> ignore
+    arg [-rpath-link] ==> ignore
+    arg [/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib] ==> ignore
+    arg [-rpath-link] ==> ignore
+    arg [/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi] ==> ignore
+    arg [-rpath-link] ==> ignore
+    arg [/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi] ==> ignore
+    arg [-rpath-link] ==> ignore
+    arg [/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib] ==> ignore
+    arg [CMakeFiles/cmTC_3bf47.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/crtend.o] ==> ignore
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  collapse library dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0] ==> [/usr/local/Mike/armv6-rpi-linux-gnueabi/lib/gcc/armv6-rpi-linux-gnueabi/5.2.0]
+  collapse library dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc] ==> [/usr/local/Mike/armv6-rpi-linux-gnueabi/lib/gcc]
+  collapse library dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib] ==> [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/lib]
+  collapse library dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib] ==> [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib]
+  collapse library dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib] ==> [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib]
+  implicit libs: [c]
+  implicit dirs: [/usr/local/Mike/armv6-rpi-linux-gnueabi/lib/gcc/armv6-rpi-linux-gnueabi/5.2.0;/usr/local/Mike/armv6-rpi-linux-gnueabi/lib/gcc;/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/lib;/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib;/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib]
+  implicit fwks: []
+
+
+
+
+Detecting C [-std=c11] compiler features compiled with the following output:
+Change Dir: /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_53bab/fast"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_53bab.dir/build.make CMakeFiles/cmTC_53bab.dir/build
+Building C object CMakeFiles/cmTC_53bab.dir/feature_tests.c.o
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot   -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -std=c11 -o CMakeFiles/cmTC_53bab.dir/feature_tests.c.o   -c /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_53bab
+/usr/local/Cellar/cmake/3.6.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_53bab.dir/link.txt --verbose=1
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot  -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib     CMakeFiles/cmTC_53bab.dir/feature_tests.c.o  -o cmTC_53bab -rdynamic 
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:1c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c99] compiler features compiled with the following output:
+Change Dir: /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_76ed2/fast"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_76ed2.dir/build.make CMakeFiles/cmTC_76ed2.dir/build
+Building C object CMakeFiles/cmTC_76ed2.dir/feature_tests.c.o
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot   -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -std=c99 -o CMakeFiles/cmTC_76ed2.dir/feature_tests.c.o   -c /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_76ed2
+/usr/local/Cellar/cmake/3.6.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_76ed2.dir/link.txt --verbose=1
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot  -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib     CMakeFiles/cmTC_76ed2.dir/feature_tests.c.o  -o cmTC_76ed2 -rdynamic 
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c90] compiler features compiled with the following output:
+Change Dir: /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_6beea/fast"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_6beea.dir/build.make CMakeFiles/cmTC_6beea.dir/build
+Building C object CMakeFiles/cmTC_6beea.dir/feature_tests.c.o
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot   -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -std=c90 -o CMakeFiles/cmTC_6beea.dir/feature_tests.c.o   -c /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_6beea
+/usr/local/Cellar/cmake/3.6.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6beea.dir/link.txt --verbose=1
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-gcc  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot  -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib     CMakeFiles/cmTC_6beea.dir/feature_tests.c.o  -o cmTC_6beea -rdynamic 
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:0c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:0c_variadic_macros
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_b6972/fast"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_b6972.dir/build.make CMakeFiles/cmTC_b6972.dir/build
+Building CXX object CMakeFiles/cmTC_b6972.dir/testCXXCompiler.cxx.o
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot    -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -o CMakeFiles/cmTC_b6972.dir/testCXXCompiler.cxx.o -c /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_b6972
+/usr/local/Cellar/cmake/3.6.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b6972.dir/link.txt --verbose=1
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot   -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib     CMakeFiles/cmTC_b6972.dir/testCXXCompiler.cxx.o  -o cmTC_b6972 -rdynamic 
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_31b63/fast"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_31b63.dir/build.make CMakeFiles/cmTC_31b63.dir/build
+Building CXX object CMakeFiles/cmTC_31b63.dir/CMakeCXXCompilerABI.cpp.o
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot    -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -o CMakeFiles/cmTC_31b63.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/Cellar/cmake/3.6.2/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_31b63
+/usr/local/Cellar/cmake/3.6.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_31b63.dir/link.txt --verbose=1
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot   -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -v CMakeFiles/cmTC_31b63.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_31b63 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++
+COLLECT_LTO_WRAPPER=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/lto-wrapper
+Target: armv6-rpi-linux-gnueabi
+Configured with: /Volumes/RPi-EABI/.build/src/gcc-5.2.0/configure --build=x86_64-build_apple-darwin15.6.0 --host=x86_64-build_apple-darwin15.6.0 --target=armv6-rpi-linux-gnueabi --prefix=/Volumes/RPi-EABI-small/armv6-rpi-linux-gnueabi --with-sysroot=/Volumes/RPi-EABI-small/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot --enable-languages=c,c++ --with-cpu=arm1176jzf-s --with-fpu=vfp --with-pkgversion='crosstool-NG crosstool-ng-1.22.0' --enable-__cxa_atexit --disable-libmudflap --disable-libgomp --disable-libssp --disable-libquadmath --disable-libquadmath-support --disable-libsanitizer --with-gmp=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-mpfr=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-mpc=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-isl=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-cloog=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-libelf=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --enable-lto --enable-threads=posix --enable-target-optspace --enable-plugin --enable-gold --disable-nls --disable-multilib --with-local-prefix=/Volumes/RPi-EABI-small/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot --enable-long-long
+Thread model: posix
+gcc version 5.2.0 (crosstool-NG crosstool-ng-1.22.0) 
+COMPILER_PATH=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/bin/
+LIBRARY_PATH=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib/:/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib/:/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_31b63' '-rdynamic' '-shared-libgcc' '-mcpu=arm1176jzf-s' '-mfpu=vfp' '-mtls-dialect=gnu'
+ /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/collect2 -plugin /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/liblto_plugin.so -plugin-opt=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/lto-wrapper -plugin-opt=-fresolution=/var/folders/m4/9rg16xhd2rlbln753n9zk1540000gn/T//ccXr2UKd.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux.so.3 -X -m armelf_linux_eabi -o cmTC_31b63 /usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crt1.o /usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crti.o /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/crtbegin.o -L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0 -L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc -L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib -L/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib -L/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib CMakeFiles/cmTC_31b63.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/crtend.o /usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crtn.o
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(armv6-rpi-linux-gnueabi-ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_31b63/fast"]
+  ignore line: [/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_31b63.dir/build.make CMakeFiles/cmTC_31b63.dir/build]
+  ignore line: [Building CXX object CMakeFiles/cmTC_31b63.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot    -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -o CMakeFiles/cmTC_31b63.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/Cellar/cmake/3.6.2/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_31b63]
+  ignore line: [/usr/local/Cellar/cmake/3.6.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_31b63.dir/link.txt --verbose=1]
+  ignore line: [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot   -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -v CMakeFiles/cmTC_31b63.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_31b63 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/lto-wrapper]
+  ignore line: [Target: armv6-rpi-linux-gnueabi]
+  ignore line: [Configured with: /Volumes/RPi-EABI/.build/src/gcc-5.2.0/configure --build=x86_64-build_apple-darwin15.6.0 --host=x86_64-build_apple-darwin15.6.0 --target=armv6-rpi-linux-gnueabi --prefix=/Volumes/RPi-EABI-small/armv6-rpi-linux-gnueabi --with-sysroot=/Volumes/RPi-EABI-small/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot --enable-languages=c,c++ --with-cpu=arm1176jzf-s --with-fpu=vfp --with-pkgversion='crosstool-NG crosstool-ng-1.22.0' --enable-__cxa_atexit --disable-libmudflap --disable-libgomp --disable-libssp --disable-libquadmath --disable-libquadmath-support --disable-libsanitizer --with-gmp=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-mpfr=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-mpc=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-isl=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-cloog=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --with-libelf=/Volumes/RPi-EABI/.build/armv6-rpi-linux-gnueabi/buildtools --enable-lto --enable-threads=posix --enable-target-optspace --enable-plugin --enable-gold --disable-nls --disable-multilib --with-local-prefix=/Volumes/RPi-EABI-small/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot --enable-long-long]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 5.2.0 (crosstool-NG crosstool-ng-1.22.0) ]
+  ignore line: [COMPILER_PATH=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/bin/]
+  ignore line: [LIBRARY_PATH=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/:/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib/:/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib/:/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_31b63' '-rdynamic' '-shared-libgcc' '-mcpu=arm1176jzf-s' '-mfpu=vfp' '-mtls-dialect=gnu']
+  link line: [ /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/collect2 -plugin /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/liblto_plugin.so -plugin-opt=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/lto-wrapper -plugin-opt=-fresolution=/var/folders/m4/9rg16xhd2rlbln753n9zk1540000gn/T//ccXr2UKd.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux.so.3 -X -m armelf_linux_eabi -o cmTC_31b63 /usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crt1.o /usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crti.o /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/crtbegin.o -L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0 -L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc -L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib -L/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib -L/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -rpath-link /Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib CMakeFiles/cmTC_31b63.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/crtend.o /usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crtn.o]
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../libexec/gcc/armv6-rpi-linux-gnueabi/5.2.0/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/var/folders/m4/9rg16xhd2rlbln753n9zk1540000gn/T//ccXr2UKd.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [--sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux.so.3] ==> ignore
+    arg [-X] ==> ignore
+    arg [-m] ==> ignore
+    arg [armelf_linux_eabi] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_31b63] ==> ignore
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crt1.o] ==> ignore
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crti.o] ==> ignore
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/crtbegin.o] ==> ignore
+    arg [-L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0] ==> dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0]
+    arg [-L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc] ==> dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc]
+    arg [-L/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib] ==> dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib]
+    arg [-L/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib] ==> dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib]
+    arg [-L/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib] ==> dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib]
+    arg [-rpath-link] ==> ignore
+    arg [/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi] ==> ignore
+    arg [-rpath-link] ==> ignore
+    arg [/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi] ==> ignore
+    arg [-rpath-link] ==> ignore
+    arg [/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib] ==> ignore
+    arg [-rpath-link] ==> ignore
+    arg [/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi] ==> ignore
+    arg [-rpath-link] ==> ignore
+    arg [/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi] ==> ignore
+    arg [-rpath-link] ==> ignore
+    arg [/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib] ==> ignore
+    arg [CMakeFiles/cmTC_31b63.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/crtend.o] ==> ignore
+    arg [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib/crtn.o] ==> ignore
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  collapse library dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0] ==> [/usr/local/Mike/armv6-rpi-linux-gnueabi/lib/gcc/armv6-rpi-linux-gnueabi/5.2.0]
+  collapse library dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc] ==> [/usr/local/Mike/armv6-rpi-linux-gnueabi/lib/gcc]
+  collapse library dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/../lib/gcc/armv6-rpi-linux-gnueabi/5.2.0/../../../../armv6-rpi-linux-gnueabi/lib] ==> [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/lib]
+  collapse library dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib] ==> [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib]
+  collapse library dir [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib] ==> [/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib]
+  implicit libs: [stdc++;m;c]
+  implicit dirs: [/usr/local/Mike/armv6-rpi-linux-gnueabi/lib/gcc/armv6-rpi-linux-gnueabi/5.2.0;/usr/local/Mike/armv6-rpi-linux-gnueabi/lib/gcc;/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/lib;/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/lib;/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot/usr/lib]
+  implicit fwks: []
+
+
+
+
+Detecting CXX [-std=c++14] compiler features compiled with the following output:
+Change Dir: /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_0503c/fast"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_0503c.dir/build.make CMakeFiles/cmTC_0503c.dir/build
+Building CXX object CMakeFiles/cmTC_0503c.dir/feature_tests.cxx.o
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot    -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -std=c++14 -o CMakeFiles/cmTC_0503c.dir/feature_tests.cxx.o -c /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_0503c
+/usr/local/Cellar/cmake/3.6.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0503c.dir/link.txt --verbose=1
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot   -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib     CMakeFiles/cmTC_0503c.dir/feature_tests.cxx.o  -o cmTC_0503c -rdynamic 
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++11] compiler features compiled with the following output:
+Change Dir: /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_139a3/fast"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_139a3.dir/build.make CMakeFiles/cmTC_139a3.dir/build
+Building CXX object CMakeFiles/cmTC_139a3.dir/feature_tests.cxx.o
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot    -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -std=c++11 -o CMakeFiles/cmTC_139a3.dir/feature_tests.cxx.o -c /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_139a3
+/usr/local/Cellar/cmake/3.6.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_139a3.dir/link.txt --verbose=1
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot   -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib     CMakeFiles/cmTC_139a3.dir/feature_tests.cxx.o  -o cmTC_139a3 -rdynamic 
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++98] compiler features compiled with the following output:
+Change Dir: /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_e1f8a/fast"
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -f CMakeFiles/cmTC_e1f8a.dir/build.make CMakeFiles/cmTC_e1f8a.dir/build
+Building CXX object CMakeFiles/cmTC_e1f8a.dir/feature_tests.cxx.o
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot    -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib    -std=c++98 -o CMakeFiles/cmTC_e1f8a.dir/feature_tests.cxx.o -c /Volumes/Daten/DevLocal/DevCPP/Projects/XCTest/hello_lib/myLib/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_e1f8a
+/usr/local/Cellar/cmake/3.6.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e1f8a.dir/link.txt --verbose=1
+/usr/local/Mike/armv6-rpi-linux-gnueabi/bin/armv6-rpi-linux-gnueabi-g++  --sysroot=/usr/local/Mike/armv6-rpi-linux-gnueabi/armv6-rpi-linux-gnueabi/sysroot   -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/lib/arm-linux-gnueabi -Wl,-rpath-link,/Volumes/DataElCapitan/raspberry/rpi1/rootfs/usr/local/lib     CMakeFiles/cmTC_e1f8a.dir/feature_tests.cxx.o  -o cmTC_e1f8a -rdynamic 
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:0cxx_alias_templates
+    Feature record: CXX_FEATURE:0cxx_alignas
+    Feature record: CXX_FEATURE:0cxx_alignof
+    Feature record: CXX_FEATURE:0cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:0cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:0cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:0cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:0cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:0cxx_default_function_template_args
+    Feature record: CXX_FEATURE:0cxx_defaulted_functions
+    Feature record: CXX_FEATURE:0cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:0cxx_delegating_constructors
+    Feature record: CXX_FEATURE:0cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:0cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:0cxx_explicit_conversions
+    Feature record: CXX_FEATURE:0cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:0cxx_extern_templates
+    Feature record: CXX_FEATURE:0cxx_final
+    Feature record: CXX_FEATURE:0cxx_func_identifier
+    Feature record: CXX_FEATURE:0cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:0cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:0cxx_inline_namespaces
+    Feature record: CXX_FEATURE:0cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:0cxx_local_type_template_args
+    Feature record: CXX_FEATURE:0cxx_long_long_type
+    Feature record: CXX_FEATURE:0cxx_noexcept
+    Feature record: CXX_FEATURE:0cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:0cxx_nullptr
+    Feature record: CXX_FEATURE:0cxx_override
+    Feature record: CXX_FEATURE:0cxx_range_for
+    Feature record: CXX_FEATURE:0cxx_raw_string_literals
+    Feature record: CXX_FEATURE:0cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:0cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:0cxx_rvalue_references
+    Feature record: CXX_FEATURE:0cxx_sizeof_member
+    Feature record: CXX_FEATURE:0cxx_static_assert
+    Feature record: CXX_FEATURE:0cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:0cxx_thread_local
+    Feature record: CXX_FEATURE:0cxx_trailing_return_types
+    Feature record: CXX_FEATURE:0cxx_unicode_literals
+    Feature record: CXX_FEATURE:0cxx_uniform_initialization
+    Feature record: CXX_FEATURE:0cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:0cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:0cxx_variadic_macros
+    Feature record: CXX_FEATURE:0cxx_variadic_templates

@@ -30,6 +30,23 @@ else()
 
 endif()
 
+
+
+# Verhindert die komische Fehlermeldung:
+#
+#     Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+#     Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+#     command to set the policy and suppress this warning.
+#
+#     Environment variable GPIO_ROOT is set to:
+#         /Volumes/DevLocal/DevCPP/Production/libs/gpio
+#
+#     For compatibility, CMake is ignoring the variable.
+#
+if (POLICY CMP0074)
+    cmake_policy(SET CMP0074 NEW)
+endif()
+
 find_package(GPIO)
 
 # ┌──────────────────────────────────────────────────────────────────┐

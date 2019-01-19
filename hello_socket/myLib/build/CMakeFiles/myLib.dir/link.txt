@@ -1,0 +1,1 @@
+"" qc ../lib/libmyLib.a  CMakeFiles/myLib.dir/src/NewCppClass.cpp.o

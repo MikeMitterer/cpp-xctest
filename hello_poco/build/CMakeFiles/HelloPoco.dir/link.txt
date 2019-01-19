@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/clang++   -std=c++11 -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/HelloPoco.dir/src/hello_poco.cpp.o  -o ../bin/mac/HelloPoco /usr/local/lib/libPocoFoundation.dylib /usr/local/lib/libPocoNet.dylib /usr/local/lib/libPocoUtil.dylib 

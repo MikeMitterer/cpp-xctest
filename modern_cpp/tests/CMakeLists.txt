@@ -12,6 +12,7 @@ add_executable(
         ${MODULE_SOURCE}
 
         basic/rule_of_x_test.cpp
+        basic/smart_pointer_test.cpp
         )
 
 target_link_libraries(${PROJECT_NAME} gtest gtest_main)
