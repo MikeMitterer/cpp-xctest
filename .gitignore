@@ -44,3 +44,4 @@ lib
 # CLion generated files/folders
 cmake-build-*
 
+build

@@ -1,3 +1,5 @@
+#include <utility>
+
 //
 // Created by Mike Mitterer on 11.11.17.
 //
@@ -7,16 +9,20 @@
 
 uint8_t Resource::instanceCounter{0};
 
-Resource::Resource(const std::string& _value)
-        : value{_value} {
+Resource::Resource(std::string _value)
+        : value{ std::move(_value) } {
     
     instanceCounter++;
-    logger->debug("[{}] Resource - Konstruktor",__FILENAME__);
+    logger->debug("[] Resource - Konstruktor");
 }
 
 Resource::~Resource() {
-    logger->debug("[{}] Resource - Destruktor",__FILENAME__);
+    //logger->debug("[{}] Resource - Destruktor",__FILENAME__);
+    
+    spdlog::drop(_class());
 }
+
+const std::string AllDefaultOperators::_LOGGER_NAME = "AllDefaultOperators";
 
 /// Default constructor
 ///     auto ado = AllDefaultOperators();
@@ -26,7 +32,7 @@ AllDefaultOperators::AllDefaultOperators()
     std::strcpy(name,UNDEFINED.c_str());
     std::strcat(name, MSG_CREATED_IN_DEFAULT_CTOR.c_str());
 
-    _logger->debug("[{}] Default-Konstruktor ({})",__FILENAME__,name);
+    // _logger->debug("[{}] Default-Konstruktor ({})",__FILENAME__,name);
 }
 
 /// Explicit constructor
@@ -37,7 +43,7 @@ AllDefaultOperators::AllDefaultOperators(const char* arg)
     std::strcpy(name,arg);
     std::strcat(name, MSG_CREATED_IN_CTOR.c_str());
 
-    _logger->debug("[{}] Konstruktor ({})",__FILENAME__,name);
+    // _logger->debug("[{}] Konstruktor ({})",__FILENAME__,name);
 }
 
 /// Copy construktor
@@ -49,36 +55,7 @@ AllDefaultOperators::AllDefaultOperators(const AllDefaultOperators& _other)
     std::strcpy(name,_other.getName());
     std::strcat(name, MSG_CREATED_IN_COPY_CTOR.c_str());
 
-    _logger->debug("[{}] Copy-Konstruktor ({})",__FILENAME__,name);
-}
-
-/// copy assignment operator
-/// 
-///     auto ado1 = AllDefaultOperators{"Mike"};
-///     auto ado2 = AllDefaultOperators{"Gerda"};
-///     
-///     ado1 = ado2;
-AllDefaultOperators& AllDefaultOperators::operator=(const AllDefaultOperators& _other) {
-    //using std::swap;
-    //swap(*this, _other);
-
-    if(this == &_other) {
-        return *this;
-    }
-
-    delete[] name;
-    name = new char[std::strlen(_other.name) + 1];
-    std::strcpy(name, _other.name);
-
-    this->_logger = _other._logger;
-
-//    // GOOD: no need to check for self-assignment (other than performance)
-//    auto tmp = _other;
-//    std::swap(*this, tmp);
-//    return *this;
-
-    _logger->debug("[{}] Zuweisungsoperator",__FILENAME__);
-    return *this;
+    // _logger->debug("[{}] Copy-Konstruktor ({})",__FILENAME__,name);
 }
 
 /// Move constructor
@@ -95,32 +72,45 @@ AllDefaultOperators::AllDefaultOperators(AllDefaultOperators&& _other) noexcept
     // Reset other
     _other.name = nullptr;
 
-    _logger->debug("[{}] Move-Konstruktor ({})",__FILENAME__,name);
+    // _logger->debug("[{}] Move-Konstruktor ({})",__FILENAME__,name);
 }
 
-/// Move assignment operator
-AllDefaultOperators& AllDefaultOperators::operator=(AllDefaultOperators&& _other) noexcept {
 
-    if(this == &_other) {
-        return *this;
-    }
-
-    delete[] name;
-    name = _other.name;
-
-    // Reset other
-    _other.name = nullptr;
-
-    _logger->debug("[{}] Move-Assignment",__FILENAME__);
-    return *this;
+/// Diese Variante kombiniert den
+/// (Copy + Swap pattern: https://cpppatterns.com/patterns/copy-and-swap.html)
+///
+///     // copy assignment operator
+///     AllDefaultOperators& AllDefaultOperators::operator=(const AllDefaultOperators& _other)
+///
+/// und den
+///
+///     // Move assignment operator
+///     AllDefaultOperators& AllDefaultOperators::operator=(AllDefaultOperators&& _other) noexcept
+///
+/// This assignment operator takes its argument by value,
+/// making use of the existing copy and move constructor implementations.
+AllDefaultOperators& AllDefaultOperators::operator=(AllDefaultOperators _other) noexcept {
+      swap(*this, _other);
+      return *this;
 }
+
+// Swap for ADL
+void swap(AllDefaultOperators& left, AllDefaultOperators& right) {
+    std::swap(right.name, left.name);
+}
+
 
 /// Destruktor
 AllDefaultOperators::~AllDefaultOperators() {
 
+    // _logger->debug("[{}] Destruktor",__FILENAME__);
+
     delete[] name;
-    _logger->debug("[{}] Destruktor",__FILENAME__);
+    
+    // spdlog::drop(_LOGGER_NAME);
 }
+
+
 //
 //void AllDefaultOperators::swap(AllDefaultOperators& left, AllDefaultOperators& right) {
 //    using std::swap;

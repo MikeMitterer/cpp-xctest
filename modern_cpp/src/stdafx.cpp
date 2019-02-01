@@ -1,5 +1,4 @@
 //
-// Created by Mike Mitterer on 19.05.17.
+// Created by Mike Mitterer on 2019-02-01.
 //
 
-#include "stdafx.h"

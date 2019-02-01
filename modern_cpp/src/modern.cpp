@@ -8,7 +8,7 @@
  *      ArgParser: https://github.com/Taywee/args
  */
 int main(int argc,const char *argv[]) {
-    auto logger = spdlog::stdout_color_mt(mm::APP_LOGGER);
+    auto logger = spdlog::stdout_color_mt("application");
 
     args::ArgumentParser parser("This is a test program.", "This goes after the options.");
     args::HelpFlag help(parser, "help", "Display this help menu", {'h', "help"});

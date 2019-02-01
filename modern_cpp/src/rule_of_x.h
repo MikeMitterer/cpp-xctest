@@ -7,19 +7,23 @@
 
 #include "stdafx.h"
 
+#include <setup.h>
+
 class Resource {
+    virtual std::string _class() { return "Resource"; }
+
 private:
     const std::string value { "<undefined>" };
 
     // Default-Init ist zu bevorzugen
-    const std::shared_ptr<spdlog::logger> logger { spdlog::get(mm::TEST_LOGGER) };
+    const std::shared_ptr<spdlog::logger> logger = DefaultLogger::get(_class());
 
 public:
     static uint8_t instanceCounter;
 
 public:
-    Resource(const std::string& value);
     Resource() = delete;
+    Resource(std::string value);
 
     virtual ~Resource();
 
@@ -41,8 +45,10 @@ const std::string UNDEFINED = "<undefined>";
  */
 class AllDefaultOperators final {
 private:
+    const static std::string _LOGGER_NAME;
+
     // Default-Init ist zu bevorzugen
-    std::shared_ptr<spdlog::logger> _logger { spdlog::get(mm::TEST_LOGGER) };
+    // std::shared_ptr<spdlog::logger> _logger { spdlog::get(_LOGGER_NAME) };
 
     char* name = nullptr;
 
@@ -61,19 +67,20 @@ public:
     AllDefaultOperators();
 
     /// Explicit constructor
-    AllDefaultOperators(const char* arg);
+    explicit AllDefaultOperators(const char* arg);
 
     /// Copy construktor
     AllDefaultOperators(const AllDefaultOperators& _other);
 
-    /// Copy assignment operator
-    AllDefaultOperators& operator=(const AllDefaultOperators& _other);
-
     /// Move constructor
     AllDefaultOperators(AllDefaultOperators&& _other) noexcept;
 
+    /// Copy assignment operator
     /// Move assignment operator
-    AllDefaultOperators& operator=(AllDefaultOperators&& _other) noexcept;
+    AllDefaultOperators& operator=(AllDefaultOperators _other) noexcept;
+
+    // Swap for ADL
+    friend void swap(AllDefaultOperators& left, AllDefaultOperators& right);
 
     /// Destruktor
     ///
@@ -84,12 +91,6 @@ public:
     virtual ~AllDefaultOperators();
 
     inline const char* getName() const { return name; }
-
-    // Swap for ADL
-    friend void swap(AllDefaultOperators& left, AllDefaultOperators& right) {
-        using std::swap;
-        swap(right.name, left.name);
-    }
 
     const std::string toString() {
         return std::string(name);

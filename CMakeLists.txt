@@ -18,6 +18,9 @@ list(APPEND CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH})
 
 project(XCTest)
 
+# Triggert den Debugger an - scheint aber nicht immer notwendig zu sein...
+# set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -D_DEBUG")
+
 # Output bin, c++11 usw
 include(Config)
 

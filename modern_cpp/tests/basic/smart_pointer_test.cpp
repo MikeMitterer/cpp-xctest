@@ -2,25 +2,32 @@
 // Created by Mike Mitterer on 02.11.15.
 //
 
-#include "gtest/gtest.h"
-#include "rule_of_x.h"
-
 #include <memory>
 
+#include "gtest/gtest.h"
+
+#include "rule_of_x.h"
+#include "setup.h"
+
+
 class PointerTest {
+    virtual std::string _class() { return "PointerTest"; }
+
+private:
+    const Logger logger = DefaultLogger::get(_class());
 
 public:
     PointerTest() {
-        std::cout << "created" << std::endl;
+        logger->debug("created");
     }
 
     bool greet() {
-        std::cout << "Hi!" << std::endl;
+        logger->debug("Hi");
         return true;
     }
 
     virtual ~PointerTest() {
-        std::cout << "deleted" << std::endl;
+        logger->debug("deleted");
     }
 };
 
@@ -44,27 +51,35 @@ public:
 
 };
 
-TEST(smart_pointer_test, simple_test) {
+class SmartPointerTestCase : public ::testing::Test {
+protected:
+    TestSetup* testSetup = nullptr;
+
+    virtual void SetUp() { testSetup = new TestSetup(); }
+    virtual void TearDown() { delete testSetup; testSetup = nullptr; }
+};
+
+TEST_F(SmartPointerTestCase, simple_test) {
     std::unique_ptr<int> pTest(new int);
 
     *pTest = 10;
     EXPECT_EQ(*pTest,10);
 }
 
-TEST(smart_pointer_test, with_class) {
+TEST_F(SmartPointerTestCase, with_class) {
     std::unique_ptr<PointerTest> pTest(new PointerTest);
 
     EXPECT_EQ(pTest->greet(),true);
 }
 
-TEST(smart_pointer_test, with_array) {
+TEST_F(SmartPointerTestCase, with_array) {
     std::unique_ptr<PointerTest[]> pTest(new PointerTest[5]);
 
     // Zugriff über punkt!
     EXPECT_EQ(pTest[0].greet(),true);
 }
 
-TEST(smart_pointer_test, shared_pointer) {
+TEST_F(SmartPointerTestCase, shared_pointer) {
 
     std::shared_ptr<PointerTest> pTest = std::make_shared<PointerTest>();
     std::shared_ptr<PointerTest> pTest2 = pTest;
@@ -72,7 +87,7 @@ TEST(smart_pointer_test, shared_pointer) {
     std::cout << "Finished" << std::endl;
 }
 
-TEST(smart_pointer_test, shared_pointer_with_scope) {
+TEST_F(SmartPointerTestCase, shared_pointer_with_scope) {
 
     std::shared_ptr<PointerTest> pTest2{nullptr};
 
