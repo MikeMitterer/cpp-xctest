@@ -7,34 +7,14 @@
 
 #include "stdafx.h"
 
+#include <vector>
+
 #include <setup.h>
 
-class Resource {
-    virtual std::string _class() { return "Resource"; }
-
-private:
-    const std::string value { "<undefined>" };
-
-    // Default-Init ist zu bevorzugen
-    const std::shared_ptr<spdlog::logger> logger = DefaultLogger::get(_class());
-
-public:
-    static uint8_t instanceCounter;
-
-public:
-    Resource() = delete;
-    Resource(std::string value);
-
-    virtual ~Resource();
-
-    
+enum class FunctionType {
+    DefaultCTOR, ParamCTOR, CopyCTOR, MoveCTOR,
+    AssignmentOperator, MoveAssignmentOperator, Destructor
 };
-
-const std::string MSG_CREATED_IN_DEFAULT_CTOR = " - default-CTOR";
-const std::string MSG_CREATED_IN_CTOR = " - CTOR";
-const std::string MSG_CREATED_IN_COPY_CTOR = " - copy-CTOR";
-
-const std::string UNDEFINED = "<undefined>";
 
 /**
  * Alle Operatoren können mit = delete gelöscht, oder mit = default in der default-Variante
@@ -43,14 +23,18 @@ const std::string UNDEFINED = "<undefined>";
  * Rule of 5
  *      https://www.youtube.com/watch?v=JsaTQiYDBb0
  */
-class AllDefaultOperators final {
+class RuleOf5 final {
+    static const std::string _class() { return "RuleOf5"; }
+
 private:
-    const static std::string _LOGGER_NAME;
 
     // Default-Init ist zu bevorzugen
-    // std::shared_ptr<spdlog::logger> _logger { spdlog::get(_LOGGER_NAME) };
+    std::shared_ptr<spdlog::logger> _logger { DefaultLogger::get(_class()) };
 
     char* name = nullptr;
+
+public:
+    static std::vector<uint8_t> functionCalls;
 
 public:
     /// Default constructor
@@ -64,23 +48,22 @@ public:
     ///
     /// ClassName() = delete;
     /// ClassName() = default ;
-    AllDefaultOperators();
+    RuleOf5();
 
-    /// Explicit constructor
-    explicit AllDefaultOperators(const char* arg);
+    /// Explicit constructor (Single argument CTOR)
+    explicit RuleOf5(const char* arg);
 
     /// Copy construktor
-    AllDefaultOperators(const AllDefaultOperators& _other);
+    RuleOf5(const RuleOf5& _other);
 
     /// Move constructor
-    AllDefaultOperators(AllDefaultOperators&& _other) noexcept;
+    RuleOf5(RuleOf5&& _other) noexcept;
 
     /// Copy assignment operator
-    /// Move assignment operator
-    AllDefaultOperators& operator=(AllDefaultOperators _other) noexcept;
+    RuleOf5& operator=(const RuleOf5& _other) noexcept;
 
-    // Swap for ADL
-    friend void swap(AllDefaultOperators& left, AllDefaultOperators& right);
+    /// Move assignment operator
+    RuleOf5& operator=(RuleOf5&& _other) noexcept;
 
     /// Destruktor
     ///
@@ -88,15 +71,33 @@ public:
     /// and if callers should be able to destroy polymorphically,
     /// then make A::~A public and virtual.
     /// Otherwise make it protected (and not-virtual)
-    virtual ~AllDefaultOperators();
+    virtual ~RuleOf5();
 
-    inline const char* getName() const { return name; }
+    /// Das RuleOf5 object wird in einen String konvertiert
+    /// Hier könnte auch "explicit" verwendet werden
+    operator std::string();
 
-    const std::string toString() {
+    /// Ist als globale funktion zu implementieren
+    /// 
+    ///     std::stringstream buffer;
+    ///     auto ruf = RuleOf5{"Mike"};
+    ///
+    ///     buffer << ruf;
+    ///
+    ///     auto result = buffer.str();
+    ///
+    friend std::ostream& operator<<(std::ostream& os, const RuleOf5& rof);
+
+    inline const char* getName() const { return (name != nullptr ? name : "<null>"); }
+
+    const std::string toString() const {
         return std::string(name);
     }
-    
-    //friend std::ostream& operator<<(std::ostream& os, std::string& s);
+
+    static uint8_t nrOfCalls();
+    static uint8_t nrOfCalls(FunctionType forType);
+
+    static void showCalls();
 };
 
 #endif //XCTEST_RULE_OF_X_H
