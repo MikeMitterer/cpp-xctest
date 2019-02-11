@@ -64,6 +64,8 @@ set(MODULE_main ${PROJECT_SOURCE_DIR}/src/modern.cpp)
 
 set(MODULE_SOURCE
         ${PROJECT_SOURCE_DIR}/src/config.h
+        ${PROJECT_SOURCE_DIR}/src/logger.h
+
         ${PROJECT_SOURCE_DIR}/src/rule_of_x.cpp
 
         # stdafx

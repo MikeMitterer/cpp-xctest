@@ -20,6 +20,7 @@ add_executable(
         basic/smart_pointer_test.cpp
         basic/ctor_test.cpp
         basic/var_init.cpp
+        basic/strings.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} gtest gtest_main)

@@ -9,7 +9,7 @@
 
 #include <vector>
 
-#include <setup.h>
+#include "logger.h"
 
 enum class FunctionType {
     DefaultCTOR, ParamCTOR, CopyCTOR, MoveCTOR,

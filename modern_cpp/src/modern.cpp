@@ -1,6 +1,21 @@
 #include "stdafx.h"
 #include <args.hxx>
 
+#include "logger.h"
+
+std::string getCompilerStandard() {
+    std::stringstream out;
+
+    if (__cplusplus == 201703L) out << "C++17\n";
+    else if (__cplusplus == 201402L) out << "C++14\n";
+    else if (__cplusplus == 201103L) out << "C++11\n";
+    else if (__cplusplus == 199711L) out << "C++98\n";
+    else out << "Could not find out your C++ standard! '__cplusplus("
+             << __cplusplus << ")'" << std::endl;
+
+    return out.str();
+}
+
 /**
  * Sample verwendet folgendes Libs:
  *      Formatter:  https://github.com/fmtlib/fmt
@@ -8,9 +23,14 @@
  *      ArgParser: https://github.com/Taywee/args
  */
 int main(int argc,const char *argv[]) {
-    auto logger = spdlog::stdout_color_mt("application");
+    auto logger = DefaultLogger::get("application");
 
-    args::ArgumentParser parser("This is a test program.", "This goes after the options.");
+    args::ArgumentParser parser("This is a test program.",
+            std::string("This goes after the options.\n")
+                + std::string("Your compiler supports: ")
+                + getCompilerStandard()
+                );
+
     args::HelpFlag help(parser, "help", "Display this help menu", {'h', "help"});
 
     args::ValueFlag<int> integer(parser, "integer", "The integer flag", {'i'});
@@ -44,6 +64,8 @@ int main(int argc,const char *argv[]) {
     if (characters) { for (const auto ch: args::get(characters)) { std::cout << "Param c (characters): " << ch << std::endl; }}
     if (foo) { std::cout << "Param f (foo (positional)): " << args::get(foo) << std::endl; }
     if (numbers) { for (const auto nm: args::get(numbers)) { std::cout << "Param n (number): " << nm << std::endl; }}
+
+    logger->info(getCompilerStandard());
 
     return 0;
 }
