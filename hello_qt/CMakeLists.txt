@@ -43,18 +43,18 @@ if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm")
 
 else()
 
-    # Ist in der .bashrc definiert
-    set(CMAKE_PREFIX_PATH $ENV{QT5DIR} ${CMAKE_PREFIX_PATH})
-
-    set(CMAKE_MODULE_PATH $ENV{QT5DIR}/lib/cmake/Qt5 ${CMAKE_MODULE_PATH})
+#    # Ist in der .bashrc definiert
+#    set(CMAKE_PREFIX_PATH $ENV{QT5DIR} ${CMAKE_PREFIX_PATH})
+#
+#    set(CMAKE_MODULE_PATH $ENV{QT5DIR}/lib/cmake/Qt5 ${CMAKE_MODULE_PATH})
 
 endif()
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Widgets REQUIRED)
+find_package(Qt6 COMPONENTS Core REQUIRED)
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
 
 # ┌──────────────────────────────────────────────────────────────────┐
@@ -85,4 +85,4 @@ add_executable(${PROJECT_NAME}
         ${SOURCE_FILES}
         )
 
-qt5_use_modules(${PROJECT_NAME} Widgets)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Core Qt6::Widgets)

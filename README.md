@@ -1,3 +1,5 @@
+# XCTest f. Mac + Raspi
+
 Welche GLIBC ist verfügbar
     strings /usr/lib/arm-linux-gnueabihf/libstdc++.so.6 | grep -i glibc
 
@@ -50,3 +52,13 @@ Dependencies für dieses Projekt:
 ACHTUNG:
     clang auf Raspi needs crtbegin.o - wird nicht automatisch installiert
         apt-get install --reinstall libgcc-4.9-dev
+
+### Toolchain - Raspi
+Die ganze Geschichte wurde am 19.3.2021 vorrübergehend ausgeschaltet da der Arm-Compiler am 
+Mac nicht vorhanden ist.
+
+Basis-Settings waren bis zu diesem Zeitpunkt:
+
+![Settings - Teil1](doc/images/cmake-toolchain-raspi-1.png)
+
+![Settings - Teil2](doc/images/cmake-toolchain-raspi-2.png)

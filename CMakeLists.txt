@@ -30,6 +30,8 @@ include(Config)
 
 find_package(GTest)
 
+include_directories(${GTEST_INCLUDE_DIR})
+
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Sub-Projects                                                    │
 # └──────────────────────────────────────────────────────────────────┘
@@ -38,16 +40,19 @@ add_subdirectory(hello_world)
 add_subdirectory(hello_lib)
 add_subdirectory(hello_socket)
 add_subdirectory(hello_thread)
+#
+## Scheint nur mit clang zu funktionieren - nicht mit gcc-5
+# add_subdirectory(hello_poco)
+#
 
-# Scheint nur mit clang zu funktionieren - nicht mit gcc-5
-add_subdirectory(hello_poco)
-
+# brew install qt6
 add_subdirectory(hello_qt)
-add_subdirectory(hello_qt_socket)
 
-add_subdirectory(hello_led)
-add_subdirectory(hello_ncurses)
-add_subdirectory(hello_dart)
-
+#add_subdirectory(hello_qt_socket)
+#
+#add_subdirectory(hello_led)
+#add_subdirectory(hello_ncurses)
+#add_subdirectory(hello_dart)
+#
 add_subdirectory(modern_cpp)
 

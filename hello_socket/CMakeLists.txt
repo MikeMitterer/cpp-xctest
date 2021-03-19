@@ -32,8 +32,8 @@ find_package(OpenSSL REQUIRED)
 
 find_package(LibUV REQUIRED)
 find_package(ZLIB REQUIRED)
-find_package(UWS REQUIRED)
-find_package(JSON REQUIRED)
+find_package(uws REQUIRED)
+find_package(json REQUIRED)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Tests                                                           │

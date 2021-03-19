@@ -47,9 +47,9 @@ set_source_files_properties(${PROJECT_SOURCE_DIR}/src/stdafx.cpp
 # │  Libs                                                            │
 # └──────────────────────────────────────────────────────────────────┘
 
-find_package(Args)
-find_package(Spdlog)
-find_package(Fmt)
+find_package(args)
+find_package(spdlog)
+find_package(fmt)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Modul-Source                                                    │

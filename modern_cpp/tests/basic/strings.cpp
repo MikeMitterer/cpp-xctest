@@ -44,6 +44,20 @@ TEST_F(StringTestCase, string_stream) {
     EXPECT_STREQ(ss.str().c_str(),"Mike");
 }
 
+TEST_F(StringTestCase, string_stream_with_format) {
+    auto logger = testSetup->getLogger();
+
+    std::stringstream ss;
+
+    ss.setf(std::ios::fixed, std::ios::floatfield);
+    ss.precision(2);
+
+    ss << "Mike" << " age: " << 99.9;
+
+    logger->info(ss.str());
+    EXPECT_STREQ(ss.str().c_str(),"Mike age: 99.90");
+}
+
 TEST_F(StringTestCase, toString) {
     EXPECT_STREQ(std::to_string(5).c_str(),"5");
 }

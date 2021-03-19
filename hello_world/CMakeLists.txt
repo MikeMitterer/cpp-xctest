@@ -47,16 +47,16 @@ set_source_files_properties(${PROJECT_SOURCE_DIR}/src/stdafx.cpp
 # │  Google-Test (BasisProjekt: find_package(GTest)                  │
 # └──────────────────────────────────────────────────────────────────┘
 
-find_package(GTest)
+# find_package(GTest)
 add_subdirectory(tests)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Libs                                                            │
 # └──────────────────────────────────────────────────────────────────┘
 
-find_package(Args)
-find_package(Spdlog)
-find_package(Fmt)
+find_package(args)
+find_package(spdlog)
+find_package(fmt)
 
 
 # ┌──────────────────────────────────────────────────────────────────┐
