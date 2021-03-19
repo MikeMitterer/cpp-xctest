@@ -25,12 +25,12 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 # │  Libs                                                            │
 # └──────────────────────────────────────────────────────────────────┘
 
-find_package(Args)
-find_package(Spdlog)
-find_package(Fmt)
+find_package(args)
+find_package(spdlog)
+find_package(fmt)
 
 set(ADDITIONAL_LIBRARIES menu)
-find_package(Curses REQUIRED)
+find_package(curses REQUIRED)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Tests                                                           │
