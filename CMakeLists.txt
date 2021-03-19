@@ -40,18 +40,18 @@ add_subdirectory(hello_world)
 add_subdirectory(hello_lib)
 add_subdirectory(hello_socket)
 add_subdirectory(hello_thread)
-#
-## Scheint nur mit clang zu funktionieren - nicht mit gcc-5
+
+# Scheint nur mit clang zu funktionieren - nicht mit gcc-5
 # add_subdirectory(hello_poco)
-#
 
 # brew install qt6
 add_subdirectory(hello_qt)
 
-#add_subdirectory(hello_qt_socket)
-#
+# Migration required!
+# add_subdirectory(hello_qt_socket)
+
 #add_subdirectory(hello_led)
 add_subdirectory(hello_ncurses)
-#
+
 add_subdirectory(modern_cpp)
 

@@ -43,10 +43,10 @@ if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm")
 
 else()
 
-#    # Ist in der .bashrc definiert
-#    set(CMAKE_PREFIX_PATH $ENV{QT5DIR} ${CMAKE_PREFIX_PATH})
-#
-#    set(CMAKE_MODULE_PATH $ENV{QT5DIR}/lib/cmake/Qt5 ${CMAKE_MODULE_PATH})
+    # Ist in der .bashrc definiert
+    # set(CMAKE_PREFIX_PATH $ENV{QT5DIR} ${CMAKE_PREFIX_PATH})
+
+    # set(CMAKE_MODULE_PATH $ENV{QT5DIR}/lib/cmake/Qt5 ${CMAKE_MODULE_PATH})
 
 endif()
 

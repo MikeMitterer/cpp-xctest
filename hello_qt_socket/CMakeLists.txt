@@ -44,9 +44,9 @@ if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm")
 else()
 
     # Ist in der .bashrc definiert
-    set(CMAKE_PREFIX_PATH $ENV{QT5DIR} ${CMAKE_PREFIX_PATH})
+    # set(CMAKE_PREFIX_PATH $ENV{QT5DIR} ${CMAKE_PREFIX_PATH})
 
-    set(CMAKE_MODULE_PATH $ENV{QT5DIR}/lib/cmake/Qt5 ${CMAKE_MODULE_PATH})
+    # set(CMAKE_MODULE_PATH $ENV{QT5DIR}/lib/cmake/Qt5 ${CMAKE_MODULE_PATH})
 
 endif()
 
@@ -56,9 +56,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(OPENSSL_ROOT_DIR "/usr/local/opt/openssl" )
 find_package(OpenSSL REQUIRED)
 
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5WebSockets REQUIRED)
+find_package(Qt6 COMPONENTS Core REQUIRED)
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
+find_package(Qt6 COMPONENTS WebSockets REQUIRED)
 
 # ┌──────────────────────────────────────────────────────────────────┐
 # │  Libs                                                            │
@@ -91,4 +91,4 @@ add_executable(${PROJECT_NAME}
         )
 
 #target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::WebSockets)
-qt5_use_modules(${PROJECT_NAME} Core WebSockets)
+qt5_use_modules(${PROJECT_NAME} PRIVATE Qt6::Core Qt6::Widgets Qt6::WebSockets)
