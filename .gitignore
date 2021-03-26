@@ -45,4 +45,8 @@ lib
 cmake-build-*
 
 build
+<<<<<<< HEAD
 _Documentation
+=======
+.dependencies/
+>>>>>>> b6d9dbe17b58eb621703a3a0398495fe337450a3
