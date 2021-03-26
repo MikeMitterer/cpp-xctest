@@ -29,6 +29,8 @@ add_executable(
         basic/rule_of_x_test.cpp
         basic/smart_pointer_test.cpp
         basic/ctor_test.cpp
+        basic/loops_test.cpp
+        basic/conditions_test.cpp
         basic/var_init.cpp
         basic/strings.cpp
 )

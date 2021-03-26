@@ -9,8 +9,10 @@
 get_filename_component(PARENT_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
 get_filename_component(PARENT_NAME ${PARENT_DIR} NAME)
 
-# project(${PARENT_NAME}_tests)
-project(HelloWorld_tests)
+project(${PARENT_NAME}_tests)
+# message("ParentName: " ${PARENT_NAME})
+
+# project(HelloWorld_tests)
 
 # include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
