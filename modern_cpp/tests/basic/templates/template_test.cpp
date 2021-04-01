@@ -28,6 +28,9 @@ TEST_F(TemplateTestCast, functionTemplate) {
     EXPECT_EQ(toString("Mike"), "Mike");
 
     EXPECT_EQ(toString(10), "10");
+
+    // Math-Constants:
+    //      https://www.quantstart.com/articles/Mathematical-Constants-in-C/
     EXPECT_EQ(toString(M_PI + 10.0), "13.14");
     EXPECT_EQ(toString(M_PI + 100.0), "103.14");
 
