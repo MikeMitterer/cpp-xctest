@@ -39,3 +39,4 @@ std::string toString(const float & value) {
     ss << std::fixed << std::setprecision(2) << value << "f";
     return ss.str();
 }
+
