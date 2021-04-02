@@ -26,13 +26,17 @@ add_executable(
         # Test-Setup
         _setup/setup.cpp
 
-        basic/rule_of_x_test.cpp
-        basic/smart_pointer_test.cpp
+        basic/conditions_test.cpp
         basic/ctor_test.cpp
         basic/loops_test.cpp
-        basic/conditions_test.cpp
+        basic/rule_of_x_test.cpp
+        basic/smart_pointer_test.cpp
+        basic/string_test.cpp
         basic/var_init.cpp
-        basic/strings.cpp
+
+        basic/templates/template_test.h
+        basic/templates/template_test.cpp
+
 )
 
 target_link_libraries(${PROJECT_NAME} ${GTEST_LIBRARY} ${GTEST_MAIN_LIBRARY})
