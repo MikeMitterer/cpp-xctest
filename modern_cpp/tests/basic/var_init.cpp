@@ -29,20 +29,27 @@ public:
 
     Person() = delete;
 
+    // const auto p1 = Person{"Mike"};
+    // const Person name = p1;
+    // Person(const Person& person) = delete;
+
     Person(std::string name, int age)
             : age{ age }, name{ std::move(name) } {
+
         nrOfCTORCalls++;
 
         logger->info("Person(std::string name, int age)");
     }
 
-    Person(std::initializer_list<int> values) : age{ 99} {
+    Person(std::initializer_list<int> values) : age{ 99 } {
+        nrOfCTORCalls++;
+
         for(auto value : values) {
             myValues.push_back(value);
         }
     }
 
-    explicit Person(std::vector<std::string> petNames) : myPetNames{ petNames }, age{ -1 }{
+    explicit Person(std::vector<std::string> petNames) : age{ -1 }, myPetNames{std::move( petNames )}{
         nrOfCTORCalls++;
 
         logger->info("Person(std::vector<std::string> petNames)");
@@ -68,7 +75,7 @@ public:
 
 };
 
-std::string genUserName(Person person){
+std::string genUserName(const Person& person){
     std::ostringstream oss;
     oss << person.name << person.age;
     std::string username = oss.str();
@@ -120,6 +127,7 @@ TEST_F(VarInitTestCase, init_array_auto) {
     EXPECT_EQ(typeid(int1), typeid(std::initializer_list<int>));
     EXPECT_EQ(int1.size(), 1);
     EXPECT_EQ(*int1.begin(), 42);
+
     //Person p1 = Person("Sarah", int1); does not work!
     const Person p1 = Person{int1};
     EXPECT_EQ(*(p1.myValues.begin()), 42);
@@ -149,12 +157,12 @@ TEST_F(VarInitTestCase, auto_type_conversion) {
     const Person p1 = Person{ 5 };
     EXPECT_EQ(p1.age, 99);
     EXPECT_EQ(*p1.myValues.begin(), 5);
-    EXPECT_EQ(p1.nrOfCTORCalls, 0);
+    EXPECT_EQ(p1.nrOfCTORCalls, 1);
 
     // CTOR Person(std::string name) wird hier allerdings verwendet
     const Person p2 = Person{"Sarah"};
     EXPECT_EQ(p2.name, "Sarah");
-    EXPECT_EQ(p1.nrOfCTORCalls, 1);
+    EXPECT_EQ(p1.nrOfCTORCalls, 2);
 
     const Person p3 = { "Sarah", 25};
     // Alternativ: const Person p3{ "Sarah", 25};
@@ -176,23 +184,27 @@ TEST_F(VarInitTestCase, temp_object) {
 
     auto username3 = genUserName(Person{"Sarah", 25});
     EXPECT_EQ(username3, "Sarah25");
+
 }
 
 TEST_F(VarInitTestCase, init_list_vector) {
     std::vector<std::string> pets {"Marie", "Sophie", "Niki", "Pebbles"};
-    Person p1 = Person(pets);
+
+    Person p1 = Person{pets};
+
     EXPECT_EQ(p1.myPetNames[2], "Niki");
 }
 
 TEST_F(VarInitTestCase, test_nr_of_calls_1) {
-    auto firstname = std::string("Mike");
-    auto name = Person(firstname);
+    auto firstname = std::string{"Mike"};
+    auto name = Person{firstname};
 
     EXPECT_EQ(name.nrOfCTORCalls, 1);
 }
 
 TEST_F(VarInitTestCase, test_nr_of_calls_param_as_charpointer) {
-    auto name = Person("Mike");
+    const auto p1 = Person{"Mike"};
+    const Person name = p1;
 
     EXPECT_EQ(name.nrOfCTORCalls, 1);
 

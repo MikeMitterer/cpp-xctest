@@ -59,7 +59,7 @@ TEST_F(TemplateTestCast, toJson) {
 
 TEST_F(TemplateTestCast, classTemplate) {
     // Compiliert - ist aber falsch!!!!! (Definiert eine Funktion)
-    // const JsonEvent<Name> event();
+    // const JsonEvent<NameEvent> event1()
 
     // const auto name = Name{ "Mike", 99u };
     
@@ -89,20 +89,20 @@ TEST_F(TemplateTestCast, typeConstraint) {
 
 // [] Implementiere die Funktion "myswap"
 TEST_F(TemplateTestCast, staticMember) {
-    StaticTemplateSample<int> s1("Mike", 1);
-    StaticTemplateSample<int> s2("Mike", 1);
-    StaticTemplateSample<float> s3("Mike", 1);
+    StaticTemplateSample<int> s1{"Mike", 1};
+    StaticTemplateSample<int> s2{"Mike", 1};
+    StaticTemplateSample<float> s3{"Mike", 1};
 
-    StaticSample s4("Mike", 1);
-    StaticSample s5("Mike", 1);
-    StaticSample s6("Mike", 1);
+    StaticSample s4{"Mike", 1};
+    StaticSample s5{"Mike", 1};
+    StaticSample s6{"Mike", 1};
 
     EXPECT_EQ(s2.instanceCounter, 2);
     EXPECT_EQ(s3.instanceCounter, 1);
     EXPECT_EQ(s6.instanceCounter, 3);
 
     {
-        StaticTemplateSample<int> s1("Mike", 1);
+        StaticTemplateSample<int> s1{"Mike", 1};
         EXPECT_EQ(s1.instanceCounter, 3);
 
         StaticSample s7("Mike", 1);
@@ -112,10 +112,10 @@ TEST_F(TemplateTestCast, staticMember) {
     }
 
     // [] Welchen Wert hat s1.instanceCounter
-    EXPECT_EQ(s1.instanceCounter, );
+    // EXPECT_EQ(s1.instanceCounter, );
 
     // [] Welchen Wert hat s6.instanceCounter
-    EXPECT_EQ(s6.instanceCounter, );
+    // EXPECT_EQ(s6.instanceCounter, );
 }
 
 
@@ -124,13 +124,13 @@ TEST_F(TemplateTestCast, swapValue) {
 
     auto v1 = 10;
     auto v2 = 20;
-    myswap(v1, v2);
+    // myswap(v1, v2);
 
     EXPECT_EQ(v2, 10);
 
     auto v3 = "Mike";
     auto v4 = "Sarah";
-    myswap(v3, v4);
+    // myswap(v3, v4);
 
     EXPECT_EQ(v3, "Sarah");
 }
