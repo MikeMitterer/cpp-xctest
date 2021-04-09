@@ -35,7 +35,6 @@ add_executable(
         basic/rule_of_x_test.cpp
         basic/smart_pointer_test.cpp
         basic/string_test.cpp
-        basic/utils_test.cpp
         basic/var_init.cpp
 
         basic/templates/ToJson.h

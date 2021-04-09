@@ -73,3 +73,11 @@ public:
         instanceCounter--;
     }
 };
+
+class SimpleClass {
+public:
+    template<typename T>
+    std::string convToString(T value) { return std::to_string(value); }
+
+    std::string sayMyName() { return "Sarah"; }
+};
