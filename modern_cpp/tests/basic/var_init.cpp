@@ -247,6 +247,17 @@ TEST_F(VarInitTestCase, remove_element_from_vector) {
     EXPECT_EQ(values[1], 2);
 }
 
+TEST_F(VarInitTestCase, testLambdaWithArrayAsReturnValue) {
+    std::function<std::vector<uint8_t> ()> callback = [] () {
+//        std::vector<uint8_t> test = { 1,2 };
+//        return test;
+        return std::vector<uint8_t>{ 1 ,2 ,3 };
+    };
+
+    // EXPECT_EQ(values[1], 2);
+}
+
+
 
 
 #pragma clang diagnostic pop
