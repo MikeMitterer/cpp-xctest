@@ -20,14 +20,32 @@ protected:
     }
 };
 
-class Cat {
+constexpr int increment(int& n){ return ++n; }
+constexpr int incr1(int k) {
+    // Rückgabewerte bei constexpr-Functions dürfen
+    // nicht constexpr sein!
+    // constexpr int y = increment(k);
+
+    const int x { increment(k) };
+
+    return x;
+}
+
+class ExpressCat {
+private:
+    static constexpr int v = incr1(1);
+
 public:
     // constexpr must be initialized
     static constexpr int numHindLegs = 4;
     static const int age;
 
+    // Selbe Auswirkung wie:
+    //      constexpr int n = std::numeric_limits<int>::max()
+    constexpr int heads() { return 1; }
 };
-const int Cat::age = 3;
+
+const int ExpressCat::age = 3;
 
 constexpr int some_constexpr_function(int i){
     if (i < 3) { return i + 2; }
@@ -44,17 +62,17 @@ constexpr int factorial_const_expr(int n){
     return result;
 }
 
-constexpr int increment(int& n){ return ++n; }
-constexpr int incr1(int k) { int x = increment(k); return x; }
-// does not work bc lifetime of k began outside of expression (not a core constant)
+
+
+// does not work because lifetime of k began outside of expression (not a core constant)
 // constexpr int incr2(int k) { constexpr int x = increment(k); return x; }
 
 template<int N>
 constexpr int value = N;
 
 TEST_F(ConstexprTestCase, constexpr_variable) {
-    EXPECT_EQ(Cat::age, 3);
-    EXPECT_EQ(Cat::numHindLegs, 4);
+    EXPECT_EQ(ExpressCat::age, 3);
+    EXPECT_EQ(ExpressCat::numHindLegs, 4);
 }
 
 TEST_F(ConstexprTestCase, constexpr_function) {
