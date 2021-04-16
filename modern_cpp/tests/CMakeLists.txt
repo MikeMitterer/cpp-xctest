@@ -30,6 +30,8 @@ add_executable(
         _setup/utils.cpp
 
         basic/conditions_test.cpp
+        basic/const_test.cpp
+        basic/constexpr_test.cpp
         basic/ctor_test.cpp
         basic/loops_test.cpp
         basic/rule_of_x_test.cpp
