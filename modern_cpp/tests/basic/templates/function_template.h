@@ -40,3 +40,10 @@ std::string toString(const float & value) {
     return ss.str();
 }
 
+template<typename T>
+void myswap(T& v1, T& v2) {
+    T temp = v1;
+    v1 = v2;
+    v2 = temp;
+}
+

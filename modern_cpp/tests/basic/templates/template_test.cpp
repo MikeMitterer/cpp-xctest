@@ -16,7 +16,6 @@ uint8_t StaticTemplateSample<T>::instanceCounter = 0;
 
 uint8_t StaticSample::instanceCounter = 0;
 
-
 class TemplateTestCast : public ::testing::Test {
 protected:
     TestSetup* testSetup = nullptr;
@@ -63,7 +62,9 @@ TEST_F(TemplateTestCast, classTemplate) {
 
     // const auto name = Name{ "Mike", 99u };
     
-    const JsonEvent<NameEvent> event{"mm.event.SendName", NameEvent{ "Mike", 88u }};
+    const JsonEvent<NameEvent> event {
+        "mm.event.SendName", NameEvent{ "Mike", 88u }
+    };
 
     const auto json = event.toJson();
     std::cout << json;
@@ -81,6 +82,13 @@ TEST_F(TemplateTestCast, typeConstraint) {
     // const JsonEvent<std::string> event("mm.event.SendName", Name("Mike", 99));
 
     EXPECT_EQ(true, true);
+}
+
+TEST_F(TemplateTestCast, nonStaticClassWithFunctionTemplate) {
+    SimpleClass testClass;
+
+    EXPECT_EQ(testClass.convToString(10), "10");
+    EXPECT_EQ(testClass.sayMyName(), "Sarah");
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -112,10 +120,10 @@ TEST_F(TemplateTestCast, staticMember) {
     }
 
     // [] Welchen Wert hat s1.instanceCounter
-    // EXPECT_EQ(s1.instanceCounter, );
+    EXPECT_EQ(s1.instanceCounter, 2);
 
     // [] Welchen Wert hat s6.instanceCounter
-    // EXPECT_EQ(s6.instanceCounter, );
+    EXPECT_EQ(s6.instanceCounter, 3);
 }
 
 
@@ -124,13 +132,13 @@ TEST_F(TemplateTestCast, swapValue) {
 
     auto v1 = 10;
     auto v2 = 20;
-    // myswap(v1, v2);
+    myswap(v1, v2);
 
     EXPECT_EQ(v2, 10);
 
     auto v3 = "Mike";
     auto v4 = "Sarah";
-    // myswap(v3, v4);
+    myswap(v3, v4);
 
     EXPECT_EQ(v3, "Sarah");
 }
