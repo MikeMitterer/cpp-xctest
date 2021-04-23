@@ -18,6 +18,11 @@ include_directories(
         _setup
 )
 
+# Evtl. könnte auch GLOB_RECURSE eine Variante sein!
+file(GLOB BASIC_TESTS basic/*.h basic/*.cpp)
+file(GLOB CLASS_TESTS basic/class/*.h basic/class/*.cpp basic/class/tdd)
+file(GLOB TEMPLATE_TESTS basic/templates/*.h basic/templates/*.cpp)
+
 add_executable(
         ${PROJECT_NAME}
 
@@ -29,22 +34,27 @@ add_executable(
         _setup/utils.h
         _setup/utils.cpp
 
-        basic/conditions_test.cpp
-        basic/const_test.cpp
-        basic/constexpr_test.cpp
-        basic/ctor_test.cpp
-        basic/loops_test.cpp
-        basic/rule_of_x_test.cpp
-        basic/smart_pointer_test.cpp
-        basic/string_test.cpp
-        basic/var_init.cpp
+        ${BASIC_TESTS}
+        ${CLASS_TESTS}
+        ${TEMPLATE_TESTS}
 
-        basic/templates/ToJson.h
-        basic/templates/ToJson.cpp
-        basic/templates/NameEvent.h
-        basic/templates/class_template.h
-        basic/templates/function_template.h
-        basic/templates/template_test.cpp
+#        basic/conditions_test.cpp
+#        basic/const_test.cpp
+#        basic/constexpr_test.cpp
+#        basic/loops_test.cpp
+#        basic/smart_pointer_test.cpp
+#        basic/string_test.cpp
+#        basic/var_init.cpp
+#
+#        basic/class/rule_of_x_test.cpp
+#        basic/class/ctor_test.cpp
+#
+#        basic/templates/ToJson.h
+#        basic/templates/ToJson.cpp
+#        basic/templates/NameEvent.h
+#        basic/templates/class_template.h
+#        basic/templates/function_template.h
+#        basic/templates/template_test.cpp
 
 )
 
