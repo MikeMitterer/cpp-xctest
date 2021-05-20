@@ -7,13 +7,20 @@
 
 #include "stdafx.h"
 
+#include "logger.h"
+#include "string_utils.h"
+
+#include <utility>
 #include <vector>
 
-#include "logger.h"
 
 enum class FunctionType {
-    DefaultCTOR, ParamCTOR, CopyCTOR, MoveCTOR,
+    DefaultCTOR, ParamCTOR, CopyCTOR, MoveCTOR, DelegateCTOR,
     AssignmentOperator, MoveAssignmentOperator, Destructor
+};
+
+enum class Delegate {
+    Yes, No
 };
 
 /**
@@ -31,8 +38,13 @@ private:
     // Default-Init ist zu bevorzugen
     std::shared_ptr<spdlog::logger> _logger { DefaultLogger::get(_class()) };
 
-    char* name = nullptr;
+    std::vector<std::string> hobbies;
 
+    char* firstname = nullptr;
+    std::string lastname { "" };
+
+    int8_t age{ -1 };
+    
 public:
     static std::vector<uint8_t> functionCalls;
 
@@ -51,7 +63,10 @@ public:
     RuleOf5();
 
     /// Explicit constructor (Single argument CTOR)
-    explicit RuleOf5(const char* arg);
+    explicit RuleOf5(const char* firstname);
+
+    /// Mit explicit wird die implizite Typumwandlung des Compilers unterbunden
+    explicit RuleOf5(const char* firstname, std::string lastname, int8_t age, std::vector<std::string> hobbies = {}, const Delegate& delegate = Delegate::No);
 
     /// Copy construktor
     RuleOf5(const RuleOf5& _other);
@@ -88,16 +103,36 @@ public:
     ///
     friend std::ostream& operator<<(std::ostream& os, const RuleOf5& rof);
 
-    inline const char* getName() const { return (name != nullptr ? name : "<null>"); }
+    inline const char* getName() const { return (firstname != nullptr ? firstname : "<null>"); }
 
+    std::string getHobbies(const char *const delimiter = ", ") {
+        return mm::string::Join(hobbies, delimiter);
+    }
+
+    int8_t getAge() { return age; }
+
+    std::string getFullName() {
+        return std::string(getName()) + " " + lastname;
+    }
+
+    [[nodiscard]]
     const std::string toString() const {
-        return std::string(name);
+        return std::string(firstname);
     }
 
     static uint8_t nrOfCalls();
     static uint8_t nrOfCalls(FunctionType forType);
 
     static void showCalls();
+
+private:
+    void saveCopyFirstName(const char* firstname) {
+        if(firstname != nullptr) {
+            auto size = strlen(firstname);
+            this->firstname = new char[size + 1];
+            strcpy(this->firstname, firstname);
+        }
+    }
 };
 
 #endif //XCTEST_RULE_OF_X_H

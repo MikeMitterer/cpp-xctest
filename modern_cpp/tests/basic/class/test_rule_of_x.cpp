@@ -31,9 +31,12 @@ protected:
 TEST_F(RuleOfXTestCase, test_default_ctor) {
     //auto logger = testSetup->getLogger();
     {
+        // Konstruktor
         auto ado = RuleOf5();
 
         ASSERT_STREQ(ado.getName(),"<null>");
+
+        // Destruktor - am Ende des Scopes
     }
 
     ASSERT_EQ(RuleOf5::nrOfCalls(), 2);
@@ -42,11 +45,25 @@ TEST_F(RuleOfXTestCase, test_default_ctor) {
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 1);
 }
 
-TEST_F(RuleOfXTestCase, test_ctor) {
+TEST_F(RuleOfXTestCase, test_user_defined_ctor) {
     {
         auto ado = RuleOf5{"Mike"};
 
         ASSERT_STREQ(ado.getName(),"Mike");
+    }
+    ASSERT_EQ(RuleOf5::nrOfCalls(), 2);
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::ParamCTOR), 1);
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 1);
+}
+
+TEST_F(RuleOfXTestCase, test_user_defined_ctor2) {
+    {
+        auto ado = RuleOf5{"Mike", "Mitterer", 99, { "Biken" }};
+
+        ASSERT_STREQ(ado.getName(),"Mike");
+        ASSERT_STREQ(ado.getHobbies().c_str(),"Biken");
     }
     ASSERT_EQ(RuleOf5::nrOfCalls(), 2);
 
@@ -62,20 +79,90 @@ TEST_F(RuleOfXTestCase, test_ctor) {
 //
 TEST_F(RuleOfXTestCase, test_copy_ctor) {
     {
-        // Param CTOR
+        // (1) Param CTOR
         auto rule1 = RuleOf5{"Mike"};
 
-        // Copy CTOR (Initialisierung!!!!)
+        // (2) (3) Copy CTOR (Initialisierung!!!!)
         auto rule2 = rule1;
 
         ASSERT_STREQ(rule1.getName(),"Mike");
         ASSERT_STREQ(rule2.getName(),"Mike");
     }
 
-    ASSERT_EQ(RuleOf5::nrOfCalls(), 4);
+    ASSERT_EQ(RuleOf5::nrOfCalls(), 5);
 
-    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::ParamCTOR), 1);
-    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::CopyCTOR), 1);
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::ParamCTOR), 1); // (1)
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::CopyCTOR), 1);  // (2) - auf der linken Seite!
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::DelegateCTOR), 1); // (3)
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 2);
+}
+
+// Klassischer Anwendungsfall für einen Copy-CTOR
+//  - neues Objekt wird basierend auf einem anderen object erzeugt
+//
+// Wie oben - allerdings hier mit dem zweiten, erweiterten Konstruktor!
+// Bei diesem Sample wird auch ein Delegation-CTOR verwendet.
+//
+//       auto rule2 = rule1;
+//
+TEST_F(RuleOfXTestCase, test_copy_ctor2) {
+    {
+        // (1) Param CTOR
+        auto rule1 = RuleOf5{"Mike", "Mitterer", 99, { "Snowboarden", "Biken"}};
+
+        // (2) (3) Copy CTOR (Initialisierung!!!!)
+        auto rule2 = rule1;
+
+        ASSERT_STREQ(rule1.getName(),"Mike");
+        ASSERT_STREQ(rule1.getFullName().c_str(),"Mike Mitterer");
+        ASSERT_EQ(rule1.getAge(), 99);
+        ASSERT_STREQ(rule1.getHobbies().c_str(),"Snowboarden, Biken");
+
+        ASSERT_STREQ(rule2.getName(),"Mike");
+        ASSERT_STREQ(rule2.getFullName().c_str(),"Mike Mitterer");
+        ASSERT_EQ(rule2.getAge(), 99);
+        ASSERT_STREQ(rule2.getHobbies().c_str(),"Snowboarden, Biken");
+    }
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(), 5);
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::ParamCTOR), 1); // (1)
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::CopyCTOR), 1);  // (2) - auf der linken Seite!
+
+    // (2) ruft in der Initializer-Sektion den User-Defined-CTOR auf
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::DelegateCTOR), 1); // (3)
+
+    // ACHTUNG! Obwohl 3x ein Konstruktor aufgerufen wird, wird nur 2x der Destruktor
+    // aufgerufen. Der Grund ist, dass bei (2) eine CTOR-Delegation gemacht wird und somit
+    // kein eigenes Object erstellt wird
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 2);
+}
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "performance-unnecessary-value-param"
+// Beim aufruf der Funktion verwendet der Compiler den Copy-CTOR
+void functionTakesObjectByValue(const RuleOf5 ruf) {
+    ruf.getName();
+}
+#pragma clang diagnostic pop
+
+// Übergabe eines objektes per value
+TEST_F(RuleOfXTestCase, test_copy_ctor_function_call) {
+    {
+        // (1) Param CTOR
+        auto mike { RuleOf5{ "Mike" } };
+
+        // (2) (3) Copy-CTOR
+        functionTakesObjectByValue(mike);
+    }
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(), 5);
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::ParamCTOR), 1);  // (1)
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::CopyCTOR), 1);   // (2)
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::DelegateCTOR), 1); // (3) Function-Call
 
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 2);
 }
@@ -96,8 +183,9 @@ RuleOf5 functionReturnsObjectByValue(bool choose = true) {
 
 // Copy-CTOR - rückgabe per value aus Funktion
 // Funktioniert hier aber nicht da die copy-Funktion wegoptimiert wird
-TEST_F(RuleOfXTestCase, test_copy_ctor2) {
+TEST_F(RuleOfXTestCase, test_copy_ctor_return_value) {
     {
+        // (1) (2)
         auto rule { functionReturnsObjectByValue() };
 
         ASSERT_STREQ(rule.getName(),"Gerda");
@@ -110,31 +198,24 @@ TEST_F(RuleOfXTestCase, test_copy_ctor2) {
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 1);
 }
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "performance-unnecessary-value-param"
-// Beim aufruf der Funktion verwendet der Compiler den Copy-CTOR
-void functionTakesObjectByValue(const RuleOf5 ruf) {
-    ruf.getName();
-}
-#pragma clang diagnostic pop
-
-// Übergabe eines objektes per value
-TEST_F(RuleOfXTestCase, test_copy_ctor3) {
+// Copy-CTOR - Das eigene Object wird übergeben
+TEST_F(RuleOfXTestCase, test_copy_ctor_own_object) {
     {
-        // Param CTOR
-        auto mike { RuleOf5{ "Mike" } };
+        auto rule1 = RuleOf5("Sarah");
+        auto rule2 = RuleOf5(rule1);
 
-        // Copy-CTOR
-        functionTakesObjectByValue(mike);
+        ASSERT_STREQ(rule2.getName(),"Sarah");
     }
 
-    ASSERT_EQ(RuleOf5::nrOfCalls(), 4);
+    ASSERT_EQ(RuleOf5::nrOfCalls(), 5);
 
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::ParamCTOR), 1);
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::CopyCTOR), 1);
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::DelegateCTOR), 1);
 
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 2);
 }
+
 
 TEST_F(RuleOfXTestCase, test_move_ctor) {
     {

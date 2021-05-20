@@ -58,6 +58,9 @@ find_package(fmt)
 set(MODULE_INCLUDES
         ${PROJECT_SOURCE_DIR}/include
         ${PROJECT_SOURCE_DIR}/src
+
+        ${PROJECT_SOURCE_DIR}/src/class
+        ${PROJECT_SOURCE_DIR}/src/utils
         )
 
 set(MODULE_main ${PROJECT_SOURCE_DIR}/src/modern.cpp)
@@ -66,7 +69,8 @@ set(MODULE_SOURCE
         ${PROJECT_SOURCE_DIR}/src/config.h
         ${PROJECT_SOURCE_DIR}/src/logger.h
 
-        ${PROJECT_SOURCE_DIR}/src/rule_of_x.cpp
+        ${PROJECT_SOURCE_DIR}/src/class/rule_of_x.cpp
+        ${PROJECT_SOURCE_DIR}/src/utils/string_utils.h
 
         # stdafx
         ${PROJECT_SOURCE_DIR}/src/stdafx.cpp

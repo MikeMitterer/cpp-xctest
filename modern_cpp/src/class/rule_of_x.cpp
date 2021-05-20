@@ -1,5 +1,3 @@
-#include <utility>
-
 //
 // Created by Mike Mitterer on 11.11.17.
 //
@@ -7,7 +5,7 @@
 #include "stdafx.h"
 #include "rule_of_x.h"
 
-std::vector<uint8_t> RuleOf5::functionCalls { std::vector<uint8_t>(7,0) }; // NOLINT(cert-err58-cpp)
+std::vector<uint8_t> RuleOf5::functionCalls { std::vector<uint8_t>(20,0) }; // NOLINT(cert-err58-cpp)
 
 /// Default constructor
 ///     auto ado = RuleOf5();
@@ -18,20 +16,38 @@ RuleOf5::RuleOf5() {
     _logger->debug("[{}] Default-Konstruktor ({})",__FILENAME__,getName());
 }
 
-/// Explicit constructor
+/// Explicit constructor oder User-Defined-CTOR
 ///     auto ado = RuleOf5("Mike");
-RuleOf5::RuleOf5(const char* arg) {
-
-    if(arg != nullptr) {
-        auto size = strlen(arg);
-        name = new char[size+1];
-        strcpy(name, arg);
-    }
+RuleOf5::RuleOf5(const char* firstname) {
+    saveCopyFirstName(firstname);
 
     functionCalls[static_cast<int>(FunctionType::ParamCTOR)]++;
 
-    _logger->debug("[{}] Param-Konstruktor ({})",__FILENAME__, getName());
+    _logger->debug("[{}] 1-Param-Konstruktor ( ({})",__FILENAME__, getName());
 }
+
+/// User-Defined-Constructor
+///
+/// Der letzte Parameter (delegate) gibt an ob der CTOR als Delegate-CTOR aufgerufen wurde
+RuleOf5::RuleOf5(const char* firstname, std::string _lastname, int8_t _age, std::vector<std::string> _hobbies, const Delegate& delegate)
+: hobbies{ std::move(_hobbies) }, lastname { std::move(_lastname) }, age{ _age } {
+
+    saveCopyFirstName(firstname);
+
+    if(delegate == Delegate::No) {
+        functionCalls[static_cast<int>(FunctionType::ParamCTOR)]++;
+
+        _logger->debug("[{}] 4-Param-Konstruktor ({},{},{},{{ {} }})",
+                       __FILENAME__,
+                       getName(),
+                       this->lastname,
+                       this->age,
+                       getHobbies()
+        );
+    }
+
+}
+
 
 /// Copy construktor
 ///     auto ado1 = AllDefaultOperators("Mike");
@@ -44,17 +60,28 @@ RuleOf5::RuleOf5(const char* arg) {
 ///     4. When the compiler generates a temporary object.
 ///
 /// Muss nicht so sein - der compiler kann bestimmte calls optimieren
-RuleOf5::RuleOf5(const RuleOf5& _other) {
-
-    if(_other.name != nullptr) {
-        auto size = strlen(_other.name);
-        name = new char[size+1];
-        strcpy(name, _other.name);
-    }
+///
+/// Um Code-Duplication zu vermeiden wird hier der User-Defined-CTOR aufgerufen
+RuleOf5::RuleOf5(const RuleOf5& _other)
+: RuleOf5(_other.firstname, _other.lastname, _other.age, _other.hobbies, Delegate::Yes) {
 
     functionCalls[static_cast<int>(FunctionType::CopyCTOR)]++;
+    _logger->debug("[{}] Copy-Konstruktor ({},{},{},{{ {} }})",
+                   __FILENAME__,
+                   getName(),
+                   this->lastname,
+                   this->age,
+                   getHobbies()
+    );
 
-    _logger->debug("[{}] Copy-Konstruktor ({})",__FILENAME__, getName());
+    functionCalls[static_cast<int>(FunctionType::DelegateCTOR)]++;
+    _logger->debug("[{}]     Delegation-Konstruktor ({},{},{},{{ {} }})",
+                   __FILENAME__,
+                   getName(),
+                   this->lastname,
+                   this->age,
+                   getHobbies()
+    );
 }
 
 /// Move constructor
@@ -72,10 +99,10 @@ RuleOf5::RuleOf5(const RuleOf5& _other) {
 ///     - when throwing a function-local class object and the compiler doesn't eliminate the copy/move entirely
 RuleOf5::RuleOf5(RuleOf5&& _other) noexcept {
 
-    name = _other.name;
+    firstname = _other.firstname;
 
     // Reset other
-    _other.name = nullptr;
+    _other.firstname = nullptr;
 
     functionCalls[static_cast<int>(FunctionType::MoveCTOR)]++;
 
@@ -89,12 +116,12 @@ RuleOf5& RuleOf5::operator=(const RuleOf5& _other) noexcept {
     functionCalls[static_cast<int>(FunctionType::AssignmentOperator)]++;
 
     if(this != &_other) {
-        delete[] name;
-        name = nullptr;
-        if(_other.name != nullptr) {
-            auto size = strlen(_other.name);
-            name = new char[size+1];
-            strcpy(name, _other.name);
+        delete[] firstname;
+        firstname = nullptr;
+        if(_other.firstname != nullptr) {
+            auto size = strlen(_other.firstname);
+            firstname = new char[size + 1];
+            strcpy(firstname, _other.firstname);
         }
     }
 
@@ -110,11 +137,11 @@ RuleOf5& RuleOf5::operator=(RuleOf5&& _other) noexcept {
     functionCalls[static_cast<int>(FunctionType::MoveAssignmentOperator)]++;
 
     if(this != &_other) {
-        delete[] name;
-        name = nullptr;
+        delete[] firstname;
+        firstname = nullptr;
 
-        name = _other.name;
-        _other.name = nullptr;
+        firstname = _other.firstname;
+        _other.firstname = nullptr;
     }
 
     _logger->debug("[{}] copy assignment operator ({})",__FILENAME__, getName());
@@ -125,7 +152,7 @@ RuleOf5& RuleOf5::operator=(RuleOf5&& _other) noexcept {
 /// Destruktor
 RuleOf5::~RuleOf5() {
 
-    delete[] name;
+    delete[] firstname;
 
     functionCalls[static_cast<int>(FunctionType::Destructor)]++;
 
@@ -163,3 +190,4 @@ std::ostream& operator<<(std::ostream& os, const RuleOf5& rof) {
     os << rof.getName();
     return os;
 }
+
