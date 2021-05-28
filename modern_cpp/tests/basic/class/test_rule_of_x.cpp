@@ -12,6 +12,8 @@
 
 #include "setup.h"
 
+#include <vector>
+
 //Resource createObjectTest(bool condition);
 
 class RuleOfXTestCase : public ::testing::Test {
@@ -217,6 +219,36 @@ TEST_F(RuleOfXTestCase, test_copy_ctor_own_object) {
 }
 
 
+TEST_F(RuleOfXTestCase, test_assignement_operator) {
+    {
+        // (1)
+        auto ado1 = RuleOf5{"Mike"};
+        auto ado2 = RuleOf5{"Gerda"};
+
+        // copy assignment operator
+        ado1 = ado2; // (2)
+
+        ASSERT_STREQ(ado1.getName(),"Gerda");
+        ASSERT_STREQ(ado2.getName(),"Gerda");
+    }
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(), 8);
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::ParamCTOR), 2); // (1)
+
+    // (2.0) - Object wird der "operator="-Funktion by Value übergeben
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::CopyCTOR), 1);
+
+    // (2) - CopyCTOR rufe den Delegation-CTOR auf
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::DelegateCTOR), 1);
+
+    // (2) - Tatsächlicher Aufruf der assignment-Funktion
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::AssignmentOperator), 1);
+
+    // 2x sollte klar sein, der dritte Destruktor kommt vom (2.0)
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 3);
+}
+
 TEST_F(RuleOfXTestCase, test_move_ctor) {
     {
         // Param-CTOR
@@ -236,22 +268,37 @@ TEST_F(RuleOfXTestCase, test_move_ctor) {
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 2);
 }
 
-TEST_F(RuleOfXTestCase, test_assignement_operator) {
+TEST_F(RuleOfXTestCase, test_move_ctor_push_into_vector) {
     {
-        auto ado1 = RuleOf5{"Mike"};
-        auto ado2 = RuleOf5{"Gerda"};
+        std::vector<RuleOf5> vector;
 
-        // copy assignment operator
-        ado1 = ado2;
+        vector.emplace_back(RuleOf5{ "Mike1" });
+        vector.emplace_back(RuleOf5{ "Sarah" });
 
-        ASSERT_STREQ(ado1.getName(),"Gerda");
-        ASSERT_STREQ(ado2.getName(),"Gerda");
+        ASSERT_EQ(vector.size(),2);
     }
 
-    ASSERT_EQ(RuleOf5::nrOfCalls(), 5);
+    ASSERT_EQ(RuleOf5::nrOfCalls(), 10); // !!!!!! 10!!!!!
 
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::ParamCTOR), 2);
-    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::AssignmentOperator), 1);
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::MoveCTOR), 3);
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 5);
+}
+
+TEST_F(RuleOfXTestCase, test_move_ctor_function_param) {
+    auto testFunction = [] (RuleOf5 rof) -> RuleOf5 {
+        return rof;
+    };
+
+    {
+        const RuleOf5 rule = testFunction(RuleOf5{ "Mike" });
+    }
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(), 4);
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::ParamCTOR), 1);
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::MoveCTOR), 1); // Bei der Übergabe des Params "by value"
 
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 2);
 }
@@ -261,20 +308,31 @@ TEST_F(RuleOfXTestCase, test_move_assignement) {
         auto ado1 = RuleOf5{};
         auto ado2 = RuleOf5{"Mike"};
 
-        ado1 = std::move(ado2);
+        ado1 = ado2;
 
         ASSERT_STREQ(ado1.getName(),"Mike");
     }
 
-    ASSERT_EQ(RuleOf5::nrOfCalls(), 5);
+    ASSERT_EQ(RuleOf5::nrOfCalls(), 8);
 
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::DefaultCTOR), 1);
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::ParamCTOR), 1);
-    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::MoveAssignmentOperator), 1);
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::CopyCTOR), 1);
 
-    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 2);
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::DelegateCTOR), 1);
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::AssignmentOperator), 1);
+
+    // ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::MoveAssignmentOperator), 1);
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 3);
 }
 
+// - Test weiterer Spezialfunktionen ---------------------------------------------------------------
+
+/**
+ * RuleOf5-Object wird einem String zugewiesen!
+ */
 TEST_F(RuleOfXTestCase, operator_conversion) {
     {
         auto ruf = RuleOf5{"Mike"};
@@ -290,6 +348,9 @@ TEST_F(RuleOfXTestCase, operator_conversion) {
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 1);
 }
 
+/**
+ * RuleOf5-Object wird in einem StringBuffer ausgegeben
+ */
 TEST_F(RuleOfXTestCase, ofstream_test) {
     {
         std::stringstream buffer;

@@ -35,7 +35,8 @@ class RuleOf5 final {
 
 private:
 
-    // Default-Init ist zu bevorzugen
+    // Default-Init ist zu bevorzugen - auch in Hinblick auf das
+    // Swap-Ideom, Move-Constructor + Move-Assignment-Operator
     std::shared_ptr<spdlog::logger> _logger { DefaultLogger::get(_class()) };
 
     std::vector<std::string> hobbies;
@@ -71,14 +72,16 @@ public:
     /// Copy construktor
     RuleOf5(const RuleOf5& _other);
 
+    /// Copy assignment operator
+    RuleOf5& operator=(RuleOf5 _other) noexcept;
+
     /// Move constructor
     RuleOf5(RuleOf5&& _other) noexcept;
 
-    /// Copy assignment operator
-    RuleOf5& operator=(const RuleOf5& _other) noexcept;
-
     /// Move assignment operator
     RuleOf5& operator=(RuleOf5&& _other) noexcept;
+
+    friend void swap(RuleOf5& lhs, RuleOf5& rhs);
 
     /// Destruktor
     ///
@@ -90,7 +93,11 @@ public:
 
     /// Das RuleOf5 object wird in einen String konvertiert
     /// Hier könnte auch "explicit" verwendet werden
-    operator std::string();
+    /// Usage:
+    ///       auto ruf = RuleOf5{"Mike"};
+    ///       std::string name = ruf;
+    ///
+    operator std::string() const;
 
     /// Ist als globale funktion zu implementieren
     /// 

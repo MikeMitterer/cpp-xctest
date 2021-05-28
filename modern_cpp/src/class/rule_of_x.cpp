@@ -10,7 +10,6 @@ std::vector<uint8_t> RuleOf5::functionCalls { std::vector<uint8_t>(20,0) }; // N
 /// Default constructor
 ///     auto ado = RuleOf5();
 RuleOf5::RuleOf5() {
-
     functionCalls[static_cast<int>(FunctionType::DefaultCTOR)]++;
 
     _logger->debug("[{}] Default-Konstruktor ({})",__FILENAME__,getName());
@@ -84,6 +83,29 @@ RuleOf5::RuleOf5(const RuleOf5& _other)
     );
 }
 
+// copy assignment operator
+RuleOf5& RuleOf5::operator=(RuleOf5 _other) noexcept {
+    functionCalls[static_cast<int>(FunctionType::AssignmentOperator)]++;
+
+    //    if(this != &_other) {
+    //        delete[] firstname;
+    //        firstname = nullptr;
+    //        if(_other.firstname != nullptr) {
+    //            auto size = strlen(_other.firstname);
+    //            firstname = new char[size + 1];
+    //            strcpy(firstname, _other.firstname);
+    //        }
+    //    }
+
+    // Use copy and swap idiom to implement assignment.
+    // _other wurde bereits kopiert!!! (Übergabeparameter = by value)
+    swap(*this, _other);
+
+    _logger->debug("[{}] copy assignment operator ({})",__FILENAME__, getName());
+
+    return *this;
+}
+
 /// Move constructor
 ///
 /// When implementing move special member functions, adhere to the following guideline:
@@ -98,37 +120,17 @@ RuleOf5::RuleOf5(const RuleOf5& _other)
 ///     - when returning a function-local class object by value and the compiler doesn't eliminate the copy/move entirely
 ///     - when throwing a function-local class object and the compiler doesn't eliminate the copy/move entirely
 RuleOf5::RuleOf5(RuleOf5&& _other) noexcept {
-
-    firstname = _other.firstname;
-
-    // Reset other
-    _other.firstname = nullptr;
+    //    firstname = _other.firstname;
+    //
+    //    // Reset other
+    //    _other.firstname = nullptr;
 
     functionCalls[static_cast<int>(FunctionType::MoveCTOR)]++;
 
+    // Swap ersetzt auch hier den oben auskommentierten Code-Block
+    swap(*this, _other);
+
     _logger->debug("[{}] Move-Konstruktor ({})",__FILENAME__, getName());
-}
-
-
-// copy assignment operator
-RuleOf5& RuleOf5::operator=(const RuleOf5& _other) noexcept {
-
-    functionCalls[static_cast<int>(FunctionType::AssignmentOperator)]++;
-
-    if(this != &_other) {
-        delete[] firstname;
-        firstname = nullptr;
-        if(_other.firstname != nullptr) {
-            auto size = strlen(_other.firstname);
-            firstname = new char[size + 1];
-            strcpy(firstname, _other.firstname);
-        }
-    }
-
-
-    _logger->debug("[{}] copy assignment operator ({})",__FILENAME__, getName());
-
-    return *this;
 }
 
 // Move assignment operator
@@ -136,15 +138,18 @@ RuleOf5& RuleOf5::operator=(RuleOf5&& _other) noexcept {
 
     functionCalls[static_cast<int>(FunctionType::MoveAssignmentOperator)]++;
 
-    if(this != &_other) {
-        delete[] firstname;
-        firstname = nullptr;
+    //    if(this != &_other) {
+    //        delete[] firstname;
+    //        firstname = nullptr;
+    //
+    //        firstname = _other.firstname;
+    //        _other.firstname = nullptr;
+    //    }
 
-        firstname = _other.firstname;
-        _other.firstname = nullptr;
-    }
+    // Auskommentierter Code-Block wird durch Swap ersetzt
+    swap(*this, _other);
 
-    _logger->debug("[{}] copy assignment operator ({})",__FILENAME__, getName());
+    _logger->debug("[{}] move assignment operator ({})",__FILENAME__, getName());
 
     return *this;
 }
@@ -152,12 +157,16 @@ RuleOf5& RuleOf5::operator=(RuleOf5&& _other) noexcept {
 /// Destruktor
 RuleOf5::~RuleOf5() {
 
-    delete[] firstname;
-
-    functionCalls[static_cast<int>(FunctionType::Destructor)]++;
+   functionCalls[static_cast<int>(FunctionType::Destructor)]++;
 
     _logger->debug("[{}] Destruktor",__FILENAME__);
 
+    if(firstname == nullptr) {
+        _logger->debug("    firstname is a nullptr");
+    }
+
+    // firstname könnte auch ein nullptr sein - stellt aber kein Problem dar
+    delete[] firstname;
 }
 
 uint8_t RuleOf5::nrOfCalls() {
@@ -182,12 +191,24 @@ uint8_t RuleOf5::nrOfCalls(const FunctionType forType){
     return functionCalls[static_cast<int>(forType)];
 }
 
-RuleOf5::operator std::string() {
+RuleOf5::operator std::string() const {
     return std::string(getName());
 }
 
 std::ostream& operator<<(std::ostream& os, const RuleOf5& rof) {
     os << rof.getName();
     return os;
+}
+
+void swap(RuleOf5& lhs, RuleOf5& rhs) {
+    using std::swap;
+
+    // Logger!!!!????
+    // std::swap(lhs._logger, rhs._logger);
+
+    std::swap(lhs.hobbies, rhs.hobbies);
+    std::swap(lhs.firstname, rhs.firstname);
+    std::swap(lhs.lastname, rhs.lastname);
+    std::swap(lhs.age, rhs.age);
 }
 
