@@ -6,13 +6,15 @@
 #include "rule_of_x.h"
 
 std::vector<uint8_t> RuleOf5::functionCalls { std::vector<uint8_t>(20,0) }; // NOLINT(cert-err58-cpp)
+uint8_t RuleOf5::idCounter = 0;
 
 /// Default constructor
 ///     auto ado = RuleOf5();
 RuleOf5::RuleOf5() {
     functionCalls[static_cast<int>(FunctionType::DefaultCTOR)]++;
+    ctorID = ++idCounter;
 
-    _logger->debug("[{}] Default-Konstruktor ({})",__FILENAME__,getName());
+    _logger->debug("[{}] Default-Konstruktor ({}), ID: {}",__FILENAME__,getName(), ctorID);
 }
 
 /// Explicit constructor oder User-Defined-CTOR
@@ -21,11 +23,15 @@ RuleOf5::RuleOf5(const char* firstname) {
     saveCopyFirstName(firstname);
 
     functionCalls[static_cast<int>(FunctionType::ParamCTOR)]++;
+    ctorID = ++idCounter;
 
-    _logger->debug("[{}] 1-Param-Konstruktor ( ({})",__FILENAME__, getName());
+    _logger->debug("[{}] 1-Param-Konstruktor ( ({}), ID: {}",__FILENAME__, getName(), ctorID);
 }
 
 /// User-Defined-Constructor
+///
+/// Dieser CTOR wird auch als Delegation-CTOR (wird von einem anderen CTOR aufgerufen)
+/// verwendet.
 ///
 /// Der letzte Parameter (delegate) gibt an ob der CTOR als Delegate-CTOR aufgerufen wurde
 RuleOf5::RuleOf5(const char* firstname, std::string _lastname, int8_t _age, std::vector<std::string> _hobbies, const Delegate& delegate)
@@ -35,16 +41,17 @@ RuleOf5::RuleOf5(const char* firstname, std::string _lastname, int8_t _age, std:
 
     if(delegate == Delegate::No) {
         functionCalls[static_cast<int>(FunctionType::ParamCTOR)]++;
+        ctorID = ++idCounter;
 
-        _logger->debug("[{}] 4-Param-Konstruktor ({},{},{},{{ {} }})",
+        _logger->debug("[{}] 4-Param-Konstruktor ({},{},{},{{ {} }}), ID: {}",
                        __FILENAME__,
                        getName(),
                        this->lastname,
                        this->age,
-                       getHobbies()
+                       getHobbies(),
+                       ctorID
         );
     }
-
 }
 
 
@@ -64,23 +71,28 @@ RuleOf5::RuleOf5(const char* firstname, std::string _lastname, int8_t _age, std:
 RuleOf5::RuleOf5(const RuleOf5& _other)
 : RuleOf5(_other.firstname, _other.lastname, _other.age, _other.hobbies, Delegate::Yes) {
 
+    ctorID = ++idCounter;
+
     functionCalls[static_cast<int>(FunctionType::CopyCTOR)]++;
-    _logger->debug("[{}] Copy-Konstruktor ({},{},{},{{ {} }})",
+    _logger->debug("[{}] Copy-Konstruktor ({},{},{},{{ {} }}), ID: {}",
                    __FILENAME__,
                    getName(),
                    this->lastname,
                    this->age,
-                   getHobbies()
+                   getHobbies(),
+                   ctorID
     );
 
     functionCalls[static_cast<int>(FunctionType::DelegateCTOR)]++;
-    _logger->debug("[{}]     Delegation-Konstruktor ({},{},{},{{ {} }})",
+    _logger->debug("[{}]     Delegation-Konstruktor ({},{},{},{{ {} }}), ID: {}",
                    __FILENAME__,
                    getName(),
                    this->lastname,
                    this->age,
-                   getHobbies()
+                   getHobbies(),
+                   ctorID
     );
+
 }
 
 // copy assignment operator
@@ -97,11 +109,14 @@ RuleOf5& RuleOf5::operator=(RuleOf5 _other) noexcept {
     //        }
     //    }
 
+    _logger->debug("[{}] copy assignment operator",__FILENAME__);
+    _logger->debug("[{}]     Vor swap: ({}), ID: {}",__FILENAME__, getName(), ctorID);
+
     // Use copy and swap idiom to implement assignment.
     // _other wurde bereits kopiert!!! (Übergabeparameter = by value)
     swap(*this, _other);
 
-    _logger->debug("[{}] copy assignment operator ({})",__FILENAME__, getName());
+    _logger->debug("[{}]     Nach swap: ({}), ID: {}",__FILENAME__, getName(), ctorID);
 
     return *this;
 }
@@ -126,11 +141,15 @@ RuleOf5::RuleOf5(RuleOf5&& _other) noexcept {
     //    _other.firstname = nullptr;
 
     functionCalls[static_cast<int>(FunctionType::MoveCTOR)]++;
+    ctorID = ++idCounter;
+
+    _logger->debug("[{}] Move-Konstruktor",__FILENAME__);
+    _logger->debug("[{}]    Vor swap: ({}), ID: {}",__FILENAME__,getName(), ctorID);
 
     // Swap ersetzt auch hier den oben auskommentierten Code-Block
     swap(*this, _other);
-
-    _logger->debug("[{}] Move-Konstruktor ({})",__FILENAME__, getName());
+    
+    _logger->debug("[{}]    Nach swap: ({}), ID: {}",__FILENAME__,getName(), ctorID);
 }
 
 // Move assignment operator
@@ -146,10 +165,13 @@ RuleOf5& RuleOf5::operator=(RuleOf5&& _other) noexcept {
     //        _other.firstname = nullptr;
     //    }
 
+    _logger->debug("[{}] move assignment operator",__FILENAME__);
+    _logger->debug("    Vor swap: ({}), ID: {}",getName(), ctorID);
+
     // Auskommentierter Code-Block wird durch Swap ersetzt
     swap(*this, _other);
 
-    _logger->debug("[{}] move assignment operator ({})",__FILENAME__, getName());
+    _logger->debug("    Nach swap: ({}), ID: {}",getName(), ctorID);
 
     return *this;
 }
@@ -159,10 +181,12 @@ RuleOf5::~RuleOf5() {
 
    functionCalls[static_cast<int>(FunctionType::Destructor)]++;
 
-    _logger->debug("[{}] Destruktor",__FILENAME__);
 
-    if(firstname == nullptr) {
-        _logger->debug("    firstname is a nullptr");
+    if(firstname != nullptr) {
+        _logger->debug("[{}] Destruktor for {}, ID: {}",__FILENAME__, firstname, ctorID);
+    } else {
+        _logger->debug("[{}] Destruktor ID: {}",__FILENAME__, ctorID);
+        _logger->debug("[{}]    firstname is a nullptr (is OK for default CTOR)", __FILENAME__);
     }
 
     // firstname könnte auch ein nullptr sein - stellt aber kein Problem dar
@@ -210,5 +234,7 @@ void swap(RuleOf5& lhs, RuleOf5& rhs) {
     std::swap(lhs.firstname, rhs.firstname);
     std::swap(lhs.lastname, rhs.lastname);
     std::swap(lhs.age, rhs.age);
+
+    // std::swap(lhs.ctorID, rhs.ctorID);
 }
 

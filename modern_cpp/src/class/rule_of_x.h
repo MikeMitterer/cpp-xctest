@@ -15,8 +15,11 @@
 
 
 enum class FunctionType {
-    DefaultCTOR, ParamCTOR, CopyCTOR, MoveCTOR, DelegateCTOR,
-    AssignmentOperator, MoveAssignmentOperator, Destructor
+    DefaultCTOR, ParamCTOR, CopyCTOR,
+    DelegateCTOR,
+    MoveCTOR,
+    AssignmentOperator, MoveAssignmentOperator,
+    Destructor
 };
 
 enum class Delegate {
@@ -32,7 +35,6 @@ enum class Delegate {
  */
 class RuleOf5 final {
     static const std::string _class() { return "RuleOf5"; }
-
 private:
 
     // Default-Init ist zu bevorzugen - auch in Hinblick auf das
@@ -47,6 +49,12 @@ private:
     int8_t age{ -1 };
     
 public:
+    /** Merkt sich die jeweilige CTOR-ID (idCounter) */
+    uint8_t ctorID;
+
+    // Wird beim Aufruf eines CTORs um eins erhöht!
+    // Friend-Function ist hier zu kompliziert...
+    static uint8_t idCounter;
     static std::vector<uint8_t> functionCalls;
 
 public:
@@ -136,6 +144,8 @@ private:
     void saveCopyFirstName(const char* firstname) {
         if(firstname != nullptr) {
             auto size = strlen(firstname);
+
+            // Size ist die länge + 1 für die \0-Terminierung des Strings
             this->firstname = new char[size + 1];
             strcpy(this->firstname, firstname);
         }

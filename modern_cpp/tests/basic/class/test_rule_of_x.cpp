@@ -25,6 +25,7 @@ protected:
         testSetup = new TestSetup();
 
         RuleOf5::functionCalls.assign(RuleOf5::functionCalls.size(),0);
+        RuleOf5::idCounter = 0;
     }
 
     void TearDown() override { delete testSetup; testSetup = nullptr; }
@@ -183,7 +184,7 @@ RuleOf5 functionReturnsObjectByValue(bool choose = true) {
     return RuleOf5{ "Mike" };
 }
 
-// Copy-CTOR - rückgabe per value aus Funktion
+// Copy-CTOR - Rückgabe per value aus Funktion
 // Funktioniert hier aber nicht da die copy-Funktion wegoptimiert wird
 TEST_F(RuleOfXTestCase, test_copy_ctor_return_value) {
     {
@@ -219,7 +220,7 @@ TEST_F(RuleOfXTestCase, test_copy_ctor_own_object) {
 }
 
 
-TEST_F(RuleOfXTestCase, test_assignement_operator) {
+TEST_F(RuleOfXTestCase, test_copy_assignement_operator) {
     {
         // (1)
         auto ado1 = RuleOf5{"Mike"};
@@ -237,12 +238,16 @@ TEST_F(RuleOfXTestCase, test_assignement_operator) {
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::ParamCTOR), 2); // (1)
 
     // (2.0) - Object wird der "operator="-Funktion by Value übergeben
+    //     - RuleOf5& RuleOf5::operator=(RuleOf5 _other) noexcept
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::CopyCTOR), 1);
 
-    // (2) - CopyCTOR rufe den Delegation-CTOR auf
+    // (2) - CopyCTOR rufe den Delegation-CTOR auf (für das Objekt auf der rechten Seite!!!)
+    //     - RuleOf5::RuleOf5(const RuleOf5& _other)
+    //          : RuleOf5(_other.firstname, ...) {
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::DelegateCTOR), 1);
 
     // (2) - Tatsächlicher Aufruf der assignment-Funktion
+    //     - ...swap(*this, _other);
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::AssignmentOperator), 1);
 
     // 2x sollte klar sein, der dritte Destruktor kommt vom (2.0)
@@ -253,9 +258,30 @@ TEST_F(RuleOfXTestCase, test_move_ctor) {
     {
         // Param-CTOR
         RuleOf5 rof1{ "Donald" };
+        const RuleOf5& rof3 = rof1;
 
         // Move-CTOR
         auto rof2 = std::move(rof1);
+
+        ASSERT_STREQ(rof1.getName(),"<null>");
+        ASSERT_STREQ(rof2.getName(),"Donald");
+
+        // Referenz auf auf "rof1"
+        ASSERT_STREQ(rof3.getName(),"<null>");
+    }
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(), 4);
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::ParamCTOR), 1);
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::MoveCTOR), 1);
+
+    ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 2);
+}
+
+TEST_F(RuleOfXTestCase, test_move_ctor_temp_obj) {
+    {
+        // Move-CTOR
+        auto rof2 = std::move(RuleOf5{ "Donald" });
 
         ASSERT_STREQ(rof2.getName(),"Donald");
     }
