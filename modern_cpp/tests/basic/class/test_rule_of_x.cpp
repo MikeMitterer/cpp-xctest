@@ -11,6 +11,7 @@
 #include "rule_of_x.h"
 
 #include "setup.h"
+#include "tdd/ResourceManager.h"
 
 #include <vector>
 
@@ -352,6 +353,77 @@ TEST_F(RuleOfXTestCase, test_move_assignement) {
     // ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::MoveAssignmentOperator), 1);
 
     ASSERT_EQ(RuleOf5::nrOfCalls(FunctionType::Destructor), 3);
+}
+
+TEST_F(RuleOfXTestCase, test_copy_not_move) {
+    ResourceCopyNotMove cnm1 = ResourceCopyNotMove{ "cnm1"};
+    ResourceCopyNotMove cnm2 = ResourceCopyNotMove{ "cnm2"};
+    cnm1 = cnm2;
+
+    EXPECT_EQ(cnm1.name, "cnm2");
+    EXPECT_EQ(cnm2.name, "cnm2");
+
+    // cnm1 = std::move(cnm2); // not working since move is deleted
+}
+
+TEST_F(RuleOfXTestCase, test_move_not_copy) {
+    ResourceMoveNotCopy mnc1 = ResourceMoveNotCopy{ "mnc1"};
+    ResourceMoveNotCopy mnc2 = ResourceMoveNotCopy{ "mnc2"};
+    mnc1 = std::move(mnc2);
+
+    EXPECT_EQ(mnc1.name, "mnc2");
+    EXPECT_EQ(mnc2.name, "");
+
+    //mnc2 = mnc1; // not working since copy is deleted
+}
+
+TEST_F(RuleOfXTestCase, test_deleted_assignment_operators) {
+    ResourceDeletedAssignmentOperators res1 = ResourceDeletedAssignmentOperators{"res1"};
+
+    ResourceDeletedAssignmentOperators res2 = ResourceDeletedAssignmentOperators(res1);
+    // res2 = res1; // not possible since copy assignment operator is deleted
+
+    ResourceDeletedAssignmentOperators res3 = std::move(res1);
+    // res3 = std::move(res1); // not possible since move assignment operator is deleted
+
+    EXPECT_EQ(res2.name, "res1");
+    EXPECT_EQ(res3.name, "res1");
+}
+
+TEST_F(RuleOfXTestCase, test_inherited_destructor) {
+    {
+        // shared_ptr does not lead to the same problem as with unique_ptr or standard ptr
+        // if destructor is not virtual
+        std::shared_ptr<ChildResource> child = std::make_shared<ChildResource>();
+
+        // works also without virtual destructor
+        // auto child = std::make_unique<ChildResource>();
+
+        // does not work without virtual destructor
+        // std::unique_ptr<ParentResource> child = std::make_unique<ChildResource>();
+
+        EXPECT_STREQ(child->getMyName().c_str(), "Sarah");
+    }
+    uint8_t numDestructorCalls = ParentResource::destructorCallsCounter;
+    std::cout << "Number of destructor calls: " << unsigned(numDestructorCalls) << std::endl;
+
+    EXPECT_EQ(numDestructorCalls, 2); // Destructor of child class also destroys parent
+    // without virtual destructor in parent class only the child object would be deleted
+}
+
+TEST_F(RuleOfXTestCase, test_deleted_overload) {
+    ParentResource parent = ParentResource();
+
+    double magicNumber = 42.42;
+    int anyNumber = 123;
+
+    double processedMagicNumber = parent.processDoubleOnly(magicNumber);
+
+    // the statement below works if overloaded template function
+    // processDoubleOnly is not deleted -> promotion from int to double
+    // parent.processDoubleOnly(anyNumber);
+
+    EXPECT_EQ(processedMagicNumber, magicNumber + 2.0);
 }
 
 // - Test weiterer Spezialfunktionen ---------------------------------------------------------------

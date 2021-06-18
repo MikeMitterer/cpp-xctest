@@ -26,6 +26,7 @@ enum class Delegate {
     Yes, No
 };
 
+
 /**
  * Alle Operatoren können mit = delete gelöscht, oder mit = default in der default-Variante
  * erzeugt werden

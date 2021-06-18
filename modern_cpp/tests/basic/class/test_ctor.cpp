@@ -8,6 +8,7 @@
 
 #include "setup.h"
 #include "tdd/Name.h"
+#include "tdd/ResourceManager.h"
 
 #include <gtest/gtest.h>
 #include <spdlog/spdlog.h>
@@ -47,6 +48,14 @@ TEST_F(CTORTestCase, cpy_ctor) {
     Name anotherName(mike);
 
     EXPECT_EQ(anotherName.firstname,mike.firstname);
+}
+
+
+TEST_F(CTORTestCase, test_default_default_ctor) {
+    copy_assign_value_defaulted<Defaulted<std::string>>();  // works
+    // copy_assign_value_defaulted<Optional<int>>();  // error: default initialization of int without user-provided default CTOR
+
+    EXPECT_TRUE(true);
 }
 
 /*

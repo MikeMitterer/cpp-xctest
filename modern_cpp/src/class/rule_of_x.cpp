@@ -55,7 +55,7 @@ RuleOf5::RuleOf5(const char* firstname, std::string _lastname, int8_t _age, std:
 }
 
 
-/// Copy construktor
+/// Copy constructor
 ///     auto ado1 = AllDefaultOperators("Mike");
 ///     auto ado2 = ado1;
 ///
